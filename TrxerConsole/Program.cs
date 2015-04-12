@@ -9,10 +9,19 @@ namespace TrxerConsole
 {
     class Program
     {
-
+        /// <summary>
+        /// Embedded Resource name
+        /// </summary>
         private const string XSLT_FILE = "Trxer.xslt";
-        private const string OUTPUT_FILE = ".html";
+        /// <summary>
+        /// Trxer output format
+        /// </summary>
+        private const string OUTPUT_FILE_EXT = ".html";
 
+        /// <summary>
+        /// Main entry of TrxerConsole
+        /// </summary>
+        /// <param name="args">First cell shoud be TRX path</param>
         static void Main(string[] args)
         {
             if (args.Any() == false)
@@ -25,26 +34,38 @@ namespace TrxerConsole
             Process.Start(args[0] + ".html");
         }
 
-
+        /// <summary>
+        /// Transforms trx int html document using xslt
+        /// </summary>
+        /// <param name="fileName">Trx file path</param>
+        /// <param name="xsl">Xsl document</param>
         private static void Transform(string fileName, XmlDocument xsl)
         {
             XslCompiledTransform x = new XslCompiledTransform(true);
             x.Load(xsl, new XsltSettings(true, true), null);
-            x.Transform(fileName, fileName + OUTPUT_FILE);
-            Console.WriteLine("Done transforming trx into html");
+            x.Transform(fileName, fileName + OUTPUT_FILE_EXT);
+            Console.WriteLine("Done transforming xml into html");
         }
 
+        /// <summary>
+        /// Loads xslt form embedded resource
+        /// </summary>
+        /// <returns>Xsl document</returns>
         private static XmlDocument PrepareXsl()
         {
             XmlDocument xslDoc = new XmlDocument();
             Console.WriteLine("Loading xslt template...");
             xslDoc.Load(ResourceReader.StreamFromResource(XSLT_FILE));
-            IncludeStyle(xslDoc);
-            IncludeScript(xslDoc);
+            MergeCss(xslDoc);
+            MergeJavaScript(xslDoc);
             return xslDoc;
         }
 
-        private static void IncludeScript(XmlDocument xslDoc)
+        /// <summary>
+        /// Merges all javascript linked to page into Trxer html report itself
+        /// </summary>
+        /// <param name="xslDoc">Xsl document</param>
+        private static void MergeJavaScript(XmlDocument xslDoc)
         {
             Console.WriteLine("Loading javascript...");
             XmlNode scriptEl = xslDoc.GetElementsByTagName("script")[0];
@@ -54,7 +75,11 @@ namespace TrxerConsole
             scriptEl.InnerText = script;
         }
 
-        private static void IncludeStyle(XmlDocument xslDoc)
+        /// <summary>
+        /// Merges all css linked to page ito Trxer html report itself
+        /// </summary>
+        /// <param name="xslDoc">Xsl document</param>
+        private static void MergeCss(XmlDocument xslDoc)
         {
             Console.WriteLine("Loading css...");
             XmlNode headNode = xslDoc.GetElementsByTagName("head")[0];
