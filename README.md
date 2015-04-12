@@ -42,3 +42,6 @@ Trxer is an EXE file.
 Trxer.exe <file.trx>
 The output will be at the trx folder under the name "file.trx.html"
 
+This is how it looks like
+
+![alt tag](https://cloud.githubusercontent.com/assets/11910876/7106811/6332ee2a-e157-11e4-94cf-bf3683ca545d.PNG)
