@@ -15,7 +15,7 @@ No mess,no misunderstood fonts.
 With our friendly UI, 
 you can watch stacktraces,outputs and messages so you can determine what's the problem as quickly as lightning.<br/>
 
-<b>USING GRAPHS<b/><br/>
+<b>USING GRAPHS</b><br/>
 We draw graphs for you so you can see the status of each test class and the total passed,<br/>
 failed and warnings of all tests which you can download and use later.
 
@@ -26,8 +26,12 @@ Each color:<br/>
   <li>green</li>
   <li>red</li>
   <li>yellow</li>
-</ul><br/>
+</ul>
 indicate test status and tells you whether test passed,failed or got warned during run.
+
+<b>Supporting Versions</b><br/>
+TRXER supports visual studio 2010 and higher (xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010")<br/>
+but can easily supports lower versions by lowering the '2010' year to whatever you like.
 
 <b>Usage</b><br/>
 Trxer is an EXE file.<br/>
