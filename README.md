@@ -1,10 +1,16 @@
 # Trxer
-Transforms trx file into html \n
-Trxer is a new way to view Trx Reports,all you need is a browser\n
-Trxer website: http://wingsrom.ro/trxer/\n
--NAVIGATE EASILY:\n
+Transforms trx file into html
+
+Trxer is a new way to view Trx Reports,all you need is a browser
+
+Trxer website: http://wingsrom.ro/trxer/
+
+-NAVIGATE EASILY:
+
 Trxer so friendly UI will make your life easier,much easier.You can navigate through test classed,
+
 see outputs,messages,stacktrace,test duration and much more.
+
 
 -READ CLEARLY:
 TRXER html report is eye friendly which means you will understand all you need at one glimpse look.No mess,
