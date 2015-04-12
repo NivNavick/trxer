@@ -31,7 +31,6 @@ namespace TrxerConsole
             }
             Console.WriteLine("Trx File\n{0}", args[0]);
             Transform(args[0], PrepareXsl());
-            Process.Start(args[0] + ".html");
         }
 
         /// <summary>
