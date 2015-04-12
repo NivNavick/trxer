@@ -36,3 +36,9 @@ Each color:
 *yellow 
 indicate test status and tells you whether test passed,failed or got warned during run.
 
+-Usage:
+
+Trxer is an EXE file.
+Trxer.exe <file.trx>
+The output will be at the trx folder under the name "file.trx.html"
+
