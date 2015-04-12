@@ -1,0 +1,414 @@
+﻿<html xmlns:t="http://microsoft.com/schemas/VisualStudio/TeamTest/2006" xmlns:trxreport="urn:my-scripts">
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="C:\Users\NivNavick\Documents\TrxerHtmlLog\Css\Trxer.css">
+    <link rel="stylesheet" type="text/css" href="C:\Users\NivNavick\Documents\TrxerHtmlLog\Css\TrxerTable.css"><script src="C:\Users\NivNavick\Documents\TrxerHtmlLog\Js\functions.js"></script></head>
+  <body onload="">
+    <div id="divToRefresh" class="wrapOverall"><br><center>
+        <h1>Sample</h1>
+      </center>
+      <div class="SummaryDiv">
+        <table id="TotalTestsTable">
+          <caption>Results Summary</caption>
+          <thead>
+            <tr class="odd">
+              <th scope="col" abbr="Status">
+                    Pie View
+                  </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <div id="dataViewer"></div>
+              </td>
+            </tr>
+            <tr id="DownLoadSection">
+              <td><a href="#" class="button" id="btn-download" download="my-file-name.png">Save graph</a></td>
+            </tr>
+          </tbody>
+        </table>
+        <table class="SummaryTable">
+          <caption>Run Time Summary</caption>
+          <thead>
+            <tr class="odd">
+              <th scope="col" abbr="Status">Status</th>
+              <th scope="col" abbr="Function">Time</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="odd">
+              <th class="column1">Start Time</th>
+              <td>2/10/2008 7:10:28 PM</td>
+            </tr>
+            <tr>
+              <th class="column1">End Time</th>
+              <td>2/10/2008 7:10:28 PM</td>
+            </tr>
+            <tr>
+              <th class="column1">Duration</th>
+              <td>531.25 ms</td>
+            </tr>
+          </tbody>
+        </table>
+        <table class="DetailsTable">
+          <caption>Tests Details</caption>
+          <tbody>
+            <tr class="odd">
+              <th class="column1">User</th>
+              <td>RIDOSRV\rido</td>
+            </tr>
+            <tr>
+              <th scope="row" class="column1">Machine</th>
+              <td>RIDOSRV</td>
+            </tr>
+            <tr>
+              <th scope="row" class="column1">Description</th>
+              <td>SampleSuite to test trx2html</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <table id="ReportsTable">
+        <caption>All Tests</caption>
+        <thead>
+          <tr class="odd">
+            <th scope="col">Time</th>
+            <th scope="col" abbr="Status">Status</th>
+            <th scope="col" abbr="Test">
+                  Classes <div class="NumberTag">6</div>
+            </th>
+            <th scope="col" abbr="Message">Message</th>
+            <th scope="col" abbr="Exception">More</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row" class="column1">7/21/2014 10:56:45 PM</th>
+            <td class="PackageStatus"><canvas id="ID0A4C0ADcanvas" width="100" height="25"></canvas></td>
+            <td class="Function">trx2html.Test.FailAndIgnored</td>
+            <td class="Message" name="ID0A4C0ADId">5 Tests</td>
+            <td class="ex">
+              <div class="OpenMoreButton" onclick="ShowHide('ID0A4C0ADTestsContainer','ID0A4C0ADButton','Show Tests','Hide Tests');">
+                <div class="MoreButtonText" id="ID0A4C0ADButton">Show Tests</div>
+              </div>
+            </td>
+          </tr>
+          <tr id="ID0A4C0ADTestsContainer" class="hiddenRow">
+            <td colspan="5">
+              <div id="exceptionArrow">↳</div>
+              <table>
+                <tbody>
+                  <tr class="Test">
+                    <th scope="row" class="column1">2/10/2008 7:10:28 PM</th>
+                    <td class="warn">Inconclusive</td>
+                    <td class="Function">TestMethod6</td>
+                    <td class="Message">
+                      <div class="border">Assert.Inconclusive failed. Inconclusive<br>   at trx2html.Test.FailAndIgnored.TestMethod6()
+</div>
+                    </td>
+                    <td class="Message">15.625 ms</td>
+                  </tr>
+                  <tr class="Test">
+                    <th scope="row" class="column1">2/10/2008 7:10:28 PM</th>
+                    <td class="warn">Inconclusive</td>
+                    <td class="Function">TestMethod5</td>
+                    <td class="Message">
+                      <div class="border">Assert.Inconclusive failed. Inconclusive<br>   at trx2html.Test.FailAndIgnored.TestMethod5()
+</div>
+                    </td>
+                    <td class="Message">15.625 ms</td>
+                  </tr>
+                  <tr class="Test">
+                    <th scope="row" class="column1">2/10/2008 7:10:28 PM</th>
+                    <td class="failed">FAILED</td>
+                    <td class="Function">TestMethodFail</td>
+                    <td class="Message">
+                      <div class="border">Assert.Fail failed. Test fail<br>   at trx2html.Test.FailAndIgnored.TestMethodFail()
+</div>
+                    </td>
+                    <td class="Message">0 ms</td>
+                  </tr>
+                  <tr class="Test">
+                    <th scope="row" class="column1">2/10/2008 7:10:28 PM</th>
+                    <td class="failed">FAILED</td>
+                    <td class="Function">TestMethodFail2</td>
+                    <td class="Message">
+                      <div class="border">Assert.Fail failed. Test fail<br>   at trx2html.Test.FailAndIgnored.TestMethodFail2()
+</div>
+                    </td>
+                    <td class="Message">0 ms</td>
+                  </tr>
+                  <tr class="Test">
+                    <th scope="row" class="column1">2/10/2008 7:10:28 PM</th>
+                    <td class="warn">Inconclusive</td>
+                    <td class="Function">TestMethod4</td>
+                    <td class="Message">
+                      <div class="border">Assert.Inconclusive failed. Inconclusive<br>   at trx2html.Test.FailAndIgnored.TestMethod4()
+</div>
+                    </td>
+                    <td class="Message">0 ms</td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr><script>
+                  CalculateTestsStatuses('ID0A4C0ADTestsContainer','ID0A4C0ADcanvas');
+                </script><tr>
+            <th scope="row" class="column1">7/21/2014 10:56:45 PM</th>
+            <td class="PackageStatus"><canvas id="ID0AYD02Dcanvas" width="100" height="25"></canvas></td>
+            <td class="Function">trx2html.Test.AllPassed</td>
+            <td class="Message" name="ID0AYD02DId">3 Tests</td>
+            <td class="ex">
+              <div class="OpenMoreButton" onclick="ShowHide('ID0AYD02DTestsContainer','ID0AYD02DButton','Show Tests','Hide Tests');">
+                <div class="MoreButtonText" id="ID0AYD02DButton">Show Tests</div>
+              </div>
+            </td>
+          </tr>
+          <tr id="ID0AYD02DTestsContainer" class="hiddenRow">
+            <td colspan="5">
+              <div id="exceptionArrow">↳</div>
+              <table>
+                <tbody>
+                  <tr class="Test">
+                    <th scope="row" class="column1">2/10/2008 7:10:28 PM</th>
+                    <td class="passed">PASSED</td>
+                    <td class="Function">TestMethod1</td>
+                    <td class="Message">
+                      <div class="border">tracelog from console.out<br>tracelog from error.outtracelog from error.out<br></div>
+                    </td>
+                    <td class="Message">0 ms</td>
+                  </tr>
+                  <tr class="Test">
+                    <th scope="row" class="column1">2/10/2008 7:10:28 PM</th>
+                    <td class="passed">PASSED</td>
+                    <td class="Function">TestMethod3</td>
+                    <td class="Message">
+                      <div class="border">
+                      </div>
+                    </td>
+                    <td class="Message">0 ms</td>
+                  </tr>
+                  <tr class="Test">
+                    <th scope="row" class="column1">2/10/2008 7:10:28 PM</th>
+                    <td class="passed">PASSED</td>
+                    <td class="Function">TestMethod2</td>
+                    <td class="Message">
+                      <div class="border">
+                      </div>
+                    </td>
+                    <td class="Message">0 ms</td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr><script>
+                  CalculateTestsStatuses('ID0AYD02DTestsContainer','ID0AYD02Dcanvas');
+                </script><tr>
+            <th scope="row" class="column1">7/21/2014 10:56:45 PM</th>
+            <td class="PackageStatus"><canvas id="ID0ATE0WEcanvas" width="100" height="25"></canvas></td>
+            <td class="Function">trx2html.Test.SomeIgnored</td>
+            <td class="Message" name="ID0ATE0WEId">3 Tests</td>
+            <td class="ex">
+              <div class="OpenMoreButton" onclick="ShowHide('ID0ATE0WETestsContainer','ID0ATE0WEButton','Show Tests','Hide Tests');">
+                <div class="MoreButtonText" id="ID0ATE0WEButton">Show Tests</div>
+              </div>
+            </td>
+          </tr>
+          <tr id="ID0ATE0WETestsContainer" class="hiddenRow">
+            <td colspan="5">
+              <div id="exceptionArrow">↳</div>
+              <table>
+                <tbody>
+                  <tr class="Test">
+                    <th scope="row" class="column1">2/10/2008 7:10:28 PM</th>
+                    <td class="passed">PASSED</td>
+                    <td class="Function">TestMethod2</td>
+                    <td class="Message">
+                      <div class="border">
+                      </div>
+                    </td>
+                    <td class="Message">0 ms</td>
+                  </tr>
+                  <tr class="Test">
+                    <th scope="row" class="column1">2/10/2008 7:10:28 PM</th>
+                    <td class="warn">Inconclusive</td>
+                    <td class="Function">TestMethod4</td>
+                    <td class="Message">
+                      <div class="border">Assert.Inconclusive failed. Inconclusive Message<br>   at trx2html.Test.SomeIgnored.TestMethod4()
+</div>
+                    </td>
+                    <td class="Message">15.625 ms</td>
+                  </tr>
+                  <tr class="Test">
+                    <th scope="row" class="column1">2/10/2008 7:10:28 PM</th>
+                    <td class="passed">PASSED</td>
+                    <td class="Function">TestMethod1</td>
+                    <td class="Message">
+                      <div class="border">sample tracelog from ConsoleWriteLine<br></div>
+                    </td>
+                    <td class="Message">0 ms</td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr><script>
+                  CalculateTestsStatuses('ID0ATE0WETestsContainer','ID0ATE0WEcanvas');
+                </script><tr>
+            <th scope="row" class="column1">7/21/2014 10:56:45 PM</th>
+            <td class="PackageStatus"><canvas id="ID0AOF0RFcanvas" width="100" height="25"></canvas></td>
+            <td class="Function">trx2html.Test.AllFailed</td>
+            <td class="Message" name="ID0AOF0RFId">3 Tests</td>
+            <td class="ex">
+              <div class="OpenMoreButton" onclick="ShowHide('ID0AOF0RFTestsContainer','ID0AOF0RFButton','Show Tests','Hide Tests');">
+                <div class="MoreButtonText" id="ID0AOF0RFButton">Show Tests</div>
+              </div>
+            </td>
+          </tr>
+          <tr id="ID0AOF0RFTestsContainer" class="hiddenRow">
+            <td colspan="5">
+              <div id="exceptionArrow">↳</div>
+              <table>
+                <tbody>
+                  <tr class="Test">
+                    <th scope="row" class="column1">2/10/2008 7:10:28 PM</th>
+                    <td class="failed">FAILED</td>
+                    <td class="Function">TestMethodFail</td>
+                    <td class="Message">
+                      <div class="border">Assert.Fail failed. Test fail<br>     at ProLog.Utils.Reporters.SetAssert(TestStatus reportStatus, String message, Boolean useAsserts, Boolean iterate) in C:\Users\NivNavick\Desktop\ProLogWin\ProLog\ProLog\Utils\Reporters.cs:line 37
+   at ProLog.Utils.Reporters.AddLogRow(TestStatus reportStatus, String function, String message, String exception) in C:\Users\NivNavick\Desktop\ProLogWin\ProLog\ProLog\Utils\Reporters.cs:line 86
+   at ProLog.Utils.Reporters.ReportLog(TestStatus reportStatus, String function, String message, Exception exception) in C:\Users\NivNavick\Desktop\ProLogWin\ProLog\ProLog\Utils\Reporters.cs:line 114
+   at ProLoggerTests.UnitTest1.FileNotFound() in C:\Users\NivNavick\Desktop\ProLogWin\ProLog\ProLoggerTests\Test folder\UnitTest1.cs:line 175
+</div>
+                    </td>
+                    <td class="Message">265.625 ms</td>
+                  </tr>
+                  <tr class="Test">
+                    <th scope="row" class="column1">2/10/2008 7:10:28 PM</th>
+                    <td class="failed">FAILED</td>
+                    <td class="Function">TestMethod2</td>
+                    <td class="Message">
+                      <div class="border">Assert.Fail failed. Test failed<br>   at trx2html.Test.AllFailed.TestMethod2()
+</div>
+                    </td>
+                    <td class="Message">15.625 ms</td>
+                  </tr>
+                  <tr class="Test">
+                    <th scope="row" class="column1">2/10/2008 7:10:28 PM</th>
+                    <td class="failed">FAILED</td>
+                    <td class="Function">TestMethod3</td>
+                    <td class="Message">
+                      <div class="border">Assert.Fail failed. Test failed<br>   at trx2html.Test.AllFailed.TestMethod3()
+</div>
+                    </td>
+                    <td class="Message">0 ms</td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr><script>
+                  CalculateTestsStatuses('ID0AOF0RFTestsContainer','ID0AOF0RFcanvas');
+                </script><tr>
+            <th scope="row" class="column1">7/21/2014 10:56:45 PM</th>
+            <td class="PackageStatus"><canvas id="ID0A2AAC05AACcanvas" width="100" height="25"></canvas></td>
+            <td class="Function">trx2html.Test.SomeFailed</td>
+            <td class="Message" name="ID0A2AAC05AACId">3 Tests</td>
+            <td class="ex">
+              <div class="OpenMoreButton" onclick="ShowHide('ID0A2AAC05AACTestsContainer','ID0A2AAC05AACButton','Show Tests','Hide Tests');">
+                <div class="MoreButtonText" id="ID0A2AAC05AACButton">Show Tests</div>
+              </div>
+            </td>
+          </tr>
+          <tr id="ID0A2AAC05AACTestsContainer" class="hiddenRow">
+            <td colspan="5">
+              <div id="exceptionArrow">↳</div>
+              <table>
+                <tbody>
+                  <tr class="Test">
+                    <th scope="row" class="column1">2/10/2008 7:10:28 PM</th>
+                    <td class="passed">PASSED</td>
+                    <td class="Function">TestMethod2</td>
+                    <td class="Message">
+                      <div class="border">
+                      </div>
+                    </td>
+                    <td class="Message">0 ms</td>
+                  </tr>
+                  <tr class="Test">
+                    <th scope="row" class="column1">2/10/2008 7:10:28 PM</th>
+                    <td class="failed">FAILED</td>
+                    <td class="Function">TestMethodFail</td>
+                    <td class="Message">
+                      <div class="border">Assert.Fail failed. Test fail<br>   at trx2html.Test.SomeFailed.TestMethodFail()
+</div>
+                    </td>
+                    <td class="Message">0 ms</td>
+                  </tr>
+                  <tr class="Test">
+                    <th scope="row" class="column1">2/10/2008 7:10:28 PM</th>
+                    <td class="failed">FAILED</td>
+                    <td class="Function">TestMethod3</td>
+                    <td class="Message">
+                      <div class="border">Assert.Fail failed. Test failed<br>   at trx2html.Test.SomeFailed.TestMethod3()
+</div>
+                    </td>
+                    <td class="Message">15.625 ms</td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr><script>
+                  CalculateTestsStatuses('ID0A2AAC05AACTestsContainer','ID0A2AAC05AACcanvas');
+                </script><tr>
+            <th scope="row" class="column1">7/21/2014 10:56:45 PM</th>
+            <td class="PackageStatus"><canvas id="ID0ARCAC0UCACcanvas" width="100" height="25"></canvas></td>
+            <td class="Function">trx2html.Test.ResourceReaderTest</td>
+            <td class="Message" name="ID0ARCAC0UCACId">2 Tests</td>
+            <td class="ex">
+              <div class="OpenMoreButton" onclick="ShowHide('ID0ARCAC0UCACTestsContainer','ID0ARCAC0UCACButton','Show Tests','Hide Tests');">
+                <div class="MoreButtonText" id="ID0ARCAC0UCACButton">Show Tests</div>
+              </div>
+            </td>
+          </tr>
+          <tr id="ID0ARCAC0UCACTestsContainer" class="hiddenRow">
+            <td colspan="5">
+              <div id="exceptionArrow">↳</div>
+              <table>
+                <tbody>
+                  <tr class="Test">
+                    <th scope="row" class="column1">2/10/2008 7:10:28 PM</th>
+                    <td class="passed">PASSED</td>
+                    <td class="Function">LoadTextFromResourceTest</td>
+                    <td class="Message">
+                      <div class="border">
+                      </div>
+                    </td>
+                    <td class="Message">15.625 ms</td>
+                  </tr>
+                  <tr class="Test">
+                    <th scope="row" class="column1">2/10/2008 7:10:28 PM</th>
+                    <td class="passed">PASSED</td>
+                    <td class="Function">StreamFromResourceTest</td>
+                    <td class="Message">
+                      <div class="border">
+                      </div>
+                    </td>
+                    <td class="Message">15.625 ms</td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr><script>
+                  CalculateTestsStatuses('ID0ARCAC0UCACTestsContainer','ID0ARCAC0UCACcanvas');
+                </script></tbody>
+        <tr>
+          <td colspan="5">
+            <h6>TRX Html Viewer log - Niv Navick 2015</h6>
+          </td>
+        </tr>
+      </table>
+    </div><script>
+          CalculateTotalPrecents();
+        </script></body>
+</html>
