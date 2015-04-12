@@ -1,17 +1,16 @@
-# trxer
+# Trxer
 Transforms trx file into html.
-BRINGING TRX REPORTS TO LIFE
 Trxer is a new way to view Trx Reports,all you need is a browser
-
--NAVIGATE EASILY
+Trxer website: http://wingsrom.ro/trxer/
+-NAVIGATE EASILY:
 Trxer so friendly UI will make your life easier,much easier.You can navigate through test classed,
 see outputs,messages,stacktrace,test duration and much more.
 
--READ CLEARLY
+-READ CLEARLY:
 TRXER html report is eye friendly which means you will understand all you need at one glimpse look.No mess,
 no misunderstood fonts.
 
--FIND PROBLEMS FASTER
+-FIND PROBLEMS FASTER:
 With our friendly UI, 
 you can watch stacktraces,outputs and messages so you can determine what's the problem as quickly as lightning.
 
@@ -19,7 +18,7 @@ you can watch stacktraces,outputs and messages so you can determine what's the p
 We draw graphs for you so you can see the status of each test class and the total passed,
 failed and warnings of all tests which you can download and use later.
 
--COLORS
+-COLORS:
 TRXER html report is colorful.
 Each color:
 *green
