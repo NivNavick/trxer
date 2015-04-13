@@ -201,10 +201,68 @@
               </tbody>
             </table>
           </div>
+          <table id="ReportsTable">
+            <caption>All Failed Tests</caption>
+            <thead>
+              <tr class="odd">
+                <th scope="col">Time</th>
+                <th scope="col" abbr="Test">
+                  Status
+                </th>
+                <th scope="col" abbr="Message">Message</th>
+                <th scope="col" abbr="Exception">More</th>
+              </tr>
+            </thead>
+            <tbody>
+              <xsl:variable name="testsSet" select="//t:TestRun/t:Results/t:UnitTestResult[@outcome='Failed']" />
+              <xsl:variable name="testsCount" select="count($testsSet)" />
+              <tr>
+                <th scope="row" class="column1">7/21/2014 10:56:45 PM</th>
+                <td class="Function">
+                  Faileds
+                </td>
+                <td class="Message" name="{generate-id(faileds)}Id">
+                  <xsl:value-of select="concat($testsCount,' Tests')" />
+                </td>
+                <td class="ex">
+                  <div class="OpenMoreButton" onclick="ShowHide('{generate-id(faileds)}TestsContainer','{generate-id(faileds)}Button','Show Tests','Hide Tests');">
+                    <div class="MoreButtonText" id="{generate-id(faileds)}Button">Show Tests</div>
+                  </div>
+                </td>
+              </tr>
+              <tr id="{generate-id(faileds)}TestsContainer" class="hiddenRow">
+                <td colspan="5">
+                  <div id="exceptionArrow">↳</div>
+                  <table>
+                    <thead>
+                      <tr class="odd">
+                        <th scope="col" class="TestsTable">Time</th>
+                        <th scope="col" class="TestsTable" abbr="Status">Status</th>
+                        <th scope="col" class="TestsTable" abbr="Test">Test</th>
+                        <th scope="col" class="TestsTable" abbr="Message">Message</th>
+                        <th scope="col" class="TestsTable" abbr="Message">Owner</th>
+                        <th scope="col" class="TestsTable" abbr="Exception">Duration</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <!--Start of package content-->
+                      <xsl:for-each select="$testsSet">
+                        <xsl:call-template name="tDetails">
+                          <xsl:with-param name="testId" select="@testId" />
+                          <xsl:with-param name="testDescription" select="./../t:Description" />
+                        </xsl:call-template>
+                      </xsl:for-each>
+                    </tbody>
+                    <!--End of package content-->
+                  </table>
+                </td>
+              </tr>
+            </tbody>
+          </table>
           <xsl:variable name="classSet" select="//t:TestMethod[generate-id(.)=generate-id(key('TestMethods', @className))]" />
           <xsl:variable name="classCount" select="count($classSet)" />
           <table id="ReportsTable">
-            <caption>All Tests</caption>
+            <caption>All Tests Group By Classes</caption>
             <thead>
               <tr class="odd">
                 <th scope="col">Time</th>
@@ -398,6 +456,22 @@
           <xsl:value-of select="trxreport:ToExactTimeDefinition(@duration)" />
         </td>
       </tr>
+      <tr id="{generate-id($testId)}Stacktrace" class="hiddenRow">
+        <!--Outer-->
+        <td colspan="6">
+          <div id="exceptionArrow">↳</div>
+          <table>
+            <!--Inner-->
+            <tbody>
+              <tr id="ex1" class="visibleRow">
+                <td id="exp1" class="ex">
+                  <xsl:value-of select="/t:TestRun/t:Results/t:UnitTestResult[@testId=$testId]/t:Output/t:ErrorInfo/t:StackTrace" />
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
     </xsl:for-each>
   </xsl:template>
   <xsl:template name="debugInfo">
@@ -428,11 +502,7 @@
         <br/>
       </xsl:if>
 
-      <xsl:if test="$MessageErrorStacktrace">
-        <div id="{generate-id($testId)}Stacktrace" class="hiddenRow">
-          <xsl:value-of select="$MessageErrorStacktrace" />
-        </div>
-      </xsl:if>
+   
 
     </xsl:for-each>
   </xsl:template>

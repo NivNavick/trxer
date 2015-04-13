@@ -200,3 +200,5 @@ function CalculateTestsStatuses(testContaineId, canvasId) {
     CreateHorizontalBars(canvasId, passedPrec, failedPrec, warnPrec);
 }
 
+
+
