@@ -38,6 +38,10 @@ Trxer is an EXE file.<br/>
 Trxer.exe <file.trx><br/>
 The output will be at the trx folder under the name "file.trx.html"<br/>
 
+```bash
+TrxerConsole.exe <TRX file>
+```
+
 This is how it looks like
 
 ![alt tag](https://cloud.githubusercontent.com/assets/11910876/7106811/6332ee2a-e157-11e4-94cf-bf3683ca545d.PNG)
