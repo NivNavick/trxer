@@ -53,6 +53,19 @@
     {
       return DateTime.Now.ToString();
     }
+    
+    public string ExtractImageUrl(string text)
+    {
+       Match match = Regex.Match(text, "('|\")([^\\s]+(\\.(?i)(jpg|png|gif|bmp)))('|\")",
+	      RegexOptions.IgnoreCase);
+
+	
+	   if (match.Success)
+	   {
+	      return match.Value.Replace("\'",string.Empty).Replace("\"",string.Empty).Replace("\\","\\\\");
+	    }
+      return string.Empty;
+    }
         
     ]]>
   </msxsl:script>
@@ -70,6 +83,10 @@
       </head>
       <body>
         <div id="divToRefresh" class="wrapOverall">
+          <div id="floatingImageBackground" class="floatingImageBackground" style="visibility: hidden;">
+            <div class="floatingImageCloseButton" onclick="hide('floatingImageBackground');"></div>
+            <img src="" id="floatingImage"/>
+          </div>
           <br />
           <center>
             <h1>
@@ -203,21 +220,12 @@
           </div>
           <table id="ReportsTable">
             <caption>All Failed Tests</caption>
-            <thead>
-              <tr class="odd">
-                <th scope="col">Time</th>
-                <th scope="col" abbr="Test">
-                  Status
-                </th>
-                <th scope="col" abbr="Message">Message</th>
-                <th scope="col" abbr="Exception">More</th>
-              </tr>
-            </thead>
+
             <tbody>
               <xsl:variable name="testsSet" select="//t:TestRun/t:Results/t:UnitTestResult[@outcome='Failed']" />
               <xsl:variable name="testsCount" select="count($testsSet)" />
               <tr>
-                <th scope="row" class="column1">7/21/2014 10:56:45 PM</th>
+                <td class="column1Failed"></td>
                 <td class="Function">
                   Faileds
                 </td>
@@ -226,12 +234,12 @@
                 </td>
                 <td class="ex">
                   <div class="OpenMoreButton" onclick="ShowHide('{generate-id(faileds)}TestsContainer','{generate-id(faileds)}Button','Show Tests','Hide Tests');">
-                    <div class="MoreButtonText" id="{generate-id(faileds)}Button">Show Tests</div>
+                    <div class="MoreButtonText" id="{generate-id(faileds)}Button">Hide Tests</div>
                   </div>
                 </td>
               </tr>
-              <tr id="{generate-id(faileds)}TestsContainer" class="hiddenRow">
-                <td colspan="5">
+              <tr id="{generate-id(faileds)}TestsContainer" class="visibleRow">
+                <td colspan="4">
                   <div id="exceptionArrow">↳</div>
                   <table>
                     <thead>
@@ -331,57 +339,57 @@
               </xsl:for-each>
             </tbody>
           </table>
+          <Table>
+            <caption>Five most slowest tests</caption>
+            <thead>
+              <tr class="odd">
+                <th scope="col">Time</th>
+                <th scope="col" abbr="Status">Status</th>
+                <th scope="col" abbr="Test">Test</th>
+                <th scope="col" abbr="Message">Owner</th>
+                <th scope="col" abbr="Message">Duration</th>
+              </tr>
+            </thead>
+            <tbody>
+              <xsl:for-each select="/t:TestRun/t:Results/t:UnitTestResult">
+                <xsl:sort select="@duration" order="descending"/>
+                <xsl:if test="position() &gt;= 1 and position() &lt;=5">
+                  <xsl:variable name="testId" select="@testId" />
+                  <tr>
+                    <th scope="row" class="column1">
+                      <xsl:value-of select="trxreport:GetShortDateTime(@startTime)" />
+                    </th>
+                    <xsl:call-template name="tStatus">
+                      <xsl:with-param name="testId" select="@testId" />
+                    </xsl:call-template>
+                    <td class="Function slowest">
+                      <xsl:value-of select="trxreport:RemoveAssemblyName(/t:TestRun/t:TestDefinitions/t:UnitTest[@id=$testId]/t:TestMethod/@className)"/>
+                      .<xsl:value-of select="@testName"/>
+                    </td>
+                    <td>
+                      <xsl:variable name="nameSet" select="/t:TestRun/t:TestDefinitions/t:UnitTest[@id=$testId]/t:Owners/t:Owner"/>
+                      <xsl:variable name="nameCount" select="count($nameSet)"/>
+                      <xsl:for-each select="$nameSet">
+                        <xsl:value-of select="@name"/>
+                        <xsl:if test="$nameCount &gt;=position()+1 ">
+                          <br/>
+                        </xsl:if>
+                      </xsl:for-each>
+                    </td>
+                    <td class="Message slowest">
+                      <xsl:value-of select="trxreport:ToExactTimeDefinition(@duration)"/>
+                    </td>
+                  </tr>
+                </xsl:if>
+              </xsl:for-each>
+              <tr>
+                <td colspan="5">
+                  <h6>TRX Html Viewer log - Niv Navick 2015</h6>
+                </td>
+              </tr>
+            </tbody>
+          </Table>
         </div>
-        <Table>
-          <caption>Five most slowest tests</caption>
-          <thead>
-            <tr class="odd">
-              <th scope="col">Time</th>
-              <th scope="col" abbr="Status">Status</th>
-              <th scope="col" abbr="Test">Test</th>
-              <th scope="col" abbr="Message">Owner</th>
-              <th scope="col" abbr="Message">Duration</th>
-            </tr>
-          </thead>
-          <tbody>
-            <xsl:for-each select="/t:TestRun/t:Results/t:UnitTestResult">
-              <xsl:sort select="@duration" order="descending"/>
-              <xsl:if test="position() &gt;= 1 and position() &lt;=5">
-                <xsl:variable name="testId" select="@testId" />
-                <tr>
-                  <th scope="row" class="column1">
-                    <xsl:value-of select="trxreport:GetShortDateTime(@startTime)" />
-                  </th>
-                  <xsl:call-template name="tStatus">
-                    <xsl:with-param name="testId" select="@testId" />
-                  </xsl:call-template>
-                  <td class="Function slowest">
-                    <xsl:value-of select="trxreport:RemoveAssemblyName(/t:TestRun/t:TestDefinitions/t:UnitTest[@id=$testId]/t:TestMethod/@className)"/>
-                    .<xsl:value-of select="@testName"/>
-                  </td>
-                  <td>
-                    <xsl:variable name="nameSet" select="/t:TestRun/t:TestDefinitions/t:UnitTest[@id=$testId]/t:Owners/t:Owner"/>
-                    <xsl:variable name="nameCount" select="count($nameSet)"/>
-                    <xsl:for-each select="$nameSet">
-                      <xsl:value-of select="@name"/>
-                      <xsl:if test="$nameCount &gt;=position()+1 ">
-                        <br/>
-                      </xsl:if>
-                    </xsl:for-each>
-                  </td>
-                  <td class="Message slowest">
-                    <xsl:value-of select="trxreport:ToExactTimeDefinition(@duration)"/>
-                  </td>
-                </tr>
-              </xsl:if>
-            </xsl:for-each>
-            <tr>
-              <td colspan="5">
-                <h6>TRX Html Viewer log - Niv Navick 2015</h6>
-              </td>
-            </tr>
-          </tbody>
-        </Table>
       </body>
       <script>
         CalculateTotalPrecents();
@@ -436,6 +444,12 @@
 
         <td class="Function">
           <xsl:value-of select="@testName" />
+
+          <xsl:call-template name="imageExtractor">
+            <xsl:with-param name="testId" select="$testId" />
+          </xsl:call-template>
+
+
         </td>
         <td class="Message">
           <xsl:call-template name="debugInfo">
@@ -458,13 +472,13 @@
       </tr>
       <tr id="{generate-id($testId)}Stacktrace" class="hiddenRow">
         <!--Outer-->
-        <td colspan="6">
+        <td colspan="7">
           <div id="exceptionArrow">↳</div>
           <table>
             <!--Inner-->
             <tbody>
-              <tr id="ex1" class="visibleRow">
-                <td id="exp1" class="ex">
+              <tr class="visibleRow">
+                <td class="ex">
                   <xsl:value-of select="/t:TestRun/t:Results/t:UnitTestResult[@testId=$testId]/t:Output/t:ErrorInfo/t:StackTrace" />
                 </td>
               </tr>
@@ -474,6 +488,39 @@
       </tr>
     </xsl:for-each>
   </xsl:template>
+
+  <xsl:template name="imageExtractor">
+    <xsl:param name="testId" />
+    <xsl:for-each select="/t:TestRun/t:Results/t:UnitTestResult[@testId=$testId]/t:Output">
+
+      <xsl:variable name="MessageErrorStacktrace" select="trxreport:ExtractImageUrl(t:ErrorInfo/t:StackTrace)"/>
+      <xsl:variable name="StdOut" select="trxreport:ExtractImageUrl(t:StdOut)"/>
+      <xsl:variable name="StdErr" select="trxreport:ExtractImageUrl(t:StdErr)"/>
+      <xsl:variable name="MessageErrorInfo" select="trxreport:ExtractImageUrl(t:ErrorInfo/t:Message)"/>
+      <xsl:choose>
+        <xsl:when test="$MessageErrorStacktrace">
+          <div class="atachmentImage" onclick="show('floatingImageBackground');updateFloatingImage('{$MessageErrorStacktrace}');"></div>
+        </xsl:when>
+        <xsl:when test="$StdOut">
+          <div class="atachmentImage" onclick="show('floatingImageBackground');updateFloatingImage('{$StdOut}');"></div>
+        </xsl:when>
+        <xsl:when test="$StdErr">
+        <div class="atachmentImage" onclick="show('floatingImageBackground');updateFloatingImage('{$StdErr}');"></div>
+        </xsl:when>
+        <xsl:when test="$MessageErrorInfo">
+        <div class="atachmentImage" onclick="show('floatingImageBackground');updateFloatingImage('{$MessageErrorInfo}');"></div>
+        </xsl:when>
+      </xsl:choose>
+
+    </xsl:for-each>
+  </xsl:template>
+
+
+
+
+
+
+
   <xsl:template name="debugInfo">
     <xsl:param name="testId" />
     <xsl:for-each select="/t:TestRun/t:Results/t:UnitTestResult[@testId=$testId]/t:Output">
@@ -502,7 +549,7 @@
         <br/>
       </xsl:if>
 
-   
+
 
     </xsl:for-each>
   </xsl:template>

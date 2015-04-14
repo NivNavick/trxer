@@ -34,6 +34,11 @@ tr.odd .column1 {
     background: #dbedff;
 }
 
+tr.odd.column1Failed	{
+	background:#fed9d9;
+	width:30px;
+	}
+
 tr.odd td, tr.sep td {
     background: #FFFFFF;
 }
@@ -72,6 +77,10 @@ td.Message {
     text-align: left;
     width: auto;
     word-wrap: break-word;
+}
+
+.Atached {
+    width: 30px
 }
 
 td.Function {
