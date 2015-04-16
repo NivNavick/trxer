@@ -79,6 +79,13 @@ td.Message {
     word-wrap: break-word;
 }
 
+td.Messages {
+    text-align: left;
+    width: auto;
+    word-wrap: break-word;
+    max-width: 600px;
+}
+
 .Atached {
     width: 30px
 }

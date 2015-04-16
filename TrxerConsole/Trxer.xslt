@@ -451,7 +451,7 @@
 
 
         </td>
-        <td class="Message">
+        <td class="Messages">
           <xsl:call-template name="debugInfo">
             <xsl:with-param name="testId" select="$testId" />
           </xsl:call-template>
@@ -472,7 +472,7 @@
       </tr>
       <tr id="{generate-id($testId)}Stacktrace" class="hiddenRow">
         <!--Outer-->
-        <td colspan="7">
+        <td colspan="6">
           <div id="exceptionArrow">↳</div>
           <table>
             <!--Inner-->
