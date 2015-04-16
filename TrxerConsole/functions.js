@@ -20,6 +20,20 @@ function AddEventListener() {
     });
 }
 
+function show(id) {
+    document.getElementById(id).style.visibility = "visible";
+    document.getElementById(id).style.display = "block";
+}
+function hide(id) {
+
+    document.getElementById(id).style.visibility = "hidden";
+    document.getElementById(id).style.display = "none";
+}
+
+function updateFloatingImage(url) {
+    document.getElementById('floatingImage').src = url;
+}
+
 /**
  * @return {number}
  */
@@ -199,4 +213,6 @@ function CalculateTestsStatuses(testContaineId, canvasId) {
 
     CreateHorizontalBars(canvasId, passedPrec, failedPrec, warnPrec);
 }
+
+
 

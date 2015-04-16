@@ -1,57 +1,62 @@
 table a,
 table a:link,
 table a:visited {
-    border:none;
+    border: none;
 }
 
 img {
-    border:0;
-    margin-top:.5em;
+    border: 0;
+    margin-top: .5em;
 }
-table {
-    width:90%;
-    margin:1em auto;
-    border-collapse:collapse;
-    border:1px solid #a2caf2;
 
+table {
+    width: 90%;
+    margin: 1em auto;
+    border-collapse: collapse;
+    border: 1px solid #a2caf2;
 }
+
 caption {
     color: #9ba9b4;
-    font-size:16px;
-    letter-spacing:.2em;
-    margin:1em 0 0 0;
-    padding:0;
-    caption-side:top;
-    text-align:center;
+    font-size: 16px;
+    letter-spacing: .2em;
+    margin: 1em 0 0 0;
+    padding: 0;
+    caption-side: top;
+    text-align: center;
     font-weight: normal;
-    border-top:1px solid #a2caf2;
-    border-left:1px solid #a2caf2;
-    border-right:1px solid #a2caf2;
+    border-top: 1px solid #a2caf2;
+    border-left: 1px solid #a2caf2;
+    border-right: 1px solid #a2caf2;
 }
 
-tr.odd .column1	{
-    background:#dbedff;
+tr.odd .column1 {
+    background: #dbedff;
 }
 
-tr.odd td,tr.sep td	{
-    background:#FFFFFF;
+tr.odd.column1Failed	{
+	background:#fed9d9;
+	width:30px;
+	}
+
+tr.odd td, tr.sep td {
+    background: #FFFFFF;
 }
 
-tr.sep .column1	{
-    background:#7CCD7C;
+tr.sep .column1 {
+    background: #7CCD7C;
 }
 
-tr.odd .ex ,
+tr.odd .ex,
 tr.sep .ex,
 td.ex {
-    text-align:left;
-    width:100px;
-    color: #E6E6E6;
+    text-align: left;
+    width: 100px;
 }
 
 td.exShow {
-    text-align:left;
-    width:100px;
+    text-align: left;
+    width: 100px;
     color: #000;
 }
 
@@ -64,47 +69,58 @@ th.statusCount {
 }
 
 td.critical {
-    text-align:left;
-    width:100px;
+    text-align: left;
+    width: 100px;
 }
 
 td.Message {
-    text-align:left;
-    width:auto;
-    word-wrap:break-word;
+    text-align: left;
+    width: auto;
+    word-wrap: break-word;
+}
+
+td.Messages {
+    text-align: left;
+    width: auto;
+    word-wrap: break-word;
+    max-width: 600px;
+}
+
+.Atached {
+    width: 30px
 }
 
 td.Function {
-    text-align:left;
+    text-align: left;
 }
 
 tr.sep .error,
-tr.odd .error ,
+tr.odd .error,
 td.error {
-    background:#F08080;
+    background: #F08080;
 }
 
 tr.odd .warn,
 tr.sep .warn,
 td.warn {
     color: #E4C100;
-    background:#FBE87E;
+    background: #FBE87E;
     width: 90px;
 }
 
-tr.odd .info ,
+tr.odd .info,
 td.info,
 tr.sep .info {
     color: #c7c7c7;
-    background:#e0e0e0;
+    background: #e0e0e0;
     width: 90px;
 }
 
-tr.odd .failed ,
+tr.odd .failed,
 tr.sep.failed,
-td.failed{
+td.failed {
     color: #d42945;
-    background:#fed9d9;
+    background: #fed9d9;
     width: 90px;
 }
 
@@ -112,28 +128,27 @@ tr.odd .passed,
 tr.sep.passed,
 td.passed {
     color: #7CCD7C;
-    background:#c0eec0;
+    background: #c0eec0;
     width: 90px;
 }
 
 td {
-    color: #425b71;;
-
-    padding:.3em 1em;
-    text-align:center;
-    border-left:1px solid #a2caf2;
-    border-top:1px solid #a2caf2;
+    color: #425b71;
+    ;
+    padding: .3em 1em;
+    text-align: center;
+    border-left: 1px solid #a2caf2;
+    border-top: 1px solid #a2caf2;
     word-wrap: break-word;
 }
 
 th {
-    font-weight:normal;
+    font-weight: normal;
     color: #678197;
-    text-align:left;
-    border-left:1px solid #a2caf2;
-    border-top:1px solid #a2caf2;
-    padding:.3em 1em;
-
+    text-align: left;
+    border-left: 1px solid #a2caf2;
+    border-top: 1px solid #a2caf2;
+    padding: .3em 1em;
 }
 
 thead th.TestsTable {
@@ -142,23 +157,26 @@ thead th.TestsTable {
 }
 
 thead th {
-    background:#dbedff;
-    text-align:center;
-    font:bold 1.2em/2em "Century Gothic","Trebuchet MS",Arial,Helvetica,sans-serif;
-    color:#66a3d3
+    background: #dbedff;
+    text-align: center;
+    font: bold 1.2em/2em "Century Gothic","Trebuchet MS",Arial,Helvetica,sans-serif;
+    color: #66a3d3;
 }
+
 tfoot th {
-    text-align:center;
-    background:#f4f9fe;
+    text-align: center;
+    background: #f4f9fe;
 }
-tfoot th strong {
-    font:bold 1.2em "Century Gothic","Trebuchet MS",Arial,Helvetica,sans-serif;
-    margin:.5em .5em .5em 0;
-    color: #678197;
-}
-tfoot th em {
-    color: #678197;
-    font-weight: bold;
-    font-size: 1.1em;
-    font-style: normal;
-}
+
+    tfoot th strong {
+        font: bold 1.2em "Century Gothic","Trebuchet MS",Arial,Helvetica,sans-serif;
+        margin: .5em .5em .5em 0;
+        color: #678197;
+    }
+
+    tfoot th em {
+        color: #678197;
+        font-weight: bold;
+        font-size: 1.1em;
+        font-style: normal;
+    }

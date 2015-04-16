@@ -18,7 +18,9 @@ namespace TrxerConsole
 
         internal static Stream StreamFromResource(string name)
         {
+           
             return Assembly.GetExecutingAssembly().GetManifestResourceStream("TrxerConsole." + name);
+       
         }
     }
 }
