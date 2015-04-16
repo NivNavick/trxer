@@ -29,6 +29,22 @@ Each color:<br/>
 </ul>
 indicate test status and tells you whether test passed,failed or got warned during run.
 
+<b>Images</b><br/>
+assume you have an image to show in the report , just put it's url in the test message,stdout or stderror and<br/>
+Trxer autimatically will show your image in the final html report<br/>
+<br/>
+What you should do is surround the url with Quotes like the folowing:<br/>
+```bash
+"image url here"
+```
+
+![trxdemo2](https://cloud.githubusercontent.com/assets/11910876/7187656/ccb4093a-e47a-11e4-8cb0-7d4ad975d52e.PNG)
+
+<b>Stacktraes</b><br/>
+Providing a clear view to understand stacktraces:<br/>
+![trxdemo3](https://cloud.githubusercontent.com/assets/11910876/7187675/e637ec96-e47a-11e4-85f9-37c715540706.PNG)
+
+
 <b>Supporting Versions</b><br/>
 TRXER supports visual studio 2010 and higher (xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010")<br/>
 but can easily supports lower versions by lowering the '2010' year to whatever you like.
