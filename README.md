@@ -1,4 +1,5 @@
-# Trxer
+
+![11910876](https://cloud.githubusercontent.com/assets/11910876/7189304/c483f1b0-e486-11e4-9a95-44a1243fea5d.png)
 <h3>Transforms trx file into html</h3><br/>
 Trxer is a new way to view Trx Reports,all you need is a browser<br/>
 Trxer website: http://wingsrom.ro/trxer/<br/>
