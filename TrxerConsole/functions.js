@@ -1,6 +1,5 @@
 
-var myColor = ["#c0eec0", "#fed9d9", "#FBE87E"];//green,red,yellow
-var myStrokeColor = ["#7CCD7C", "#d42945", "#ffcc00"];
+var myColor = ["#5bab5b", "#a90000", "#fad446"];//green,red,yellow
 
 function ShowHide(id1, id2, textOnHide, textOnShow) {
     if (document.getElementById(id1).className == 'visibleRow') {
@@ -148,7 +147,7 @@ function CreateText() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     for (var i = 0; i < myData.length; i++) {
-        ctx.fillStyle = myStrokeColor[i];
+        ctx.fillStyle = myColor[i];
         ctx.font = "15px arial";
         ctx.fillText(myParsedData[i], textPosX, textPosY);
         textPosY += 35;

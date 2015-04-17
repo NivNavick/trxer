@@ -414,13 +414,17 @@
     <xsl:for-each select="/t:TestRun/t:Results/t:UnitTestResult[@testId=$testId]">
       <xsl:choose>
         <xsl:when test="@outcome='Passed'">
-          <td class="passed">PASSED</td>
+          <td class="passed">
+            <div class="StatusTag NumberTagGreen">PASSED</div>
+          </td>
         </xsl:when>
         <xsl:when test="@outcome='Failed'">
-          <td class="failed">FAILED</td>
+          <td class="failed">
+            <div class="StatusTag NumberTagRed">FAILED</div>
+          </td>
         </xsl:when>
         <xsl:when test="@outcome='Inconclusive'">
-          <td class="warn">Inconclusive</td>
+          <td class="failed"><div class="StatusTag NumberTagYellow">Inconclusive</div></td>
         </xsl:when>
         <xsl:when test="@outcome='Timeout'">
           <td class="failed">Timeout</td>
@@ -429,7 +433,9 @@
           <td class="failed">Error</td>
         </xsl:when>
         <xsl:when test="@outcome='Warn'">
-          <td class="warn">Warn</td>
+          <td class="warn">
+            <div class="StatusTag NumberTagYellow">WARN</div>
+          </td>
         </xsl:when>
         <xsl:otherwise>
           <td class="info">OTHER</td>

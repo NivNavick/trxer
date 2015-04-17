@@ -235,12 +235,12 @@ td.slowest {
 }
 
 .column1 {
-    background: #dbedff;
+    background: rgb(245, 244, 242);
     width: 170px;
 }
 
 .column1Failed {
-    background: #fed9d9;
+    background: #a90000;
     width: 30px;
 }
 
@@ -339,16 +339,34 @@ td.slowest {
     line-height: 27px;
 }
 
+.StatusTag {
+    display: inline;
+    padding-left: 3px;
+    padding-right: 3px;
+    margin-right: 4px;
+    height: auto;
+    color: white;
+    border: 1px solid #78bcff;
+    background-color: #ffffff;
+    border-radius: 4px;
+    text-align: center;
+    margin-bottom: 2px;
+    line-height: 27px;
+}
+
 .NumberTagRed {
-    background-color: #fed9d9;
+    background-color: #a90000;
+    border-color: #b93333;
 }
 
 .NumberTagGreen {
-    background-color: #c0eec0;
+    background-color: #5bab5b;
+    border-color: #339833;
 }
 
 .NumberTagYellow {
-    background-color: #FBE87E;
+    background-color: #fad446;
+    border-color: #fbe283;
 }
 
 .hiddenRow {

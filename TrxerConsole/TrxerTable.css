@@ -31,11 +31,11 @@ caption {
 }
 
 tr.odd .column1 {
-    background: #dbedff;
+    background: rgb(245, 244, 242);
 }
 
 tr.odd.column1Failed	{
-	background:#fed9d9;
+	background:#a90000;
 	width:30px;
 	}
 
@@ -103,8 +103,7 @@ td.error {
 tr.odd .warn,
 tr.sep .warn,
 td.warn {
-    color: #E4C100;
-    background: #FBE87E;
+
     width: 90px;
 }
 
@@ -119,16 +118,14 @@ tr.sep .info {
 tr.odd .failed,
 tr.sep.failed,
 td.failed {
-    color: #d42945;
-    background: #fed9d9;
+
     width: 90px;
 }
 
 tr.odd .passed,
 tr.sep.passed,
 td.passed {
-    color: #7CCD7C;
-    background: #c0eec0;
+
     width: 90px;
 }
 
@@ -157,7 +154,7 @@ thead th.TestsTable {
 }
 
 thead th {
-    background: #dbedff;
+    background: rgb(245, 244, 242);
     text-align: center;
     font: bold 1.2em/2em "Century Gothic","Trebuchet MS",Arial,Helvetica,sans-serif;
     color: #66a3d3;
