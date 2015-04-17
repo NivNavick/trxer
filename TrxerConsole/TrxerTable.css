@@ -83,7 +83,7 @@ td.Messages {
     text-align: left;
     width: auto;
     word-wrap: break-word;
-    max-width: 600px;
+    max-width: 550px;
 }
 
 .Atached {
@@ -134,7 +134,7 @@ td {
     ;
     padding: .3em 1em;
     text-align: center;
-    border-left: 1px solid #a2caf2;
+ 
     border-top: 1px solid #a2caf2;
     word-wrap: break-word;
 }
@@ -143,7 +143,7 @@ th {
     font-weight: normal;
     color: #678197;
     text-align: left;
-    border-left: 1px solid #a2caf2;
+
     border-top: 1px solid #a2caf2;
     padding: .3em 1em;
 }

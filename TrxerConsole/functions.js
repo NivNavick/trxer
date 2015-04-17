@@ -1,5 +1,5 @@
 
-var myColor = ["#5bab5b", "#a90000", "#fad446"];//green,red,yellow
+var myColor = ["#5bab5b", "#d8534f", "#fad446"];//green,red,yellow
 
 function ShowHide(id1, id2, textOnHide, textOnShow) {
     if (document.getElementById(id1).className == 'visibleRow') {
@@ -8,6 +8,15 @@ function ShowHide(id1, id2, textOnHide, textOnShow) {
     }
     else {
         document.getElementById(id2).innerHTML = textOnShow;
+        document.getElementById(id1).className = 'visibleRow';
+    }
+}
+
+function ShowHide(id1) {
+    if (document.getElementById(id1).className == 'visibleRow') {
+        document.getElementById(id1).className = 'hiddenRow';
+    }
+    else {
         document.getElementById(id1).className = 'visibleRow';
     }
 }

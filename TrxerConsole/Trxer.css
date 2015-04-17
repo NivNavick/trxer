@@ -58,7 +58,7 @@ address {
     height: 60px;
 }
 
-.statusBarPassed,.statusBarCompleted {
+.statusBarPassed, .statusBarCompleted {
     background-color: #5bab5b;
 }
 
@@ -78,7 +78,7 @@ address {
     top: 15%;
 }
 
-.statusBarPassedInner,.statusBarCompletedInner {
+.statusBarPassedInner, .statusBarCompletedInner {
     position: relative;
     background-color: #339833;
     width: 100%;
@@ -118,7 +118,7 @@ address {
     width: 20px;
     height: 20px;
     background-size: 20px 20px;
-    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgBAMAAACBVGfHAAAAJFBMVEUAAAD///8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAW+S7RAAAAC3RSTlMAABBAYHCfv8/f7y5wfg4AAACNSURBVHhendC9DYMwFEXhq0BEi7egTJEBIlHSuKdhBHpGYARGSEtA8JaDBwjbt0Aop/zk5z8Y6gZoh8KVyVrl4NEqDDiXZ7JVGZPu0O4wbPDsxGuyKCXoh28IM4Q6YMzfTQAfIPahx1rhQa2QONAJnXHwUoiugEd4Uz6WL8ZXF4qfP/EH9fSFs4Wh/oAFE9baEPQEC+YAAAAASUVORK5CYIIyNjk=');
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAEI0lEQVRYhe2WX0hsRRzHv3Nm5/zbI2qwbCiIhm0oFKqJhioBAoIvQosgKSDdS08GCFx6qTTwrcIltDXC7ksokCQEV8QwiGhfWo0sMA1FvDf1cq+qW1zdc85MLzvb7LoW3Kz74g+GM+f3m5nv5/x+M8MBru3anrCRywKU0iIAJgDX9/3j/w8JgGmanYyxn3Vd/4Uxtm4Yxqv/lZZWyBkKhV6zLCtg2zZs2yaGYdxoaGi4NFv/xnIWtSzrGdM032aMvUgpZYFAAL7vI51Oc9d1H5yfn8P3/ccWE0LcB/C+53nfFQRwHOdLxljEsiyYpgkFAGdnZ/A8D5zzxxWH7/vwff+PsrKyl7e2tk4BpQQTExNBSmlE13UYhgHGGCilYIxB13VYlgXbthEMBv+22bYtSktLzx3H4er4TDlhGEawt7f3OambBaipqTECgQB0XQelNEsthABjzF1YWPjAtm3XMAyYppnTDMOA4zje8PDwUjKZfHd7e/vWxsbGm5OTk59VVlYeyTmGYUDXddTV1RlSNyA7lFKiaRoIIRBCgHOeBaCUurW1tcuapr1OCGGEEBBCspCapvlTU1Mft7e3f7W5ubm3srJilpSUPOrs7Pyxra3th2g0emt3dzdEKYWmadC0v/b+hVMga+V5XvaZTqcFgKN0Oi183wfnXNYTnuchGo1+29zc/MX4+PhxV1fX1MDAwNc9PT13BgcHq05OTr4ZGRm5LfePECJHT1OFOedZYbm467pwXRcAsn0VznVddHd330kkEvfi8fhbh4eHL2Q27lNLS0vvxeNx0dLSsug4zkkhiJwMSAg1A7IByHn3PC8LYNv2r7Ztk1Qq9bymaaCUghACznkwHA5Hjo+PHxYXFz8sdIpyANTU5vfz4yrk8vJycSgUoq2trduyxpRSBIPBR9Fo9P7BwYG3t7dXqu6rgiWQTQrlT5B9GZPxubm5rmQy6cdisU+bmpq2AYhwOHwyPT39iRDiMBaLvXR0dFQq11YtoL6oAPm+y/pCCKytrb0yPj6+XF1d/f3i4uJoKpUKBYPB309PTzdGR0et+fn5d/JPVkEA+VXqMVFh8uPKYnR1dfXDvr6+2/39/XONjY0/7e/vm7Ozsx2JROINzvnTlNILH5cDIIOSUt4HGT9LJpMVruvqcqwaBwBCCNvZ2bk5NjZ2E4CbWZsQQrLA/5gBCSEvGiXNekdHx4z0519Eqi8znsm46s/PaA6AZVlCFVeh8p9qXDVVVBVXy5W5ObNzsr1IJOJWVVXdk2VQy5Hf8scUuuEKlZZzDl3Xz+vr63+7kIGioqL0zMzMR0NDQzfW19dDQogr/wEpLy8/HRsb+7yiouKB9OWIcM5DhJBnAThXLZ6xMyHENoC7mqaJCwAAIIRgyNucV2g+AJcQUrhe13ZtT8L+BBA9B35dQKL8AAAAAElFTkSuQmCCMTExNg==');
 }
 
 
@@ -225,6 +225,13 @@ td.slowest {
     border-collapse: collapse;
 }
 
+.alert-status-failed {
+    background-color: #f2dede;
+    color: #a94442;
+    border-radius: 4px;
+    border: 1px solid white;
+}
+
 .Summary {
     float: left;
     border-collapse: collapse;
@@ -240,7 +247,7 @@ td.slowest {
 }
 
 .column1Failed {
-    background: #a90000;
+    background: #d8534f;
     width: 30px;
 }
 
@@ -250,6 +257,15 @@ td.slowest {
 }
 
 #ReportsTable th {
+}
+
+.stacktraceButton {
+    float: right;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    background-size: 20px 20px;
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAM1BMVEUAAAD///8zMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzN/h6ohAAAAEHRSTlMAABAgMEBQYHCAj5+/z9/vnfKkYwAAALhJREFUeF7F00EWgyAMBNA0CEjFkPuftqVktDyh3bWzkcUHnfCk25f8CNCZWEqkMxcQ9JnwAUgFMgdJX0kzwKWBwhOwqWUbg6VuDqEeswxBrg1akzwCsTbwRL4+4xWwWIG1AuELSPi8O6r2wLWKmSi3qq4DZ0Wigqod8Gphwsp3YAdYV4D9HUQdJB4Al4BJYs0AuEVMEkkATsdAnYENAK9ANgNFJykGZAbEgJ8I8WhB7AdhzOHv/+YDc5kW7iYSK0MAAAAASUVORK5CYIIzMzI=');
 }
 
 #TotalPassed {
@@ -307,10 +323,22 @@ td.slowest {
     float: right;
 }
 
-    .OpenMoreButton:hover {
-        background-color: #bfe3ff;
-        text-decoration: none;
-    }
+.OpenStacktraceButton {
+    height: auto;
+    width: 200px;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+    color: #1b99fb;
+    background-color: white;
+    border: 1px solid #7ac5ff;
+    float: right;
+}
+
+.OpenMoreButton:hover {
+    background-color: #bfe3ff;
+    text-decoration: none;
+}
 
 
 
@@ -323,6 +351,8 @@ td.slowest {
     font-size: 15px;
     font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
 }
+
+
 
 .NumberTag {
     display: inline;
@@ -346,27 +376,24 @@ td.slowest {
     margin-right: 4px;
     height: auto;
     color: white;
-    border: 1px solid #78bcff;
+    font-size: 80%;
     background-color: #ffffff;
-    border-radius: 4px;
+    border-radius: .25em;
     text-align: center;
     margin-bottom: 2px;
     line-height: 27px;
 }
 
 .NumberTagRed {
-    background-color: #a90000;
-    border-color: #b93333;
+    background-color: #d8534f;
 }
 
 .NumberTagGreen {
     background-color: #5bab5b;
-    border-color: #339833;
 }
 
 .NumberTagYellow {
-    background-color: #fad446;
-    border-color: #fbe283;
+    background-color: #efac4e;
 }
 
 .hiddenRow {

@@ -27,7 +27,7 @@
     private string ToExtactTime(double ms)
     {
       if (ms < 1000)
-        return ms + " ms";
+       return string.Format("{0:0.00} ms", ms);
 
       if (ms >= 1000 && ms < 60000)
         return string.Format("{0:0.00} seconds", TimeSpan.FromMilliseconds(ms).TotalSeconds);
@@ -237,7 +237,7 @@
                 <tr>
                   <td class="column1Failed"></td>
                   <td class="Function">
-                    Faileds
+                    Failed tests
                   </td>
                   <td class="Message" name="{generate-id(faileds)}Id">
                     <xsl:value-of select="concat(testsFailedCount,' Tests')" />
@@ -250,15 +250,14 @@
                 </tr>
                 <tr id="{generate-id(faileds)}TestsContainer" class="visibleRow">
                   <td colspan="4">
-                    <div id="exceptionArrow">↳</div>
                     <table>
                       <thead>
                         <tr class="odd">
-                          <th scope="col" class="TestsTable">Time</th>
                           <th scope="col" class="TestsTable" abbr="Status">Status</th>
                           <th scope="col" class="TestsTable" abbr="Test">Test</th>
                           <th scope="col" class="TestsTable" abbr="Message">Message</th>
                           <th scope="col" class="TestsTable" abbr="Message">Owner</th>
+                          <th scope="col" class="TestsTable" abbr="Actions"></th>
                           <th scope="col" class="TestsTable" abbr="Exception">Duration</th>
                         </tr>
                       </thead>
@@ -319,15 +318,14 @@
                 </tr>
                 <tr id="{generate-id(@className)}TestsContainer" class="hiddenRow">
                   <td colspan="5">
-                    <div id="exceptionArrow">↳</div>
                     <table>
                       <thead>
                         <tr class="odd">
-                          <th scope="col" class="TestsTable">Time</th>
                           <th scope="col" class="TestsTable" abbr="Status">Status</th>
                           <th scope="col" class="TestsTable" abbr="Test">Test</th>
                           <th scope="col" class="TestsTable" abbr="Message">Message</th>
                           <th scope="col" class="TestsTable" abbr="Message">Owner</th>
+                          <th scope="col" class="TestsTable" abbr="Actions"></th>
                           <th scope="col" class="TestsTable" abbr="Exception">Duration</th>
                         </tr>
                       </thead>
@@ -424,7 +422,9 @@
           </td>
         </xsl:when>
         <xsl:when test="@outcome='Inconclusive'">
-          <td class="failed"><div class="StatusTag NumberTagYellow">Inconclusive</div></td>
+          <td class="failed">
+            <div class="StatusTag NumberTagYellow">Inconclusive</div>
+          </td>
         </xsl:when>
         <xsl:when test="@outcome='Timeout'">
           <td class="failed">Timeout</td>
@@ -450,9 +450,6 @@
     <xsl:param name="testDescription" />
     <xsl:for-each select="/t:TestRun/t:Results/t:UnitTestResult[@testId=$testId]">
       <tr class="Test">
-        <th scope="row" class="column1">
-          <xsl:value-of select="trxreport:GetShortDateTime(@startTime)" />
-        </th>
 
 
         <xsl:call-template name="tStatus">
@@ -462,9 +459,6 @@
         <td class="Function">
           <xsl:value-of select="@testName" />
 
-          <xsl:call-template name="imageExtractor">
-            <xsl:with-param name="testId" select="$testId" />
-          </xsl:call-template>
 
 
         </td>
@@ -483,6 +477,16 @@
             </xsl:if>
           </xsl:for-each>
         </td>
+        <td class="Messages">
+
+          <xsl:call-template name="stracktracButtonInject">
+            <xsl:with-param name="testId" select="$testId" />
+          </xsl:call-template>
+          <xsl:call-template name="imageExtractor">
+            <xsl:with-param name="testId" select="$testId" />
+          </xsl:call-template>
+
+        </td>
         <td class="Message">
           <xsl:value-of select="trxreport:ToExactTimeDefinition(@duration)" />
         </td>
@@ -490,12 +494,11 @@
       <tr id="{generate-id($testId)}Stacktrace" class="hiddenRow">
         <!--Outer-->
         <td colspan="6">
-          <div id="exceptionArrow">↳</div>
           <table>
             <!--Inner-->
             <tbody>
               <tr class="visibleRow">
-                <td class="ex">
+                <td class="ex alert-status-failed">
                   <xsl:value-of select="/t:TestRun/t:Results/t:UnitTestResult[@testId=$testId]/t:Output/t:ErrorInfo/t:StackTrace" />
                 </td>
               </tr>
@@ -535,21 +538,24 @@
 
 
 
-
+  <xsl:template name="stracktracButtonInject">
+    <xsl:param name="testId" />
+    <xsl:for-each select="/t:TestRun/t:Results/t:UnitTestResult[@testId=$testId]/t:Output">
+      <xsl:variable name="MessageErrorStacktrace" select="t:ErrorInfo/t:StackTrace"/>
+      <xsl:if test="$MessageErrorStacktrace">
+        <div class="stacktraceButton" onclick="ShowHide('{generate-id($testId)}Stacktrace');"></div>
+      </xsl:if>
+    </xsl:for-each>
+  </xsl:template>
 
 
   <xsl:template name="debugInfo">
     <xsl:param name="testId" />
     <xsl:for-each select="/t:TestRun/t:Results/t:UnitTestResult[@testId=$testId]/t:Output">
 
-      <xsl:variable name="MessageErrorStacktrace" select="t:ErrorInfo/t:StackTrace"/>
-
       <xsl:variable name="StdOut" select="t:StdOut"/>
-      <xsl:if test="$StdOut or $MessageErrorStacktrace">
+      <xsl:if test="$StdOut">
         <xsl:value-of select="$StdOut"/>
-        <xsl:if test="$MessageErrorStacktrace">
-          <a style="float:right;" id="{generate-id($testId)}StacktraceToggle" href="javascript:ShowHide('{generate-id($testId)}Stacktrace','{generate-id($testId)}StacktraceToggle','Show Stacktrace','Hide Stacktrace');">Show Stacktrace</a>
-        </xsl:if>
         <xsl:if test="$StdOut">
           <br/>
         </xsl:if>
