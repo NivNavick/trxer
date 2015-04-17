@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Xml;
 using System.Xml.Xsl;
@@ -30,7 +31,18 @@ namespace TrxerConsole
                 return;
             }
             Console.WriteLine("Trx File\n{0}", args[0]);
-            Transform(args[0], PrepareXsl());
+            string outputFilePath;
+            if (args.Length == 2)
+            {
+                outputFilePath = Path.Combine(args[1], Path.GetFileName(args[0]) + OUTPUT_FILE_EXT);
+            }
+            else
+            {
+                outputFilePath = args[0] + OUTPUT_FILE_EXT;
+            }
+
+
+            Transform(args[0], PrepareXsl(), outputFilePath);
         }
 
         /// <summary>
@@ -38,12 +50,13 @@ namespace TrxerConsole
         /// </summary>
         /// <param name="fileName">Trx file path</param>
         /// <param name="xsl">Xsl document</param>
-        private static void Transform(string fileName, XmlDocument xsl)
+        /// <param name="outputFile"></param>
+        private static void Transform(string fileName, XmlDocument xsl,string outputFile)
         {
             XslCompiledTransform x = new XslCompiledTransform(true);
             x.Load(xsl, new XsltSettings(true, true), null);
             Console.WriteLine("Transforming...");
-            x.Transform(fileName, fileName + OUTPUT_FILE_EXT);
+            x.Transform(fileName, outputFile);
             Console.WriteLine("Done transforming xml into html");
         }
 
