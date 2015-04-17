@@ -45,6 +45,14 @@ What you should do is surround the url with Quotes like the folowing:<br/>
 Providing a clear view to understand stacktraces:<br/>
 ![trxdemo3](https://cloud.githubusercontent.com/assets/11910876/7187675/e637ec96-e47a-11e4-85f9-37c715540706.PNG)
 
+<b>Status Bar</b><br/>
+Status bar indicate whether test run has failed or passed
+
+Outcome=Failed
+![statusbar](https://cloud.githubusercontent.com/assets/11910876/7199615/cdbba732-e4fe-11e4-8a41-78d54233d004.PNG)
+
+Outcome=Passed
+![statusbarpassed](https://cloud.githubusercontent.com/assets/11910876/7199789/1490669c-e500-11e4-9cc6-c16f74ec9d1c.PNG)
 
 <b>Supporting Versions</b><br/>
 TRXER supports visual studio 2010 and higher (xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010")<br/>
