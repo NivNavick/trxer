@@ -71,6 +71,7 @@
   </msxsl:script>
 
   <xsl:template match="/" >
+    <xsl:text disable-output-escaping='yes'>&lt;!DOCTYPE html></xsl:text>
     <html>
       <head>
         <meta charset="utf-8"/>
@@ -88,11 +89,19 @@
             <img src="" id="floatingImage"/>
           </div>
           <br />
-          <center>
-            <h1>
-              <xsl:value-of select="/t:TestRun/@name"/>
-            </h1>
-          </center>
+          <xsl:variable name="testRunOutcome" select="t:TestRun/t:ResultSummary/@outcome"/>
+
+          <div class="StatusBar statusBar{$testRunOutcome}">
+            <div class="statusBar{$testRunOutcome}Inner">
+              <center>
+                <h1 class="hWhite">
+                  <div class="titleCenterd">
+                    <xsl:value-of select="/t:TestRun/@name"/>
+                  </div>
+                </h1>
+              </center>
+            </div>
+          </div>
           <div class="SummaryDiv">
             <table id="TotalTestsTable">
               <caption>Results Summary</caption>
@@ -218,55 +227,57 @@
               </tbody>
             </table>
           </div>
-          <table id="ReportsTable">
-            <caption>All Failed Tests</caption>
+          <xsl:variable name="testsFailedSet" select="//t:TestRun/t:Results/t:UnitTestResult[@outcome='Failed']" />
+          <xsl:variable name="testsFailedCount" select="count(testsFailedSet)" />
+          <xsl:if test="$testsFailedSet">
+            <table id="ReportsTable">
+              <caption>All Failed Tests</caption>
 
-            <tbody>
-              <xsl:variable name="testsSet" select="//t:TestRun/t:Results/t:UnitTestResult[@outcome='Failed']" />
-              <xsl:variable name="testsCount" select="count($testsSet)" />
-              <tr>
-                <td class="column1Failed"></td>
-                <td class="Function">
-                  Faileds
-                </td>
-                <td class="Message" name="{generate-id(faileds)}Id">
-                  <xsl:value-of select="concat($testsCount,' Tests')" />
-                </td>
-                <td class="ex">
-                  <div class="OpenMoreButton" onclick="ShowHide('{generate-id(faileds)}TestsContainer','{generate-id(faileds)}Button','Show Tests','Hide Tests');">
-                    <div class="MoreButtonText" id="{generate-id(faileds)}Button">Hide Tests</div>
-                  </div>
-                </td>
-              </tr>
-              <tr id="{generate-id(faileds)}TestsContainer" class="visibleRow">
-                <td colspan="4">
-                  <div id="exceptionArrow">↳</div>
-                  <table>
-                    <thead>
-                      <tr class="odd">
-                        <th scope="col" class="TestsTable">Time</th>
-                        <th scope="col" class="TestsTable" abbr="Status">Status</th>
-                        <th scope="col" class="TestsTable" abbr="Test">Test</th>
-                        <th scope="col" class="TestsTable" abbr="Message">Message</th>
-                        <th scope="col" class="TestsTable" abbr="Message">Owner</th>
-                        <th scope="col" class="TestsTable" abbr="Exception">Duration</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <!--Start of package content-->
-                      <xsl:for-each select="$testsSet">
-                        <xsl:call-template name="tDetails">
-                          <xsl:with-param name="testId" select="@testId" />
-                          <xsl:with-param name="testDescription" select="./../t:Description" />
-                        </xsl:call-template>
-                      </xsl:for-each>
-                    </tbody>
-                    <!--End of package content-->
-                  </table>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+              <tbody>
+                <tr>
+                  <td class="column1Failed"></td>
+                  <td class="Function">
+                    Faileds
+                  </td>
+                  <td class="Message" name="{generate-id(faileds)}Id">
+                    <xsl:value-of select="concat(testsFailedCount,' Tests')" />
+                  </td>
+                  <td class="ex">
+                    <div class="OpenMoreButton" onclick="ShowHide('{generate-id(faileds)}TestsContainer','{generate-id(faileds)}Button','Show Tests','Hide Tests');">
+                      <div class="MoreButtonText" id="{generate-id(faileds)}Button">Hide Tests</div>
+                    </div>
+                  </td>
+                </tr>
+                <tr id="{generate-id(faileds)}TestsContainer" class="visibleRow">
+                  <td colspan="4">
+                    <div id="exceptionArrow">↳</div>
+                    <table>
+                      <thead>
+                        <tr class="odd">
+                          <th scope="col" class="TestsTable">Time</th>
+                          <th scope="col" class="TestsTable" abbr="Status">Status</th>
+                          <th scope="col" class="TestsTable" abbr="Test">Test</th>
+                          <th scope="col" class="TestsTable" abbr="Message">Message</th>
+                          <th scope="col" class="TestsTable" abbr="Message">Owner</th>
+                          <th scope="col" class="TestsTable" abbr="Exception">Duration</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <!--Start of package content-->
+                        <xsl:for-each select="$testsFailedSet">
+                          <xsl:call-template name="tDetails">
+                            <xsl:with-param name="testId" select="@testId" />
+                            <xsl:with-param name="testDescription" select="./../t:Description" />
+                          </xsl:call-template>
+                        </xsl:for-each>
+                      </tbody>
+                      <!--End of package content-->
+                    </table>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </xsl:if>
           <xsl:variable name="classSet" select="//t:TestMethod[generate-id(.)=generate-id(key('TestMethods', @className))]" />
           <xsl:variable name="classCount" select="count($classSet)" />
           <table id="ReportsTable">
@@ -505,10 +516,10 @@
           <div class="atachmentImage" onclick="show('floatingImageBackground');updateFloatingImage('{$StdOut}');"></div>
         </xsl:when>
         <xsl:when test="$StdErr">
-        <div class="atachmentImage" onclick="show('floatingImageBackground');updateFloatingImage('{$StdErr}');"></div>
+          <div class="atachmentImage" onclick="show('floatingImageBackground');updateFloatingImage('{$StdErr}');"></div>
         </xsl:when>
         <xsl:when test="$MessageErrorInfo">
-        <div class="atachmentImage" onclick="show('floatingImageBackground');updateFloatingImage('{$MessageErrorInfo}');"></div>
+          <div class="atachmentImage" onclick="show('floatingImageBackground');updateFloatingImage('{$MessageErrorInfo}');"></div>
         </xsl:when>
       </xsl:choose>
 
