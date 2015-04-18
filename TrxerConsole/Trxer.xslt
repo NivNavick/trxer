@@ -59,7 +59,6 @@
        Match match = Regex.Match(text, "('|\")([^\\s]+(\\.(?i)(jpg|png|gif|bmp)))('|\")",
 	      RegexOptions.IgnoreCase);
 
-	
 	   if (match.Success)
 	   {
 	      return match.Value.Replace("\'",string.Empty).Replace("\"",string.Empty).Replace("\\","\\\\");
@@ -86,7 +85,7 @@
         <div id="divToRefresh" class="wrapOverall">
           <div id="floatingGrayBackground" onclick="hide('floatingGrayBackground');hide('floatingImageBackground');"></div>
           <div id="floatingImageBackground" class="floatingImageBackground" style="visibility: hidden;">
-            <div id="floatingImageDock">
+            <!--  <div id="floatingImageDock">
               <center>
                 <div id="floatingImageTitle">
                   Test's Image
@@ -94,8 +93,8 @@
                 </div>
               </center>
 
-            </div>
-            <img src="" id="floatingImage"/>
+            </div>-->
+            <img src="" class="displayed"  id="floatingImage"/>
           </div>
           <br />
           <xsl:variable name="testRunOutcome" select="t:TestRun/t:ResultSummary/@outcome"/>
@@ -260,7 +259,7 @@
                     <xsl:value-of select="concat(testsFailedCount,' Tests')" />
                   </td>
                   <td class="ex">
-                    <div class="OpenMoreButton" onclick="ShowHide('{generate-id(faileds)}TestsContainer','{generate-id(faileds)}Button','Show Tests','Hide Tests');">
+                    <div class="OpenMoreButton" onclick="ShowHideWithChange('{generate-id(faileds)}TestsContainer','{generate-id(faileds)}Button','Show Tests','Hide Tests');">
                       <div class="MoreButtonText" id="{generate-id(faileds)}Button">Hide Tests</div>
                     </div>
                   </td>
@@ -328,7 +327,7 @@
                     <xsl:value-of select="concat($testsCount,' Tests')" />
                   </td>
                   <td class="ex">
-                    <div class="OpenMoreButton" onclick="ShowHide('{generate-id(@className)}TestsContainer','{generate-id(@className)}Button','Show Tests','Hide Tests');">
+                    <div class="OpenMoreButton" onclick="ShowHideWithChange('{generate-id(@className)}TestsContainer','{generate-id(@className)}Button','Show Tests','Hide Tests');">
                       <div class="MoreButtonText" id="{generate-id(@className)}Button">Show Tests</div>
                     </div>
                   </td>
@@ -533,20 +532,20 @@
       <xsl:variable name="StdOut" select="trxreport:ExtractImageUrl(t:StdOut)"/>
       <xsl:variable name="StdErr" select="trxreport:ExtractImageUrl(t:StdErr)"/>
       <xsl:variable name="MessageErrorInfo" select="trxreport:ExtractImageUrl(t:ErrorInfo/t:Message)"/>
-        <xsl:choose>
-          <xsl:when test="$MessageErrorStacktrace">
-            <div class="atachmentImage tooltip" onclick="show('floatingImageBackground');show('floatingGrayBackground');updateFloatingImage('{$MessageErrorStacktrace}');" title="{$MessageErrorStacktrace}"></div>
-          </xsl:when>
-          <xsl:when test="$StdOut">
-            <div class="atachmentImage tooltip" onclick="show('floatingImageBackground');show('floatingGrayBackground');updateFloatingImage('{$StdOut}');" title="{$MessageErrorStacktrace}"></div>
-          </xsl:when>
-          <xsl:when test="$StdErr">
-            <div class="atachmentImage tooltip" onclick="show('floatingImageBackground');show('floatingGrayBackground');updateFloatingImage('{$StdErr}');" title="{$StdErr}"></div>
-          </xsl:when>
-          <xsl:when test="$MessageErrorInfo">
-            <div class="atachmentImage tooltip" onclick="show('floatingImageBackground');show('floatingGrayBackground');updateFloatingImage('{$MessageErrorInfo}');" title="{$MessageErrorInfo}"></div>
-          </xsl:when>
-        </xsl:choose>
+      <xsl:choose>
+        <xsl:when test="$MessageErrorStacktrace">
+          <div class="atachmentImage tooltip" onclick="show('floatingImageBackground');show('floatingGrayBackground');updateFloatingImage('{$MessageErrorStacktrace}');" title="{$MessageErrorStacktrace}"></div>
+        </xsl:when>
+        <xsl:when test="$StdOut">
+          <div class="atachmentImage tooltip" onclick="show('floatingImageBackground');show('floatingGrayBackground');updateFloatingImage('{$StdOut}');" title="{$StdOut}"></div>
+        </xsl:when>
+        <xsl:when test="$StdErr">
+          <div class="atachmentImage tooltip" onclick="show('floatingImageBackground');show('floatingGrayBackground');updateFloatingImage('{$StdErr}');" title="{$StdErr}"></div>
+        </xsl:when>
+        <xsl:when test="$MessageErrorInfo">
+          <div class="atachmentImage tooltip" onclick="show('floatingImageBackground');show('floatingGrayBackground');updateFloatingImage('{$MessageErrorInfo}');" title="{$MessageErrorInfo}"></div>
+        </xsl:when>
+      </xsl:choose>
     </xsl:for-each>
   </xsl:template>
 

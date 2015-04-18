@@ -1,7 +1,7 @@
 
 var myColor = ["#5bab5b", "#d8534f", "#fad446"];//green,red,yellow
 
-function ShowHide(id1, id2, textOnHide, textOnShow) {
+function ShowHideWithChange(id1, id2, textOnHide, textOnShow) {
     if (document.getElementById(id1).className == 'visibleRow') {
         document.getElementById(id2).innerHTML = textOnHide;
         document.getElementById(id1).className = 'hiddenRow';

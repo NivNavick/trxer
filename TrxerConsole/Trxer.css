@@ -38,10 +38,10 @@ address {
     width: 680px;
     height: 600px;
     visibility: hidden;
-    background-color: rgb(245, 244, 242);
     background-repeat: no-repeat;
+   /* background-color: rgb(245, 244, 242);
     border: 2px #000000;
-    border-style: solid;
+    border-style: solid;*/
 }
 
 .hWhite {
@@ -62,11 +62,11 @@ address {
     background-color: #5bab5b;
 }
 
-.statusBarFailed,.statusBarError {
+.statusBarFailed, .statusBarError {
     background-color: #b93333;
 }
 
-.statusBarFailedInner,.statusBarErrorInner {
+.statusBarFailedInner, .statusBarErrorInner {
     position: relative;
     background-color: #a90000;
     width: 100%;
@@ -78,36 +78,35 @@ address {
     top: 15%;
 }
 
-.tooltip{
+.tooltip {
     display: inline;
     position: relative;
 }
 
-.tooltip:hover:after{
-    background: #333;
-    background: rgba(0,0,0,.8);
-    border-radius: 5px;
-    bottom: 26px;
-    color: #fff;
-    content: attr(title);
+    .tooltip:hover:after {
+        background: #333;
+        background: rgba(0,0,0,.8);
+        border-radius: 5px;
+        bottom: 26px;
+        color: #fff;
+        content: attr(title);
+        padding: 5px 10px;
+        position: absolute;
+        z-index: 98;
+        max-width: 300px;
+        width: auto;
+    }
 
-    padding: 5px 10px;
-    position: absolute;
-    z-index: 98;
-    max-width: 300px;
-    width: auto;
-}
-
-.tooltip:hover:before{
-    border: solid;
-    border-color: #333 transparent;
-    border-width: 6px 6px 0 6px;
-    bottom: 20px;
-    content: "";
-    left: 50%;
-    position: absolute;
-    z-index: 99;
-}
+    .tooltip:hover:before {
+        border: solid;
+        border-color: #333 transparent;
+        border-width: 6px 6px 0 6px;
+        bottom: 20px;
+        content: "";
+        left: 50%;
+        position: absolute;
+        z-index: 99;
+    }
 
 .statusBarPassedInner, .statusBarCompletedInner {
     position: relative;
@@ -131,7 +130,7 @@ address {
 
 #floatingGrayBackground {
     background-color: #000000;
-    opacity: 0.5;
+    opacity: 0.8;
     position: fixed;
     float: left;
     width: 100%;
@@ -140,12 +139,12 @@ address {
     z-index: 1;
 }
 
-#floatingImage {
-    position: relative;
-    margin-left: 8%;
-    margin-top: 15%;
-    width: auto;
-    max-width: 566px;
+img.displayed {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 700px;
+        
 }
 
 .floatingImageCloseButton {
@@ -164,7 +163,6 @@ address {
     color: white;
     font-size: 20px;
     text-align: center;
-    
     margin-top: 20px;
     float: inherit;
 }
