@@ -1,0 +1,52 @@
+.stacktraceButton {
+    float: right;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    background-size: 20px 20px;
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAM1BMVEUAAAD///8zMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzN/h6ohAAAAEHRSTlMAABAgMEBQYHCAj5+/z9/vnfKkYwAAALhJREFUeF7F00EWgyAMBNA0CEjFkPuftqVktDyh3bWzkcUHnfCk25f8CNCZWEqkMxcQ9JnwAUgFMgdJX0kzwKWBwhOwqWUbg6VuDqEeswxBrg1akzwCsTbwRL4+4xWwWIG1AuELSPi8O6r2wLWKmSi3qq4DZ0Wigqod8Gphwsp3YAdYV4D9HUQdJB4Al4BJYs0AuEVMEkkATsdAnYENAK9ANgNFJykGZAbEgJ8I8WhB7AdhzOHv/+YDc5kW7iYSK0MAAAAASUVORK5CYIIzMzI=');
+}
+
+.OpenMoreButton {
+    height: auto;
+    width: 200px;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+    color: #1b99fb;
+    background-color: white;
+    border: 1px solid #7ac5ff;
+    float: right;
+}
+
+.OpenStacktraceButton {
+    height: auto;
+    width: 200px;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+    color: #1b99fb;
+    background-color: white;
+    border: 1px solid #7ac5ff;
+    float: right;
+}
+
+.OpenMoreButton:hover {
+    background-color: #bfe3ff;
+    text-decoration: none;
+}
+
+#btn-download {
+    font-size: 14px;
+}
+
+
+#MoreButtonText {
+    color: #1b99fb;
+    top: 0;
+    left: 25px;
+    font-weight: normal;
+    text-align: center;
+    font-size: 15px;
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+}

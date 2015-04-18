@@ -1,20 +1,4 @@
-table a,
-table a:link,
-table a:visited {
-    border: none;
-}
 
-img {
-    border: 0;
-    margin-top: .5em;
-}
-
-table {
-    width: 90%;
-    margin: 1em auto;
-    border-collapse: collapse;
-    border: 1px solid #a2caf2;
-}
 
 caption {
     color: #9ba9b4;
@@ -71,6 +55,10 @@ th.statusCount {
 td.critical {
     text-align: left;
     width: 100px;
+}
+
+td.slowest {
+    width: auto;
 }
 
 td.Message {
@@ -158,21 +146,3 @@ thead th {
     font: bold 1.2em/2em "Century Gothic","Trebuchet MS",Arial,Helvetica,sans-serif;
     color: #66a3d3;
 }
-
-tfoot th {
-    text-align: center;
-    background: #f4f9fe;
-}
-
-    tfoot th strong {
-        font: bold 1.2em "Century Gothic","Trebuchet MS",Arial,Helvetica,sans-serif;
-        margin: .5em .5em .5em 0;
-        color: #678197;
-    }
-
-    tfoot th em {
-        color: #678197;
-        font-weight: bold;
-        font-size: 1.1em;
-        font-style: normal;
-    }

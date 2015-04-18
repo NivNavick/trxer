@@ -1,0 +1,125 @@
+
+.alert-status-failed {
+    background-color: #f2dede;
+    color: #a94442;
+    border-radius: 4px;
+    border: 1px solid white;
+}
+
+#TotalPassed {
+    min-width: 30px;
+    width: auto;
+    height: auto;
+    color: #7CCD7C;
+    background: #c0eec0;
+    border: 1px solid #7CCD7C;
+    margin-bottom: 5px;
+}
+
+#TotalWarn {
+    min-width: 30px;
+    width: auto;
+    height: auto;
+    color: #E4C100;
+    background: #FBE87E;
+    border: 1px solid #E4C100;
+    margin-bottom: 5px;
+}
+
+#TotalFailed {
+    min-width: 30px;
+    width: auto;
+    height: auto;
+    color: #d42945;
+    background: #fed9d9;
+    border: 1px solid #d42945;
+    margin-bottom: 5px;
+}
+
+#TotalInfo {
+    min-width: 30px;
+    width: auto;
+    height: auto;
+    border: 1px solid #c7c7c7;
+    color: #c7c7c7;
+    background: #e0e0e0;
+}
+
+.NumberTag {
+    display: inline;
+    padding-left: 3px;
+    padding-right: 3px;
+    margin-right: 4px;
+    height: auto;
+    color: #678197;
+    border: 1px solid #78bcff;
+    background-color: #ffffff;
+    border-radius: 8px;
+    text-align: center;
+    margin-bottom: 2px;
+    line-height: 27px;
+}
+
+.StatusTag {
+    display: inline;
+    padding-left: 3px;
+    padding-right: 3px;
+    margin-right: 4px;
+    height: auto;
+    color: white;
+    font-size: 80%;
+    background-color: #ffffff;
+    border-radius: .25em;
+    text-align: center;
+    margin-bottom: 2px;
+    line-height: 27px;
+}
+
+.NumberTagRed {
+    background-color: #d8534f;
+}
+
+.NumberTagGreen {
+    background-color: #5bab5b;
+}
+
+.NumberTagYellow {
+    background-color: #efac4e;
+}
+
+.StatusBar {
+    width: 100%;
+    height: 60px;
+}
+
+.statusBarPassed, .statusBarCompleted {
+    background-color: #5bab5b;
+}
+
+.statusBarFailed, .statusBarError {
+    background-color: #b93333;
+}
+
+.statusBarFailedInner, .statusBarErrorInner {
+    position: relative;
+    background-color: #a90000;
+    width: 100%;
+    height: 70%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: auto;
+    margin-bottom: auto;
+    top: 15%;
+}
+
+.statusBarPassedInner, .statusBarCompletedInner {
+    position: relative;
+    background-color: #339833;
+    width: 100%;
+    height: 70%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: auto;
+    margin-bottom: auto;
+    top: 15%;
+}

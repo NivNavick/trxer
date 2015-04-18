@@ -74,9 +74,14 @@
     <html>
       <head>
         <meta charset="utf-8"/>
-        <link rel="stylesheet" type="text/css" href="Trxer.css"/>
-        <link rel="stylesheet" type="text/css" href="TrxerTable.css"/>
-        <script language="javascript" type="text/javascript" src="functions.js"></script>
+        <link rel="stylesheet" type="text/css" href="Css.Trxer.css"/>
+        <link rel="stylesheet" type="text/css" href="Css.TrxerTable.css"/>
+        <link rel="stylesheet" type="text/css" href="Css.Buttons.css"/>
+        <link rel="stylesheet" type="text/css" href="Css.ImageView.css"/>
+        <link rel="stylesheet" type="text/css" href="Css.Statuses.css"/>
+        <link rel="stylesheet" type="text/css" href="Css.ToolTip.css"/>
+        <link rel="stylesheet" type="text/css" href="Css.HtmlTags.css"/>
+        <script language="javascript" type="text/javascript" src="Javascript.functions.js"></script>
         <title>
           <xsl:value-of select="/t:TestRun/@name"/>
         </title>

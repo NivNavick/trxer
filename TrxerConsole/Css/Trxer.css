@@ -1,0 +1,110 @@
+
+.wrapOverall {
+    width: auto;
+    margin: -8px 0px 0px 0px;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.hWhite {
+    color: white;
+}
+
+.titleCenterd {
+    position: relative;
+    top: 12px;
+}
+
+.StatusesBorders {
+    border-width: 0;
+    border-right: 1px solid;
+    border-left: 1px solid;
+    width: 100px;
+}
+
+.PackageStatus {
+    width: 100px;
+}
+
+.SummaryTable {
+    width: auto;
+    max-width: 407px;
+    float: left;
+    margin-right: 20px;
+}
+
+#divToRefresh > div > table.SummaryTable > tbody > tr > th {
+    width: auto;
+}
+
+.DetailsTable {
+    width: auto;
+    max-width: 407px;
+    float: left;
+    margin-right: 20px;
+    text-align: left;
+    word-wrap: break-word;
+}
+
+.StatusesTable {
+    width: auto;
+}
+
+#divToRefresh > div.SummaryDiv > table.DetailsTable > tbody > tr > td {
+    text-align: left;
+    word-wrap: break-word;
+}
+
+#divToRefresh > div.SummaryDiv > table.DetailsTable > tbody > tr > th {
+    width: 30px;
+    /*background-color: #FFFFFF;*/
+}
+
+#TotalTestsTable {
+    min-width: 250px;
+    width: auto;
+    float: left;
+    margin-right: 20px;
+}
+
+.SummaryDiv {
+    width: 90%;
+    border-top: 1px solid #e5eff8;
+    border-right: 1px solid #e5eff8;
+    margin: 1em auto;
+    border-collapse: collapse;
+}
+
+.Summary {
+    float: left;
+    border-collapse: collapse;
+}
+
+.column1 {
+    background: rgb(245, 244, 242);
+    width: 170px;
+}
+
+.column1Failed {
+    background: #d8534f;
+    width: 30px;
+}
+
+#ReportsTable > tbody > tr > th {
+    background: #E8E8E8;
+    width: 170px;
+}
+
+#dataViewer {
+    width: 240px;
+}
+
+.hiddenRow {
+    display: none;
+    visibility: hidden;
+}
+
+.visibleRow {
+    visibility: visible;
+}
