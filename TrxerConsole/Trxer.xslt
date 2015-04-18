@@ -84,8 +84,17 @@
       </head>
       <body>
         <div id="divToRefresh" class="wrapOverall">
+          <div id="floatingGrayBackground" onclick="hide('floatingGrayBackground');hide('floatingImageBackground');"></div>
           <div id="floatingImageBackground" class="floatingImageBackground" style="visibility: hidden;">
-            <div class="floatingImageCloseButton" onclick="hide('floatingImageBackground');"></div>
+            <div id="floatingImageDock">
+              <center>
+                <div id="floatingImageTitle">
+                  Test's Image
+
+                </div>
+              </center>
+
+            </div>
             <img src="" id="floatingImage"/>
           </div>
           <br />
@@ -179,7 +188,7 @@
               </tbody>
             </table>
             <table class="SummaryTable">
-              <caption>Run Time Summary</caption>
+              <caption>Summary</caption>
               <tbody>
                 <xsl:for-each select="/t:TestRun/t:Times">
                   <tr class="odd">
@@ -201,11 +210,6 @@
                     </td>
                   </tr>
                 </xsl:for-each>
-              </tbody>
-            </table>
-            <table class="DetailsTable">
-              <caption>Tests Details</caption>
-              <tbody>
                 <tr class="odd">
                   <th class="column1">User</th>
                   <td>
@@ -224,8 +228,21 @@
                     <xsl:value-of select="/t:TestRun/t:TestRunConfiguration/t:Description"/>
                   </td>
                 </tr>
+                <tr>
+                  <th scope="row" class="column1">Outcome</th>
+                  <td>
+                    <xsl:value-of select="$testRunOutcome"/>
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row" class="column1">Message</th>
+                  <td class="outcomeMessage">
+                    <xsl:value-of select="t:TestRun/t:ResultSummary/t:RunInfos/t:RunInfo/t:Text"/>
+                  </td>
+                </tr>
               </tbody>
             </table>
+
           </div>
           <xsl:variable name="testsFailedSet" select="//t:TestRun/t:Results/t:UnitTestResult[@outcome='Failed']" />
           <xsl:variable name="testsFailedCount" select="count(testsFailedSet)" />
@@ -512,26 +529,24 @@
   <xsl:template name="imageExtractor">
     <xsl:param name="testId" />
     <xsl:for-each select="/t:TestRun/t:Results/t:UnitTestResult[@testId=$testId]/t:Output">
-
       <xsl:variable name="MessageErrorStacktrace" select="trxreport:ExtractImageUrl(t:ErrorInfo/t:StackTrace)"/>
       <xsl:variable name="StdOut" select="trxreport:ExtractImageUrl(t:StdOut)"/>
       <xsl:variable name="StdErr" select="trxreport:ExtractImageUrl(t:StdErr)"/>
       <xsl:variable name="MessageErrorInfo" select="trxreport:ExtractImageUrl(t:ErrorInfo/t:Message)"/>
-      <xsl:choose>
-        <xsl:when test="$MessageErrorStacktrace">
-          <div class="atachmentImage" onclick="show('floatingImageBackground');updateFloatingImage('{$MessageErrorStacktrace}');"></div>
-        </xsl:when>
-        <xsl:when test="$StdOut">
-          <div class="atachmentImage" onclick="show('floatingImageBackground');updateFloatingImage('{$StdOut}');"></div>
-        </xsl:when>
-        <xsl:when test="$StdErr">
-          <div class="atachmentImage" onclick="show('floatingImageBackground');updateFloatingImage('{$StdErr}');"></div>
-        </xsl:when>
-        <xsl:when test="$MessageErrorInfo">
-          <div class="atachmentImage" onclick="show('floatingImageBackground');updateFloatingImage('{$MessageErrorInfo}');"></div>
-        </xsl:when>
-      </xsl:choose>
-
+        <xsl:choose>
+          <xsl:when test="$MessageErrorStacktrace">
+            <div class="atachmentImage tooltip" onclick="show('floatingImageBackground');show('floatingGrayBackground');updateFloatingImage('{$MessageErrorStacktrace}');" title="{$MessageErrorStacktrace}"></div>
+          </xsl:when>
+          <xsl:when test="$StdOut">
+            <div class="atachmentImage tooltip" onclick="show('floatingImageBackground');show('floatingGrayBackground');updateFloatingImage('{$StdOut}');" title="{$MessageErrorStacktrace}"></div>
+          </xsl:when>
+          <xsl:when test="$StdErr">
+            <div class="atachmentImage tooltip" onclick="show('floatingImageBackground');show('floatingGrayBackground');updateFloatingImage('{$StdErr}');" title="{$StdErr}"></div>
+          </xsl:when>
+          <xsl:when test="$MessageErrorInfo">
+            <div class="atachmentImage tooltip" onclick="show('floatingImageBackground');show('floatingGrayBackground');updateFloatingImage('{$MessageErrorInfo}');" title="{$MessageErrorInfo}"></div>
+          </xsl:when>
+        </xsl:choose>
     </xsl:for-each>
   </xsl:template>
 
@@ -543,7 +558,7 @@
     <xsl:for-each select="/t:TestRun/t:Results/t:UnitTestResult[@testId=$testId]/t:Output">
       <xsl:variable name="MessageErrorStacktrace" select="t:ErrorInfo/t:StackTrace"/>
       <xsl:if test="$MessageErrorStacktrace">
-        <div class="stacktraceButton" onclick="ShowHide('{generate-id($testId)}Stacktrace');"></div>
+        <div class="stacktraceButton tooltip" title="Stacktrace"  onclick="ShowHide('{generate-id($testId)}Stacktrace');"></div>
       </xsl:if>
     </xsl:for-each>
   </xsl:template>

@@ -41,7 +41,6 @@ namespace TrxerConsole
                 outputFilePath = args[0] + OUTPUT_FILE_EXT;
             }
 
-
             Transform(args[0], PrepareXsl(), outputFilePath);
         }
 
@@ -51,7 +50,7 @@ namespace TrxerConsole
         /// <param name="fileName">Trx file path</param>
         /// <param name="xsl">Xsl document</param>
         /// <param name="outputFile"></param>
-        private static void Transform(string fileName, XmlDocument xsl,string outputFile)
+        private static void Transform(string fileName, XmlDocument xsl, string outputFile)
         {
             XslCompiledTransform x = new XslCompiledTransform(true);
             x.Load(xsl, new XsltSettings(true, true), null);

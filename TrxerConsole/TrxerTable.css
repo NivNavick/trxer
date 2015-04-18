@@ -34,10 +34,10 @@ tr.odd .column1 {
     background: rgb(245, 244, 242);
 }
 
-tr.odd.column1Failed	{
-	background:#a90000;
-	width:30px;
-	}
+tr.odd.column1Failed {
+    background: #a90000;
+    width: 30px;
+}
 
 tr.odd td, tr.sep td {
     background: #FFFFFF;
@@ -74,7 +74,7 @@ td.critical {
 }
 
 td.Message {
-    text-align: left;
+    text-align: center;
     width: auto;
     word-wrap: break-word;
 }
@@ -87,7 +87,7 @@ td.Messages {
 }
 
 .Atached {
-    width: 30px
+    width: 30px;
 }
 
 td.Function {
@@ -103,8 +103,11 @@ td.error {
 tr.odd .warn,
 tr.sep .warn,
 td.warn {
-
     width: 90px;
+}
+
+td.outcomeMessage {
+    max-width: 240px;
 }
 
 tr.odd .info,
@@ -118,14 +121,12 @@ tr.sep .info {
 tr.odd .failed,
 tr.sep.failed,
 td.failed {
-
     width: 90px;
 }
 
 tr.odd .passed,
 tr.sep.passed,
 td.passed {
-
     width: 90px;
 }
 
@@ -134,7 +135,6 @@ td {
     ;
     padding: .3em 1em;
     text-align: center;
- 
     border-top: 1px solid #a2caf2;
     word-wrap: break-word;
 }
@@ -143,7 +143,6 @@ th {
     font-weight: normal;
     color: #678197;
     text-align: left;
-
     border-top: 1px solid #a2caf2;
     padding: .3em 1em;
 }
