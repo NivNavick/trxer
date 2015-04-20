@@ -115,7 +115,7 @@ function CreatePie() {
         ctx.arc(160, 75, 40, 0, Math.PI * 2);
     }
 
-    // either change this to the background color, or use the global composition
+    // either change this to the background color,CalculateTestsStatuses or use the global composition
     ctx.globalCompositeOperation = "destination-out";
     ctx.beginPath();
     ctx.moveTo(160, 35);
@@ -191,7 +191,7 @@ function CalculateTotalPrecents() {
     AddEventListener();
 }
 
-function CalculateTestsStatuses(testContaineId, canvasId) {
+function CalculateTestsStatuses(testContaineId, classId) {
     var totalPassed = 0;
     var totalFailed = 0;
     var totalInconclusive = 0;
@@ -218,9 +218,50 @@ function CalculateTestsStatuses(testContaineId, canvasId) {
     var failedPrec = (totalFailed / totalTests) * 100;
     var warnPrec = (totalInconclusive / totalTests) * 100;
 
+    passedPrec = passedPrec.toFixed(2).replace("/\.(\d\d)\d?$/", '.$1');
+    failedPrec = failedPrec.toFixed(2).replace("/\.(\d\d)\d?$/", '.$1');
+    warnPrec = warnPrec.toFixed(2).replace("/\.(\d\d)\d?$/", '.$1');
 
-    CreateHorizontalBars(canvasId, passedPrec, failedPrec, warnPrec);
+    document.getElementById(classId + "Failed").style.width = failedPrec + "%";
+    document.getElementById(classId + "Passed").style.width = passedPrec + "%";
+    document.getElementById(classId + "Warn").style.width = warnPrec + "%";
+
+    document.getElementById(classId + "Failed").title = totalFailed + "(" + failedPrec + "%)";
+    document.getElementById(classId + "Passed").title = totalPassed + "(" + passedPrec + "%)";
+    document.getElementById(classId + "Warn").title = totalInconclusive + "(" + warnPrec + "%)";
 }
 
+var img;
 
+function AddToArray(imagesString) {
+    img = imagesString.split("|");
+    slideimagesRight();
+}
+
+function slideimagesRight() {
+    var lastPlace = img[img.length - 1];//Save the last cell 
+    for (var i = 1; i < img.length; i++) {
+        img[img.length - i] = img[img.length - 1 - i];//Do the replacment,shift left
+    }
+
+    img[0] = lastPlace;//Replace first cell with the last cell we stored
+
+    for (var i = 0; i < img.length; i++) {
+        updateFloatingImage(img[i]);
+    }
+}
+
+function slideimagesLeft() {
+    var firstPlace = img[0];
+
+    for (var i = 0; i < img.length - 1; i++) {
+        img[i] = img[i + 1];
+    }
+
+    img[img.length - 1] = firstPlace;
+
+    for (var i = 0; i < img.length; i++) {
+        updateFloatingImage(img[i]);
+    }
+}
 

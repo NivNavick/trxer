@@ -69,3 +69,42 @@ table {
     border-collapse: collapse;
     border: 1px solid #a2caf2;
 }
+
+caption {
+    color: #9ba9b4;
+    font-size: 16px;
+    letter-spacing: .2em;
+    margin: 1em 0 0 0;
+    padding: 0;
+    caption-side: top;
+    text-align: center;
+    font-weight: normal;
+    border-top: 1px solid #a2caf2;
+    border-left: 1px solid #a2caf2;
+    border-right: 1px solid #a2caf2;
+}
+
+
+td {
+    color: #425b71;
+    ;
+    padding: .3em 1em;
+    text-align: center;
+    border-top: 1px solid #a2caf2;
+    word-wrap: break-word;
+}
+
+th {
+    font-weight: normal;
+    color: #678197;
+    text-align: left;
+    border-top: 1px solid #a2caf2;
+    padding: .3em 1em;
+}
+
+thead th {
+    background: rgb(245, 244, 242);
+    text-align: center;
+    font: bold 1.2em/2em "Century Gothic","Trebuchet MS",Arial,Helvetica,sans-serif;
+    color: #66a3d3;
+}

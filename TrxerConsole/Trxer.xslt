@@ -9,6 +9,7 @@
   <!--<xsl:namespace-alias stylesheet-prefix="t" result-prefix="#default"/>-->
 
   <msxsl:script language="C#" implements-prefix="trxreport">
+    <msxsl:using namespace="System.Collections.Generic" />
     <![CDATA[
     public string RemoveAssemblyName(string asm) 
     {
@@ -54,9 +55,27 @@
       return DateTime.Now.ToString();
     }
     
+   public string ExtractMultipleImages(string message,string stacktrace,string stdout,string stderr)
+    {
+      List<string> imagesUrl=new List<string>();
+      string[] textArray= {message,stacktrace,stdout,stderr};
+      foreach(string posibleImageUrl in textArray)
+      {
+          string image = ExtractImageUrl("\""+posibleImageUrl+"\"");
+          if(string.IsNullOrEmpty(image)==false)
+          {
+            imagesUrl.Add(posibleImageUrl);
+          }
+      }
+      return imagesUrl.Count>0?"'"+string.Join("|",imagesUrl)+"'":string.Empty;
+    }
+    
     public string ExtractImageUrl(string text)
     {
-       Match match = Regex.Match(text, "('|\")([^\\s]+(\\.(?i)(jpg|png|gif|bmp)))('|\")",
+    
+     //('|\")([^\\s]+(\\.(?i)(jpg|png|gif|bmp)))('|\")
+    
+       Match match = Regex.Match(text, "(\"|').*(\\.(?i)(jpg|png|gif|bmp))(\"|')",
 	      RegexOptions.IgnoreCase);
 
 	   if (match.Success)
@@ -81,6 +100,7 @@
         <link rel="stylesheet" type="text/css" href="Css.Statuses.css"/>
         <link rel="stylesheet" type="text/css" href="Css.ToolTip.css"/>
         <link rel="stylesheet" type="text/css" href="Css.HtmlTags.css"/>
+        <link rel="stylesheet" type="text/css" href="Css.Pie.css"/>
         <script language="javascript" type="text/javascript" src="Javascript.functions.js"></script>
         <title>
           <xsl:value-of select="/t:TestRun/@name"/>
@@ -89,7 +109,27 @@
       <body>
         <div id="divToRefresh" class="wrapOverall">
           <div id="floatingGrayBackground" onclick="hide('floatingGrayBackground');hide('floatingImageBackground');"></div>
-          <div id="floatingImageBackground" class="floatingImageBackground" style="visibility: hidden;">
+
+
+          <div id="floatingImageBackground">
+            <div id="navigation">
+              <table border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                  <td class="arrowCell">
+                    <div id="leftArrow" onclick="slideimagesLeft();"></div>
+                  </td>
+                  <td valign="top">
+                    <img src="" class="displayed"  id="floatingImage"/>
+                  </td>
+                  <td class="arrowCell">
+                    <div id="rightArrow" onclick="slideimagesRight();"></div>
+                  </td>
+                </tr>
+              </table>
+            </div>
+
+
+
             <!--  <div id="floatingImageDock">
               <center>
                 <div id="floatingImageTitle">
@@ -99,13 +139,14 @@
               </center>
 
             </div>-->
-            <img src="" class="displayed"  id="floatingImage"/>
+
+
           </div>
           <br />
           <xsl:variable name="testRunOutcome" select="t:TestRun/t:ResultSummary/@outcome"/>
 
           <div class="StatusBar statusBar{$testRunOutcome}">
-            <div class="statusBar{$testRunOutcome}Inner">
+            <div class="statusBarInner statusBar{$testRunOutcome}Inner">
               <center>
                 <h1 class="hWhite">
                   <div class="titleCenterd">
@@ -304,10 +345,9 @@
             <caption>All Tests Group By Classes</caption>
             <thead>
               <tr class="odd">
-                <th scope="col">Time</th>
                 <th scope="col" abbr="Status">Status</th>
                 <th scope="col" abbr="Test">
-                  Classes <div class="NumberTag">
+                  Classes <div class="Tag NumberTag">
                     <xsl:value-of select="$classCount" />
                   </div>
                 </th>
@@ -320,10 +360,10 @@
                 <xsl:variable name="testsSet" select="key('TestMethods', @className)" />
                 <xsl:variable name="testsCount" select="count($testsSet)" />
                 <tr>
-                  <th scope="row" class="column1">7/21/2014 10:56:45 PM</th>
                   <td class="PackageStatus">
-                    <canvas id="{generate-id(@className)}canvas" width="100" height="25">
-                    </canvas>
+                    <div id="{generate-id(@className)}Failed" class="graphsDiv NumberTagRed tooltip"></div>
+                    <div id="{generate-id(@className)}Passed" class="graphsDiv NumberTagGreen tooltip"></div>
+                    <div id="{generate-id(@className)}Warn" class="graphsDiv NumberTagYellow tooltip"></div>
                   </td>
                   <td class="Function">
                     <xsl:value-of select="trxreport:RemoveAssemblyName(@className)" />
@@ -338,7 +378,7 @@
                   </td>
                 </tr>
                 <tr id="{generate-id(@className)}TestsContainer" class="hiddenRow">
-                  <td colspan="5">
+                  <td colspan="4">
                     <table>
                       <thead>
                         <tr class="odd">
@@ -364,7 +404,7 @@
                   </td>
                 </tr>
                 <script>
-                  CalculateTestsStatuses('<xsl:value-of select="generate-id(@className)"/>TestsContainer','<xsl:value-of select="generate-id(@className)"/>canvas');
+                  CalculateTestsStatuses('<xsl:value-of select="generate-id(@className)"/>TestsContainer','<xsl:value-of select="generate-id(@className)"/>');
                 </script>
               </xsl:for-each>
             </tbody>
@@ -434,17 +474,17 @@
       <xsl:choose>
         <xsl:when test="@outcome='Passed'">
           <td class="passed">
-            <div class="StatusTag NumberTagGreen">PASSED</div>
+            <div class="Tag StatusTag NumberTagGreen">PASSED</div>
           </td>
         </xsl:when>
         <xsl:when test="@outcome='Failed'">
           <td class="failed">
-            <div class="StatusTag NumberTagRed">FAILED</div>
+            <div class="Tag StatusTag NumberTagRed">FAILED</div>
           </td>
         </xsl:when>
         <xsl:when test="@outcome='Inconclusive'">
           <td class="failed">
-            <div class="StatusTag NumberTagYellow">Inconclusive</div>
+            <div class="Tag StatusTag NumberTagYellow">INCONCLUSIVE</div>
           </td>
         </xsl:when>
         <xsl:when test="@outcome='Timeout'">
@@ -455,7 +495,7 @@
         </xsl:when>
         <xsl:when test="@outcome='Warn'">
           <td class="warn">
-            <div class="StatusTag NumberTagYellow">WARN</div>
+            <div class="Tag StatusTag NumberTagYellow">WARN</div>
           </td>
         </xsl:when>
         <xsl:otherwise>
@@ -506,6 +546,15 @@
           <xsl:call-template name="imageExtractor">
             <xsl:with-param name="testId" select="$testId" />
           </xsl:call-template>
+          <xsl:call-template name="stdOutButtnoInject">
+            <xsl:with-param name="testId" select="$testId" />
+          </xsl:call-template>
+
+          <xsl:call-template name="stdErrButtonInject">
+            <xsl:with-param name="testId" select="$testId" />
+          </xsl:call-template>
+
+
 
         </td>
         <td class="Message">
@@ -514,13 +563,58 @@
       </tr>
       <tr id="{generate-id($testId)}Stacktrace" class="hiddenRow">
         <!--Outer-->
-        <td colspan="6">
+        <td colspan="6" class="testOutputs">
           <table>
             <!--Inner-->
             <tbody>
+              <tr>
+                <td class="testOutputsTitle">
+                  StackTrace
+                </td>
+              </tr>
               <tr class="visibleRow">
-                <td class="ex alert-status-failed">
+                <td class="alert-status-failed">
                   <xsl:value-of select="/t:TestRun/t:Results/t:UnitTestResult[@testId=$testId]/t:Output/t:ErrorInfo/t:StackTrace" />
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="{generate-id($testId)}StdOut" class="hiddenRow">
+        <!--Outer-->
+        <td colspan="6" class="testOutputs">
+          <table>
+            <!--Inner-->
+            <tbody>
+              <tr>
+                <td class="testOutputsTitle">
+                  StdOut
+                </td>
+              </tr>
+              <tr class="visibleRow">
+                <td class="alert-status-out">
+                  <xsl:value-of select="/t:TestRun/t:Results/t:UnitTestResult[@testId=$testId]/t:Output/t:StdOut" />
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="{generate-id($testId)}StdErr" class="hiddenRow">
+        <!--Outer-->
+        <td colspan="6" class="testOutputs">
+          <table>
+            <!--Inner-->
+            <tbody>
+              <tr>
+                <td class="testOutputsTitle">
+                  StdErr
+                </td>
+              </tr>
+              <tr class="visibleRow">
+                <td class="alert-status-err">
+                  <xsl:value-of select="/t:TestRun/t:Results/t:UnitTestResult[@testId=$testId]/t:Output/t:StdErr" />
                 </td>
               </tr>
             </tbody>
@@ -537,25 +631,13 @@
       <xsl:variable name="StdOut" select="trxreport:ExtractImageUrl(t:StdOut)"/>
       <xsl:variable name="StdErr" select="trxreport:ExtractImageUrl(t:StdErr)"/>
       <xsl:variable name="MessageErrorInfo" select="trxreport:ExtractImageUrl(t:ErrorInfo/t:Message)"/>
-      <xsl:choose>
-        <xsl:when test="$MessageErrorStacktrace">
-          <div class="atachmentImage tooltip" onclick="show('floatingImageBackground');show('floatingGrayBackground');updateFloatingImage('{$MessageErrorStacktrace}');" title="{$MessageErrorStacktrace}"></div>
-        </xsl:when>
-        <xsl:when test="$StdOut">
-          <div class="atachmentImage tooltip" onclick="show('floatingImageBackground');show('floatingGrayBackground');updateFloatingImage('{$StdOut}');" title="{$StdOut}"></div>
-        </xsl:when>
-        <xsl:when test="$StdErr">
-          <div class="atachmentImage tooltip" onclick="show('floatingImageBackground');show('floatingGrayBackground');updateFloatingImage('{$StdErr}');" title="{$StdErr}"></div>
-        </xsl:when>
-        <xsl:when test="$MessageErrorInfo">
-          <div class="atachmentImage tooltip" onclick="show('floatingImageBackground');show('floatingGrayBackground');updateFloatingImage('{$MessageErrorInfo}');" title="{$MessageErrorInfo}"></div>
-        </xsl:when>
-      </xsl:choose>
+
+      <xsl:variable name="imagesUrl" select="trxreport:ExtractMultipleImages($MessageErrorStacktrace,$StdOut,$StdErr,$MessageErrorInfo)"/>
+      <xsl:if test="$imagesUrl">
+        <div class="atachmentImage tooltip" onclick="AddToArray({$imagesUrl});show('floatingImageBackground');show('floatingGrayBackground')" title="Image"></div>
+      </xsl:if>
     </xsl:for-each>
   </xsl:template>
-
-
-
 
   <xsl:template name="stracktracButtonInject">
     <xsl:param name="testId" />
@@ -567,32 +649,29 @@
     </xsl:for-each>
   </xsl:template>
 
+  <xsl:template name="stdOutButtnoInject">
+    <xsl:param name="testId" />
+    <xsl:variable name="stdOut" select="/t:TestRun/t:Results/t:UnitTestResult[@testId=$testId]/t:Output/t:StdOut"/>
+    <xsl:if test="$stdOut">
+      <div class="stdOutButton tooltip" title="StdOut"  onclick="ShowHide('{generate-id($testId)}StdOut');"></div>
+    </xsl:if>
+  </xsl:template>
+
+  <xsl:template name="stdErrButtonInject">
+    <xsl:param name="testId" />
+    <xsl:variable name="stdErr" select="/t:TestRun/t:Results/t:UnitTestResult[@testId=$testId]/t:Output/t:StdErr"/>
+    <xsl:if test="$stdErr">
+      <div class="stdErrButton tooltip" title="StdErr"  onclick="ShowHide('{generate-id($testId)}StdErr');"></div>
+    </xsl:if>
+  </xsl:template>
 
   <xsl:template name="debugInfo">
     <xsl:param name="testId" />
     <xsl:for-each select="/t:TestRun/t:Results/t:UnitTestResult[@testId=$testId]/t:Output">
-
-      <xsl:variable name="StdOut" select="t:StdOut"/>
-      <xsl:if test="$StdOut">
-        <xsl:value-of select="$StdOut"/>
-        <xsl:if test="$StdOut">
-          <br/>
-        </xsl:if>
-      </xsl:if>
-      <xsl:value-of select="t:StdErr" />
-      <xsl:variable name="StdErr" select="t:StdErr"/>
-      <xsl:if test="$StdErr">
-        <xsl:value-of select="$StdErr"/>
-        <br/>
-      </xsl:if>
       <xsl:variable name="MessageErrorInfo" select="t:ErrorInfo/t:Message"/>
       <xsl:if test="$MessageErrorInfo">
         <xsl:value-of select="$MessageErrorInfo"/>
-        <br/>
       </xsl:if>
-
-
-
     </xsl:for-each>
   </xsl:template>
 </xsl:stylesheet>

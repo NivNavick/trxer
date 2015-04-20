@@ -1,19 +1,4 @@
 
-
-caption {
-    color: #9ba9b4;
-    font-size: 16px;
-    letter-spacing: .2em;
-    margin: 1em 0 0 0;
-    padding: 0;
-    caption-side: top;
-    text-align: center;
-    font-weight: normal;
-    border-top: 1px solid #a2caf2;
-    border-left: 1px solid #a2caf2;
-    border-right: 1px solid #a2caf2;
-}
-
 tr.odd .column1 {
     background: rgb(245, 244, 242);
 }
@@ -23,12 +8,18 @@ tr.odd.column1Failed {
     width: 30px;
 }
 
-tr.odd td, tr.sep td {
-    background: #FFFFFF;
+tr.odd.column1Warn {
+    background: #efac4e;
+    width: 30px;
 }
 
-tr.sep .column1 {
-    background: #7CCD7C;
+tr.odd.column1Passed {
+    background: #339833;
+    width: 30px;
+}
+
+tr.odd td, tr.sep td {
+    background: #FFFFFF;
 }
 
 tr.odd .ex,
@@ -38,23 +29,9 @@ td.ex {
     width: 100px;
 }
 
-td.exShow {
-    text-align: left;
-    width: 100px;
-    color: #000;
-}
-
+th.statusCount,
 td.statusCount {
     width: auto;
-}
-
-th.statusCount {
-    width: auto;
-}
-
-td.critical {
-    text-align: left;
-    width: 100px;
 }
 
 td.slowest {
@@ -74,65 +51,27 @@ td.Messages {
     max-width: 550px;
 }
 
-.Atached {
-    width: 30px;
-}
-
 td.Function {
     text-align: left;
-}
-
-tr.sep .error,
-tr.odd .error,
-td.error {
-    background: #F08080;
-}
-
-tr.odd .warn,
-tr.sep .warn,
-td.warn {
-    width: 90px;
 }
 
 td.outcomeMessage {
     max-width: 240px;
 }
 
-tr.odd .info,
-td.info,
-tr.sep .info {
-    color: #c7c7c7;
-    background: #e0e0e0;
-    width: 90px;
-}
-
 tr.odd .failed,
 tr.sep.failed,
-td.failed {
-    width: 90px;
-}
-
+td.failed,
+tr.odd .info,
+td.info,
+tr.sep .info,
 tr.odd .passed,
 tr.sep.passed,
+tr.odd .warn,
+tr.sep .warn,
+td.warn,
 td.passed {
     width: 90px;
-}
-
-td {
-    color: #425b71;
-    ;
-    padding: .3em 1em;
-    text-align: center;
-    border-top: 1px solid #a2caf2;
-    word-wrap: break-word;
-}
-
-th {
-    font-weight: normal;
-    color: #678197;
-    text-align: left;
-    border-top: 1px solid #a2caf2;
-    padding: .3em 1em;
 }
 
 thead th.TestsTable {
@@ -140,9 +79,13 @@ thead th.TestsTable {
     font-weight: normal;
 }
 
-thead th {
-    background: rgb(245, 244, 242);
-    text-align: center;
-    font: bold 1.2em/2em "Century Gothic","Trebuchet MS",Arial,Helvetica,sans-serif;
-    color: #66a3d3;
+td.testOutputs {
+    border-top: none;
+}
+
+td.testOutputsTitle {
+    color: black;
+    font-weight: bold;
+    text-align: left;
+    border: 1px solid rgb(221, 221, 221);
 }

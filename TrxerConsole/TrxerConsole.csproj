@@ -46,7 +46,9 @@
     <Compile Include="ResourceReader.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Trxer.xslt">
@@ -58,6 +60,7 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Css\HtmlTags.css" />
+    <EmbeddedResource Include="Css\Pie.css" />
     <Content Include="Examples\NivNavick_NIVNAVICK-PC 2014-07-28 21_47_29.trx.html" />
     <EmbeddedResource Include="Css\ImageView.css" />
     <EmbeddedResource Include="Css\Buttons.css" />
