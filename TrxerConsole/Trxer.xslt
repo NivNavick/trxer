@@ -115,13 +115,6 @@
             <div id="navigation">
               <table border="0" cellspacing="0" cellpadding="0">
                 <tr>
-                  <td></td>
-                  <td></td>
-                  <td colspan="3" class="closeImageViewButton">
-                    <div onclick="hide('floatingImageBackground');hide('floatingGrayBackground')">&#10006;</div></td>
-
-                </tr>
-                <tr>
                   <td class="arrowCell">
                     <div id="leftArrow" onclick="slideimagesLeft();"></div>
                   </td>
@@ -133,6 +126,13 @@
                   <td class="arrowCell">
                     <div id="rightArrow" onclick="slideimagesRight();"></div>
                   </td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td colspan="3" class="closeImageViewButton">
+                      <a href="javascript:hide('floatingImageBackground');hide('floatingGrayBackground')">&#10006;Close</a>
+                  </td>
+                  <td></td>
                 </tr>
               </table>
             </div>
