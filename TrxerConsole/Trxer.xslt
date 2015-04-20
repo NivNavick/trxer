@@ -115,11 +115,20 @@
             <div id="navigation">
               <table border="0" cellspacing="0" cellpadding="0">
                 <tr>
+                  <td></td>
+                  <td></td>
+                  <td colspan="3" class="closeImageViewButton">
+                    <div onclick="hide('floatingImageBackground');hide('floatingGrayBackground')">&#10006;</div></td>
+
+                </tr>
+                <tr>
                   <td class="arrowCell">
                     <div id="leftArrow" onclick="slideimagesLeft();"></div>
                   </td>
                   <td valign="top">
-                    <img src="" class="displayed"  id="floatingImage"/>
+                    <div class="overFlowImage">
+                      <img src="" class="displayed"  id="floatingImage"/>
+                    </div>
                   </td>
                   <td class="arrowCell">
                     <div id="rightArrow" onclick="slideimagesRight();"></div>
@@ -543,9 +552,6 @@
           <xsl:call-template name="stracktracButtonInject">
             <xsl:with-param name="testId" select="$testId" />
           </xsl:call-template>
-          <xsl:call-template name="imageExtractor">
-            <xsl:with-param name="testId" select="$testId" />
-          </xsl:call-template>
           <xsl:call-template name="stdOutButtnoInject">
             <xsl:with-param name="testId" select="$testId" />
           </xsl:call-template>
@@ -553,7 +559,9 @@
           <xsl:call-template name="stdErrButtonInject">
             <xsl:with-param name="testId" select="$testId" />
           </xsl:call-template>
-
+          <xsl:call-template name="imageExtractor">
+            <xsl:with-param name="testId" select="$testId" />
+          </xsl:call-template>
 
 
         </td>
