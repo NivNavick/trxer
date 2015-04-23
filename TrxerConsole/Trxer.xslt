@@ -129,27 +129,13 @@
                 </tr>
                 <tr>
                   <td></td>
-                  <td colspan="3" class="closeImageViewButton">
-                      <a href="javascript:hide('floatingImageBackground');hide('floatingGrayBackground')">&#10006;Close</a>
+                  <td colspan="4" class="closeImageViewButton">
+                    <a href="javascript:hide('floatingImageBackground');hide('floatingGrayBackground')">&#10006; Close</a>
                   </td>
                   <td></td>
                 </tr>
               </table>
             </div>
-
-
-
-            <!--  <div id="floatingImageDock">
-              <center>
-                <div id="floatingImageTitle">
-                  Test's Image
-
-                </div>
-              </center>
-
-            </div>-->
-
-
           </div>
           <br />
           <xsl:variable name="testRunOutcome" select="t:TestRun/t:ResultSummary/@outcome"/>
@@ -166,6 +152,36 @@
             </div>
           </div>
           <div class="SummaryDiv">
+
+
+
+
+
+
+         <!--   <table id="TotalTestsTable">
+              <caption>Results Summary</caption>
+              <thead>
+                <tr class="odd">
+                  <th scope="col" abbr="Status">
+                   \f080; Pie View
+                  </th>
+                </tr>
+                <tr class="odd">
+                  <th scope="col" abbr="Status">
+                    Tests Statuses
+                  </th>
+                </tr>
+                <tr class="odd">
+                  <th scope="col" abbr="Status">
+                    Summary
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+
+              </tbody>
+            </table>-->
+
             <table id="TotalTestsTable">
               <caption>Results Summary</caption>
               <thead>
@@ -296,8 +312,10 @@
                 </tr>
               </tbody>
             </table>
-
           </div>
+
+
+
           <xsl:variable name="testsFailedSet" select="//t:TestRun/t:Results/t:UnitTestResult[@outcome='Failed']" />
           <xsl:variable name="testsFailedCount" select="count(testsFailedSet)" />
           <xsl:if test="$testsFailedSet">
@@ -310,9 +328,7 @@
                   <td class="Function">
                     Failed tests
                   </td>
-                  <td class="Message" name="{generate-id(faileds)}Id">
-                    <xsl:value-of select="concat(testsFailedCount,' Tests')" />
-                  </td>
+               
                   <td class="ex">
                     <div class="OpenMoreButton" onclick="ShowHideWithChange('{generate-id(faileds)}TestsContainer','{generate-id(faileds)}Button','Show Tests','Hide Tests');">
                       <div class="MoreButtonText" id="{generate-id(faileds)}Button">Hide Tests</div>
@@ -320,7 +336,7 @@
                   </td>
                 </tr>
                 <tr id="{generate-id(faileds)}TestsContainer" class="visibleRow">
-                  <td colspan="4">
+                  <td colspan="3">
                     <table>
                       <thead>
                         <tr class="odd">

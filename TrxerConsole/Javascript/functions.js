@@ -236,6 +236,14 @@ var img;
 function AddToArray(imagesString) {
     img = imagesString.split("|");
     slideimagesRight();
+    if (img.length > 1) {
+        show("rightArrow");
+        show("leftArrow");
+    }
+    else if (img.length == 1) {
+        hide("rightArrow");
+        hide("leftArrow");
+    }
 }
 
 function slideimagesRight() {

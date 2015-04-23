@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Xml;
 using System.Xml.Xsl;
 
@@ -82,7 +83,7 @@ namespace TrxerConsole
             Console.WriteLine("Loading javascript...");
             XmlNode scriptEl = xslDoc.GetElementsByTagName("script")[0];
             XmlAttribute scriptSrc = scriptEl.Attributes["src"];
-            string script = ResourceReader.LoadTextFromResource(scriptSrc.Value);
+            string script =ResourceReader.LoadTextFromResource(scriptSrc.Value);
             scriptEl.Attributes.Remove(scriptSrc);
             scriptEl.InnerText = script;
         }
