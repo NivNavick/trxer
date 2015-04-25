@@ -44,6 +44,12 @@ td.Message {
     word-wrap: break-word;
 }
 
+td.TestsCount {
+    text-align: left;
+    width: auto;
+    word-wrap: break-word;
+}
+
 td.Messages {
     text-align: left;
     width: auto;
@@ -72,6 +78,7 @@ tr.sep .warn,
 td.warn,
 td.passed {
     width: 90px;
+    text-align: left;
 }
 
 thead th.TestsTable {

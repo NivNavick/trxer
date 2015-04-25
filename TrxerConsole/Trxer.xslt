@@ -370,13 +370,13 @@
             <caption>All Tests Group By Classes</caption>
             <thead>
               <tr class="odd">
-                <th scope="col" abbr="Status">Status</th>
+                <th scope="col" abbr="Status"></th>
                 <th scope="col" abbr="Test">
                   Classes <div class="Tag NumberTag">
                     <xsl:value-of select="$classCount" />
                   </div>
                 </th>
-                <th scope="col" abbr="Message">Message</th>
+                <th scope="col" abbr="Message"></th>
                 <th scope="col" abbr="Exception">More</th>
               </tr>
             </thead>
@@ -393,8 +393,10 @@
                   <td class="Function">
                     <xsl:value-of select="trxreport:RemoveAssemblyName(@className)" />
                   </td>
-                  <td class="Message" name="{generate-id(@className)}Id">
-                    <xsl:value-of select="concat($testsCount,' Tests')" />
+                  <td class="TestsCount" name="{generate-id(@className)}Id">
+                    <div class="Tag NumberTag">
+                      <xsl:value-of select="concat($testsCount,' Tests')" />
+                    </div>
                   </td>
                   <td class="ex">
                     <div class="OpenMoreButton" onclick="ShowHideWithChange('{generate-id(@className)}TestsContainer','{generate-id(@className)}Button','Show Tests','Hide Tests');">
@@ -458,8 +460,7 @@
                       <xsl:with-param name="testId" select="@testId" />
                     </xsl:call-template>
                     <td class="Function slowest">
-                      <xsl:value-of select="trxreport:RemoveAssemblyName(/t:TestRun/t:TestDefinitions/t:UnitTest[@id=$testId]/t:TestMethod/@className)"/>
-                      .<xsl:value-of select="@testName"/>
+                      <xsl:value-of select="trxreport:RemoveAssemblyName(/t:TestRun/t:TestDefinitions/t:UnitTest[@id=$testId]/t:TestMethod/@className)"/>.<xsl:value-of select="@testName"/>
                     </td>
                     <td>
                       <xsl:variable name="nameSet" select="/t:TestRun/t:TestDefinitions/t:UnitTest[@id=$testId]/t:Owners/t:Owner"/>
