@@ -54,11 +54,13 @@
     <EmbeddedResource Include="Trxer.xslt">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Javascript\functions.js" />
+    <EmbeddedResource Include="Javascript\Graphs.js" />
     <EmbeddedResource Include="Css\Trxer.css" />
     <EmbeddedResource Include="Css\TrxerTable.css" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Javascript\Utils.js" />
+    <EmbeddedResource Include="Javascript\ImageView.js" />
     <EmbeddedResource Include="Css\HtmlTags.css" />
     <EmbeddedResource Include="Css\Pie.css" />
     <Content Include="Examples\NivNavick_NIVNAVICK-PC 2014-07-28 21_47_29.trx.html" />

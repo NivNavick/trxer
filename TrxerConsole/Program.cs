@@ -75,21 +75,29 @@ namespace TrxerConsole
         }
 
         /// <summary>
-        /// Merges all javascript linked to page into Trxer html report itself
+        /// Merge all javascript linked to page into Trxer html report itself
         /// </summary>
         /// <param name="xslDoc">Xsl document</param>
         private static void MergeJavaScript(XmlDocument xslDoc)
         {
             Console.WriteLine("Loading javascript...");
-            XmlNode scriptEl = xslDoc.GetElementsByTagName("script")[0];
-            XmlAttribute scriptSrc = scriptEl.Attributes["src"];
-            string script =ResourceReader.LoadTextFromResource(scriptSrc.Value);
-            scriptEl.Attributes.Remove(scriptSrc);
-            scriptEl.InnerText = script;
+            XmlNodeList linkNodes = xslDoc.GetElementsByTagName("script");
+            List<XmlNode> toChangeList = linkNodes.Cast<XmlNode>().ToList();
+            foreach (XmlNode xmlNode in toChangeList)
+            {
+                XmlAttribute scriptSrc = xmlNode.Attributes["src"];
+                if (scriptSrc == null)
+                {
+                    continue;
+                }
+                string script = ResourceReader.LoadTextFromResource(scriptSrc.Value);
+                xmlNode.Attributes.Remove(scriptSrc);
+                xmlNode.InnerText = script;
+            }
         }
 
         /// <summary>
-        /// Merges all css linked to page ito Trxer html report itself
+        /// Merge all css linked to page ito Trxer html report itself
         /// </summary>
         /// <param name="xslDoc">Xsl document</param>
         private static void MergeCss(XmlDocument xslDoc)

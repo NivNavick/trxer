@@ -101,7 +101,9 @@
         <link rel="stylesheet" type="text/css" href="Css.ToolTip.css"/>
         <link rel="stylesheet" type="text/css" href="Css.HtmlTags.css"/>
         <link rel="stylesheet" type="text/css" href="Css.Pie.css"/>
-        <script language="javascript" type="text/javascript" src="Javascript.functions.js"></script>
+        <script language="javascript" type="text/javascript" src="Javascript.Graphs.js"></script>
+        <script language="javascript" type="text/javascript" src="Javascript.ImageView.js"></script>
+        <script language="javascript" type="text/javascript" src="Javascript.Utils.js"></script>
         <title>
           <xsl:value-of select="/t:TestRun/@name"/>
         </title>
@@ -158,7 +160,7 @@
 
 
 
-         <!--   <table id="TotalTestsTable">
+            <!--   <table id="TotalTestsTable">
               <caption>Results Summary</caption>
               <thead>
                 <tr class="odd">
@@ -328,7 +330,7 @@
                   <td class="Function">
                     Failed tests
                   </td>
-               
+
                   <td class="ex">
                     <div class="OpenMoreButton" onclick="ShowHideWithChange('{generate-id(faileds)}TestsContainer','{generate-id(faileds)}Button','Show Tests','Hide Tests');">
                       <div class="MoreButtonText" id="{generate-id(faileds)}Button">Hide Tests</div>

@@ -1,47 +1,3 @@
-
-var myColor = ["#5bab5b", "#d8534f", "#fad446"];//green,red,yellow
-
-function ShowHideWithChange(id1, id2, textOnHide, textOnShow) {
-    if (document.getElementById(id1).className == 'visibleRow') {
-        document.getElementById(id2).innerHTML = textOnHide;
-        document.getElementById(id1).className = 'hiddenRow';
-    }
-    else {
-        document.getElementById(id2).innerHTML = textOnShow;
-        document.getElementById(id1).className = 'visibleRow';
-    }
-}
-
-function ShowHide(id1) {
-    if (document.getElementById(id1).className == 'visibleRow') {
-        document.getElementById(id1).className = 'hiddenRow';
-    }
-    else {
-        document.getElementById(id1).className = 'visibleRow';
-    }
-}
-
-function AddEventListener() {
-    var button = document.getElementById('btn-download');
-    button.addEventListener('click', function () {
-        button.href = canvas.toDataURL('image/png');
-    });
-}
-
-function show(id) {
-    document.getElementById(id).style.visibility = "visible";
-    document.getElementById(id).style.display = "block";
-}
-function hide(id) {
-
-    document.getElementById(id).style.visibility = "hidden";
-    document.getElementById(id).style.display = "none";
-}
-
-function updateFloatingImage(url) {
-    document.getElementById('floatingImage').src = url;
-}
-
 /**
  * @return {number}
  */
@@ -52,43 +8,6 @@ function GetTotal() {
     }
     return myTotal;
 }
-
-function CreateHorizontalBars(id, totalPass, totalFailed, totalWarn) {
-
-    if (isNaN(totalPass) || isNaN(totalFailed) || isNaN(totalWarn)) {
-        drawLine(30, 4.5, 3, 30.5, id);
-    }
-    var canvas;
-    var ctx;
-    var myArray = new Array(3);
-    myArray[0] = totalPass;
-    myArray[1] = totalFailed;
-    myArray[2] = totalWarn;
-
-    canvas = document.getElementById(id);
-    ctx = canvas.getContext("2d");
-
-    var cw = canvas.width;
-    var ch = canvas.height;
-
-    var width = 6;
-    var currX = -12;
-
-    ctx.translate(cw / 2, ch / 2);
-
-    ctx.rotate(Math.PI / 2);
-
-    ctx.restore();
-
-    for (var i = 0 ; i < myArray.length; i++) {
-        ctx.moveTo(100, 0);
-        ctx.fillStyle = myColor[i];
-        var h = myArray[i];
-        ctx.fillRect(currX, (canvas.height - h) + 25, width, h);
-        currX += width + 1;
-    }
-}
-
 
 
 function CreatePie() {
@@ -124,25 +43,6 @@ function CreatePie() {
     ctx.closePath();
     // if using the global composition method, make sure to change it back to default.
     ctx.globalCompositeOperation = "source-over";
-}
-
-function drawLine(x1, y1, x2, y2, id) {
-    var canvas = document.getElementById(id);
-    var context = canvas.getContext("2d");
-
-    for (var i = 0; i < 8; i++) {
-        context.fillStyle = '#000';
-        context.strokeStyle = '#B0B0B0';
-
-        context.beginPath();
-        context.moveTo(x1, y1);
-        context.lineTo(x2, y2);
-        context.lineWidth = 1;
-        context.stroke();
-        context.closePath();
-        x1 += 10;
-        y2 += 10;
-    }
 }
 
 function CreateText() {
@@ -230,46 +130,3 @@ function CalculateTestsStatuses(testContaineId, classId) {
     document.getElementById(classId + "Passed").title = totalPassed + "(" + passedPrec + "%)";
     document.getElementById(classId + "Warn").title = totalInconclusive + "(" + warnPrec + "%)";
 }
-
-var img;
-
-function AddToArray(imagesString) {
-    img = imagesString.split("|");
-    slideimagesRight();
-    if (img.length > 1) {
-        show("rightArrow");
-        show("leftArrow");
-    }
-    else if (img.length == 1) {
-        hide("rightArrow");
-        hide("leftArrow");
-    }
-}
-
-function slideimagesRight() {
-    var lastPlace = img[img.length - 1];//Save the last cell 
-    for (var i = 1; i < img.length; i++) {
-        img[img.length - i] = img[img.length - 1 - i];//Do the replacment,shift left
-    }
-
-    img[0] = lastPlace;//Replace first cell with the last cell we stored
-
-    for (var i = 0; i < img.length; i++) {
-        updateFloatingImage(img[i]);
-    }
-}
-
-function slideimagesLeft() {
-    var firstPlace = img[0];
-
-    for (var i = 0; i < img.length - 1; i++) {
-        img[i] = img[i + 1];
-    }
-
-    img[img.length - 1] = firstPlace;
-
-    for (var i = 0; i < img.length; i++) {
-        updateFloatingImage(img[i]);
-    }
-}
-
