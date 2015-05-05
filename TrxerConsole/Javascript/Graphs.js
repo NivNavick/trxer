@@ -23,7 +23,7 @@ function CreatePie() {
     CreateText();
 
     for (var i = 0; i < myData.length; i++) {
-        ctx.fillStyle = myColor[i];
+        ctx.fillStyle = pieColors[i];
         ctx.beginPath();
         ctx.moveTo(160, 75);
         ctx.arc(160, 75, 75, lastend, lastend +
@@ -56,7 +56,7 @@ function CreateText() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     for (var i = 0; i < myData.length; i++) {
-        ctx.fillStyle = myColor[i];
+        ctx.fillStyle = pieColors[i];
         ctx.font = "15px arial";
         ctx.fillText(myParsedData[i], textPosX, textPosY);
         textPosY += 35;
@@ -70,6 +70,27 @@ var allWarns = 0;
 var myData = [];
 
 var myParsedData = [];
+
+
+function CreateTotalStatusesGraph() {
+
+    var totalTests = allPassed + allFailed + allWarns;
+    var passedPrec = (allPassed / totalTests) * 100;
+    var failedPrec = (allFailed / totalTests) * 100;
+    var warnPrec = (allWarns / totalTests) * 100;
+
+    passedPrec = passedPrec.toFixed(2).replace("/\.(\d\d)\d?$/", '.$1');
+    failedPrec = failedPrec.toFixed(2).replace("/\.(\d\d)\d?$/", '.$1');
+    warnPrec = warnPrec.toFixed(2).replace("/\.(\d\d)\d?$/", '.$1');
+
+    document.getElementById("TotalFailed").style.height = failedPrec + "%";
+    document.getElementById("TotalPassed").style.height = passedPrec + "%";
+    document.getElementById("TotalWarn").style.height = warnPrec + "%";
+
+    document.getElementById("TotalFailed").title = allFailed + "(" + failedPrec + "%)";
+    document.getElementById("TotalPassed").title = allPassed + "(" + passedPrec + "%)";
+    document.getElementById("TotalWarn").title = allWarns + "(" + warnPrec + "%)";
+}
 
 function CalculateTotalPrecents() {
 

@@ -74,14 +74,31 @@
     {
     
      //('|\")([^\\s]+(\\.(?i)(jpg|png|gif|bmp)))('|\")
+    //(\"|').*(\\.(?i)(jpg|png|gif|bmp))(\"|')
+       MatchCollection matches = Regex.Matches(text, "((https:)|(http:(s?))|([/|.|\\w|\\s]))*\\.(?:jpg|gif|png)",
+	     RegexOptions.IgnoreCase);
+      
+      List<string> matchesList=new List<string>();
+      foreach(Match match in matches) 
+      {
+        if (match.Success)
+	      {
+	        matchesList.Add(match.Value.Replace("\'",string.Empty).Replace("\"",string.Empty).Replace("\\","\\\\"));
+	      }
+        
+        return string.Join("|",matchesList);
+      }
+      
+	   
+      return string.Empty;
+    }
     
-       Match match = Regex.Match(text, "(\"|').*(\\.(?i)(jpg|png|gif|bmp))(\"|')",
-	      RegexOptions.IgnoreCase);
-
-	   if (match.Success)
-	   {
-	      return match.Value.Replace("\'",string.Empty).Replace("\"",string.Empty).Replace("\\","\\\\");
-	    }
+    public string ShortenMessage(string message)
+    {
+      if(message.Length>300)
+      {
+         return message.Substring(0,300);
+      }
       return string.Empty;
     }
         
@@ -111,8 +128,6 @@
       <body>
         <div id="divToRefresh" class="wrapOverall">
           <div id="floatingGrayBackground" onclick="hide('floatingGrayBackground');hide('floatingImageBackground');"></div>
-
-
           <div id="floatingImageBackground">
             <div id="navigation">
               <table border="0" cellspacing="0" cellpadding="0">
@@ -491,6 +506,7 @@
       </body>
       <script>
         CalculateTotalPrecents();
+        CreateTotalStatusesGraph();
       </script>
     </html>
   </xsl:template>
@@ -539,17 +555,11 @@
     <xsl:param name="testDescription" />
     <xsl:for-each select="/t:TestRun/t:Results/t:UnitTestResult[@testId=$testId]">
       <tr class="Test">
-
-
         <xsl:call-template name="tStatus">
           <xsl:with-param name="testId" select="$testId" />
         </xsl:call-template>
-
         <td class="Function">
           <xsl:value-of select="@testName" />
-
-
-
         </td>
         <td class="Messages">
           <xsl:call-template name="debugInfo">
@@ -567,7 +577,6 @@
           </xsl:for-each>
         </td>
         <td class="Messages">
-
           <xsl:call-template name="stracktracButtonInject">
             <xsl:with-param name="testId" select="$testId" />
           </xsl:call-template>
@@ -695,9 +704,22 @@
   <xsl:template name="debugInfo">
     <xsl:param name="testId" />
     <xsl:for-each select="/t:TestRun/t:Results/t:UnitTestResult[@testId=$testId]/t:Output">
-      <xsl:variable name="MessageErrorInfo" select="t:ErrorInfo/t:Message"/>
-      <xsl:if test="$MessageErrorInfo">
-        <xsl:value-of select="$MessageErrorInfo"/>
+      <xsl:variable name="MessageText" select="t:ErrorInfo/t:Message"/>
+      <xsl:if test="$MessageText">
+        <xsl:variable name="MessageLengthMoreThan300" select="trxreport:ShortenMessage($MessageText)"/>
+        <xsl:choose>
+          <xsl:when test="$MessageLengthMoreThan300">
+            <div id="{generate-id($testId)}TestMessage">
+              <xsl:value-of select="$MessageLengthMoreThan300"/>
+            </div>
+          
+            <a href="javascript:ToggleMessageView('{$MessageText}','{$MessageLengthMoreThan300}','{generate-id($testId)}');" id="{generate-id($testId)}TestMessageLink">Show More</a>
+
+          </xsl:when>
+          <xsl:otherwise>
+            <xsl:value-of select="$MessageText"/>
+          </xsl:otherwise>
+        </xsl:choose>
       </xsl:if>
     </xsl:for-each>
   </xsl:template>

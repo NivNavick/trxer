@@ -63,7 +63,6 @@
     <EmbeddedResource Include="Javascript\ImageView.js" />
     <EmbeddedResource Include="Css\HtmlTags.css" />
     <EmbeddedResource Include="Css\Pie.css" />
-    <Content Include="Examples\NivNavick_NIVNAVICK-PC 2014-07-28 21_47_29.trx.html" />
     <EmbeddedResource Include="Css\ImageView.css" />
     <EmbeddedResource Include="Css\Buttons.css" />
     <EmbeddedResource Include="Css\ToolTip.css" />

@@ -1,4 +1,4 @@
-var img;
+var img = [];
 
 function AddToArray(imagesString) {
     img = imagesString.split("|");

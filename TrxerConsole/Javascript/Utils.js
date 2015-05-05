@@ -1,5 +1,5 @@
 
-var myColor = ["#5bab5b", "#d8534f", "#fad446"];//green,red,yellow
+var pieColors = ["#5bab5b", "#d8534f", "#efac4e"];//green,red,yellow
 
 function ShowHideWithChange(id1, id2, textOnHide, textOnShow) {
     if (document.getElementById(id1).className == 'visibleRow') {
@@ -40,4 +40,16 @@ function hide(id) {
 
 function updateFloatingImage(url) {
     document.getElementById('floatingImage').src = url;
+}
+
+function ToggleMessageView(messageText,shortenMessageText, id) {
+    var element = document.getElementById(id + "TestMessage");
+    var linkElement = document.getElementById(id + "TestMessageLink");
+    if (linkElement.innerHTML == "Show More") {
+        element.innerHTML = messageText;
+        linkElement.innerHTML = "Show Less";
+    } else {
+        element.innerHTML = shortenMessageText;
+        linkElement.innerHTML = "Show More";
+    }
 }
