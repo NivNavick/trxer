@@ -1,0 +1,149 @@
+﻿/*WebDesignAndSuch.com*/
+
+
+
+
+
+@charset "UTF-8";
+
+#container {
+    width: 780px;
+    background: #FFFFFF;
+    margin: 0 auto;
+    font-size: 14px;
+    text-align: left;
+}
+
+#mainContent {
+    padding: 0 60px;
+    min-height: 600px;
+    line-height: 25px;
+}
+
+img {
+    border: 0px;
+}
+
+
+
+
+/*LINKS*/
+
+#mainContent a:link, #mainContent a:visited {
+    color: #fff;
+    text-decoration: none;
+    font-size: 18px;
+    background: #000000;
+    padding: 5px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+}
+
+#mainContent a:hover, #mainContent a:active {
+    color: #fff;
+    text-decoration: none;
+    font-size: 18px;
+    background: #333333;
+    padding: 5px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+}
+
+
+.UnChecked {
+    width: 20px;
+    height: 20px;
+    background-size: 20px 20px;
+    float: left;
+    padding-left: 6px;
+    padding-right: 6px;
+    cursor: pointer;
+    background-repeat: no-repeat;
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAA7EAAAOxAGVKw4bAAABhElEQVRYw+2Xv2oiURTGfwcv6BSCjMoIEx0GO4cU/slLBN8gT5Bu0y1p0sl2W+YJfAPZl8iGFDKVxYDGRgtlLDSi3G2uQdg2Y5r7dec03+8cTnE+wajZbOZLpdI9cAdEgMPXagvEwDBN0+fJZPIBIABRFF0VCoU/wDWX0Xi/39+Ox+N3CcMw77ruy5n5GzA6HA6br3TM5XJFEekD7RNEmqY30ul0fojIb9P8tVgsHmezmc5ibN/3xfO8gYj8NK0H6Xa7L0APeFsul93pdKqz3L3v+1Kr1V7NJv4qc3AAo6zNAebzufY8byQibSBSZ9e+udABcjweN0opAEfxzbIAFsACWAALYAEsgAWwAMokFgcoXsxUqZPXVpm41AP6YRg+JUmS6Wdcr9cF6JsyVlrroYj0gLbrugPgMSuIRqMh1Wp1cJaOhhIEQb5SqfwXzTJ404tm8s9otl6vbwSg1WpdOY5z0XC62+1u4zh+l1MnCIJ8uVy+F5FM47nWerharZ6TJPkA+AcFx3h8axb0kgAAAABJRU5ErkJggjQ2Ng==');
+}
+
+.Checked {
+    width: 20px;
+    height: 20px;
+    background-size: 20px 20px;
+    float: left;
+    padding-left: 6px;
+    padding-right: 6px;
+    cursor: pointer;
+    background-repeat: no-repeat;
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAA7EAAAOxAGVKw4bAAADUElEQVRYw72XTUwTURDH/1NW2o3RkHZpiS0thHiAhUPf6sGPePBIPJuoF2IwEaNGgwfFxIMm1QvxgF9RYzSReNHEAzHePHpQtzRA+GiwFqyJ0ECzJRVwl+dl0bosUKDLHOfNZH5v3rzJDMGUhoYGd1VVVQeAUwBkACLKK78ADAHo1TTtYTKZXAAAAgBZlkMej+cdgBZsjwwsLi62DgwMfKf6+nq31+v9VBQ8DqBP1/V8OSNWVFTsIqJjAKLLEJqm7SfG2CUiumsq70xNTXVNTk5yJ64dDAYpEAjEiOiqqbpMiqJ8ArAPQHx6elqZmJjgTuY+GAxSTU3NFzMTnwWz4ACgr9zBGxsbD3DOMyMjIxPLukwmwwOBQB8RRQHIQlG1l/XNGWMnieglgIKiKFez2ez9dDrNAcAwjLwgCAAgCk6kuampaQ8R9Zi/bCeAHkmSjqTT6eNWW0cARFF8AsBrUR+ysy07AGOsHUCrVc85v+I4gCzLESLqtjl6rarqK0cBQqEQeTyeZwB2W45+FgqFjtX8ygbg9/vPAzhqzfzS0tLZ4eHhrKMAzc3Ne4nots3Ry3g8/nYt3y0DhMNhl9vtfm5+t2LJzM3NXVzPX1jnZocBFAYHB9XVbCRJ6gRw0Cb17aOjo7lNAzDGzhHRPQA6Y+yEqqpvrDYtLS0yEd20cX8aj8ffl5JBYZXgZ4o62Q4iemWFqKurEyorK18A8Fjcv+Xz+c5Sn9AWgIiuA3AVqVZA+Hy+LgCKxXXJMIzTY2Nj+S0BcM5jRPRoeWKyQhiG8RXAdRvXe/39/R82UsS2AKqqPmaMCWYNrIAQBOEHgEqL25imadc2+otWLUJVVR8wxmAHASBiMTd0XW9LJpOFsgGsA2GV7kQi8XEzfWTdRlQCxGAul7ux2UZWUidcA+K3rutt4+PjC44CrAERSyQSX7bSygVzYxEB7CoFIhqNZl0u1wUAn7PZ7K1NBRWE5Vi//hvLZ2ZmlFQq5ehYXltbS36//99YzjnvJaJ9AKJerzcGoMspiHA4TNXV1bGi7aiXIpGIW5KkFatZucd084n/W81yudx+MsfokCiK27qczs/Ptw4NDX3/+6UikYjb5/N1EJGj6znnvHd2dvZhKpVaAIA/b8I7joolBuYAAAAASUVORK5CYII5MjY=');
+}
+
+.checkboxContainer {
+    padding-left: 6px;
+    padding-top: 3px;
+    padding-bottom: 17px;
+}
+
+.settingsIcon {
+    cursor: pointer;
+    top: 6px;
+    left: 6px;
+    float: left;
+    width: 32px;
+    height: 32px;
+    background-size: 32px 32px;
+    background-repeat: no-repeat;
+    position: absolute;
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAFlElEQVRYhbWXXYwbVxmGn288npm1XW8cr+3xLma11kYpF0VVi6BcgFpEiEBCIC4oF235kYoAgYSUVvykEVQgEhUFwQVwUYFUgYALkIoQUhFFahFCggJNG1VVG+Qk3V2vfzb2rtfetcfj+bjwbHAcp3GS7bk658w53/OemfOe841wk8UwDDKZjKRSqbssy7pfRN4PHAaSQA9YVdUXVPUPrVbr6bW1ta7v+1fFkZuBJ5NJWVhYuCMajZ4G7gNE5IpQAqCqAAr8bX19/d56va7jscwbhWcyGXFd9wsichqww+5AVc8ALwKXgJiIPCAiqVCEe614NyQgnU5LPp//GvBdhqscAD/b3d39fqPRuNDpdDSZTIrruo8Be/C67/uf3Nraumr1NyTAcRzJ5/OfGIFvDAaD+8vl8vPNZlMBstmsuK57HPiWDul13/ePlkqllz3Pmxh3agHz8/MHDcP4SQhv+b7/oVKp9HK32x2FPwZ8O5xyGb43BsCyLA4cOCCqSrPZ1KkExGIxSSQSx4A5AFX9yoULFy4HTqfT4rruN64HdxxHisXiO03T/B1QnpmZOTKVgNnZ2Sjw2bD5r42NjV/t7OwogIiQy+XuBR6fEv4nIAsszc7OftyYRkAikbgnnISqPjlqJ9u2xTTNTwMGsDMNPLSsiMhHpxJg2/a7wqp2Op1nfd8f39GZMOgb29vbZ98EnhERBRoigoi8+7oCDMMQwzDeFja7Ozs7b4w+HwwGAC+Flrs9lUo94rquTIIDqqonVPWX4fTCVG8AsMIV9kLQ5dLv97XT6fwYqIVd38tms48WCgVjHA6cqFQqp4BO2LauKyAajQK0GNrvtmg06oyPWVlZWfM87yMMT0EBTqZSqVdN0/z7OLzVaimhm4DWmwqwLIulpaXDwINhlxGJRObGx3meR6lUOuN53tG9NyEiy4ADBMDxSqVyqlaraTweF+CucOrr17ShZVkUi8XbLcv6MzAfnmxPtNvtlUnjPc/TUqn0YqFQuDsej39ZVe9gaMmnKpXKXxuNhgIcPHhwCbgz/JTPT7wNx+Fh98lqtXqiWq1OPNNHSzQalUgkgqrieZ7u7ZtUKiWFQuGnwMOAep73nqvewK3CYbgx+/3+FX2O48j8/Px9wOfCrr80Go3/XCFgP+CTSjwel8XFxTsjkchvgAjQ6/f7xzY2Nv5/F7wVcNM0JZPJyNzc3AMi8iOG2ZKq6ldXV1dfCYJgeBveKjydTksikVgcDAZ13/d3RURmZmbeHo/HPygiDwN3h0MV+GalUnlye3tbQ5EmxWLx8M3Cc7mc5HK5U8AxhpZrM7SfPTa0HgTBF8vl8tN7jgAwFxYWEpZl/X4UXqvVbgR+EngkTAoNYHbstKwCP2+32z8ol8vN0XsCwEwmk18CDoXt07Va7USj0SCXyxmGYdi9Xq87qngC/FEAVV0BfgHcBvSDIFjt9Xr/brfb/9jc3Ozv7u5OTslE5FNh/Vyz2TxerVb10KFDS47jPAMsAqdU9fG9tGsSHFj1PO/I+fPnz+3ZLwiCqTauISLvCC+aZ+r1ug/gOM5ngGURsYCvO45z+XteC14qlV7v9XoaBIFOC4fhN4uE9T4Mc/kgCF4bVlWB80EQeNeDXyvpnEbAf8P6B9LptIgI6+vrvx4MBg8B3+l2ux9uNpvquu6+wwEiuVzOBd4HuLFYbFNV/3np0iWt1Wpna7Xac41GYzOTyUg2m913OEAkFoudtW37QSABHEkkElumab7Q7/eJRqOSz+etdDr9BEOf7yscQCzLkuXl5feapvlHhkclwBngOSAKHAWW3wo4hD+RYe52j2mavwXc0R/NkUPlNc/zPlYqlc7tFxxCB/i+z9bW1ppt20/Ztu2JSAZIMXTGWVX9YavV+vzFixcr49fsrZb/AbnEB+jFwiulAAAAAElFTkSuQmCCMTQ4NQ==');
+}
+
+/*STYLES FOR CSS POPUP*/
+
+
+#blanket {
+    background-color: #111;
+    opacity: 0.65;
+    *background: none;
+    position: absolute;
+    z-index: 9001;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+}
+
+#popUpDiv {
+    position: fixed;
+    background: url(pop-back.jpg) no-repeat;
+    width: 400px;
+    height: auto;
+    min-height: 150px;
+    border: 2px solid #0f9bdc;
+    z-index: 9002;
+    background-color: #ffffff;
+    border-radius: 10px;
+}
+
+    #popUpDiv a {
+        position: relative;
+        top: 20px;
+        left: 20px;
+    }
+
+.fsSubmitButton {
+    background-color: #0f9bdc;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #FFF;
+    border: hidden;
+    font-size: 30px;
+    height: 30px;
+    width: 30px;
+    text-align: center;
+    cursor: pointer;
+    bottom: 20px;
+    font-size: 20px;
+    border-radius: 5px;
+    position: absolute;
+    left: 93%;
+    top: -2px;
+}
+
+.li {
+    padding-left: 20px;
+    padding-top: 6px;
+}

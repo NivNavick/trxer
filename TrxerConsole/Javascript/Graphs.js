@@ -83,13 +83,17 @@ function CreateTotalStatusesGraph() {
     failedPrec = failedPrec.toFixed(2).replace("/\.(\d\d)\d?$/", '.$1');
     warnPrec = warnPrec.toFixed(2).replace("/\.(\d\d)\d?$/", '.$1');
 
-    document.getElementById("TotalFailed").style.height = failedPrec + "%";
-    document.getElementById("TotalPassed").style.height = passedPrec + "%";
-    document.getElementById("TotalWarn").style.height = warnPrec + "%";
+    //document.getElementById("TotalFailedDiv").style.width = failedPrec + "%";
+    //document.getElementById("TotalPassedDiv").style.width = passedPrec + "%";
+    //document.getElementById("TotalWarnDiv").style.width = warnPrec + "%";
 
-    document.getElementById("TotalFailed").title = allFailed + "(" + failedPrec + "%)";
-    document.getElementById("TotalPassed").title = allPassed + "(" + passedPrec + "%)";
-    document.getElementById("TotalWarn").title = allWarns + "(" + warnPrec + "%)";
+    //document.getElementById("TotalFailedDiv").title = allFailed + "(" + failedPrec + "%)";
+    //document.getElementById("TotalPassedDiv").title = allPassed + "(" + passedPrec + "%)";
+    //document.getElementById("TotalWarnDiv").title = allWarns + "(" + warnPrec + "%)";
+
+    document.getElementById("TotalFailedText").innerHTML = allFailed + "(" + failedPrec + "%)";;
+    document.getElementById("TotalPassedText").innerHTML = allPassed + "(" + passedPrec + "%)";;
+    document.getElementById("TotalWarnText").innerHTML = allWarns + "(" + warnPrec + "%)";;
 }
 
 function CalculateTotalPrecents() {

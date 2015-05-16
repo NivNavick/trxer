@@ -45,7 +45,7 @@
 
 .StatusTag {
     color: white;
-    font-size: 80%;
+    font-size: 100%;
     background-color: #ffffff;
     border-radius: .25em;
 }
@@ -68,6 +68,27 @@
     line-height: 27px;
     height: 10px;
     float: left;
+}
+
+.noTopBorder {
+    text-align: left;
+    border-top: 0;
+}
+
+.graphsDivTotal {
+    height: 30px;
+}
+
+.graphsMenuSquare {
+    width: 10px;
+    height: 10px;
+    float: left;
+}
+
+.graphMenuText {
+    width: auto;
+    float: left;
+    padding-left: 10px;
 }
 
 .StatusBar {
@@ -108,10 +129,9 @@
 
 .graphsDivVertical {
     /* text-align: center; */
-  margin-bottom: 2px;
-  /* line-height: 27px; */
-  width: 30px;
-  height: 10px;
-  float: left;
-  
+    margin-bottom: 2px;
+    /* line-height: 27px; */
+    width: 30px;
+    height: 10px;
+    float: left;
 }

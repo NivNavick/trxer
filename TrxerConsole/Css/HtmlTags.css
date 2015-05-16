@@ -87,11 +87,11 @@ caption {
 
 td {
     color: #425b71;
-    ;
     padding: .3em 1em;
     text-align: center;
     border-top: 1px solid #a2caf2;
     word-wrap: break-word;
+    font-size: 14px;
 }
 
 th {
@@ -107,4 +107,9 @@ thead th {
     text-align: center;
     font: bold 1.2em/2em "Century Gothic","Trebuchet MS",Arial,Helvetica,sans-serif;
     color: #66a3d3;
+}
+
+ul
+{
+    list-style-type: none;
 }

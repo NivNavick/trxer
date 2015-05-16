@@ -40,3 +40,17 @@ function slideimagesLeft() {
     }
 }
 
+function identifyKeyDownEvent(keyEvent) {
+    var pressedKeyValue = keyEvent.keyCode;
+    if (pressedKeyValue == 27) {//esc
+        hide('floatingImageBackground');
+        hide('floatingGrayBackground');
+    }
+    else if (pressedKeyValue == 37) {//left
+        slideimagesLeft();
+    }
+    else if (pressedKeyValue == 39) {//right
+        slideimagesRight();
+    }
+}
+
