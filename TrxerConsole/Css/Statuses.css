@@ -19,7 +19,17 @@
 
 .alert-status-err {
     background-color: #ffeea4;
-    color: #efca28;
+    color: #c6a71d;
+    border: 1px solid rgb(221, 221, 221);
+    border-top: none;
+    text-align: left;
+    max-width: 30px;
+}
+
+
+.alert-status-description {
+    background-color: #71dfa2;
+    color: #218c51;
     border: 1px solid rgb(221, 221, 221);
     border-top: none;
     text-align: left;

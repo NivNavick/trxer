@@ -94,12 +94,17 @@
     }
     
     public string ShortenMessage(string message)
-    {
+    {      
       if(message.Length>300)
-      {
+      { 
          return message.Substring(0,300)+"...";
       }
       return string.Empty;
+    }
+    
+    public string RepalceSlash(string message)
+    {
+         return message.Replace("\\","\\\\");
     }
         
     ]]>
@@ -118,16 +123,16 @@
         <link rel="stylesheet" type="text/css" href="Css.ToolTip.css"/>
         <link rel="stylesheet" type="text/css" href="Css.HtmlTags.css"/>
         <link rel="stylesheet" type="text/css" href="Css.Pie.css"/>
-        <link rel="stylesheet" type="text/css" href="Css.styles.css"/>
+        <link rel="stylesheet" type="text/css" href="Css.settingsPopup.css"/>
         <script language="javascript" type="text/javascript" src="Javascript.Graphs.js"></script>
         <script language="javascript" type="text/javascript" src="Javascript.ImageView.js"></script>
         <script language="javascript" type="text/javascript" src="Javascript.Utils.js"></script>
-        <script language="javascript" type="text/javascript" src="Javascript.css-pop.js"></script>
+        <script language="javascript" type="text/javascript" src="Javascript.settingsPopup.js"></script>
         <title>
           <xsl:value-of select="/t:TestRun/@name"/>
         </title>
       </head>
-      <body onload="ShowLocalStorgeValues();" onkeydown="return identifyKeyDownEvent(event);">
+      <body onload="ShowLocalStorgeValues();ShowStatusesLocalStorgeValues();" onkeydown="return identifyKeyDownEvent(event);">
         <div id="divToRefresh" class="wrapOverall">
           <div id="floatingGrayBackground" onclick="hide('floatingGrayBackground');hide('floatingImageBackground');"></div>
           <div id="floatingImageBackground">
@@ -174,9 +179,7 @@
           <div id="blanket" style="display: none; height: 789px;"></div>
           <div id="popUpDiv" style="display: none; top: 194.5px; left: 751.5px;">
             <br/>
-
-
-            <div  class="checkboxContainer">
+            <div class="checkboxContainer">
               <div id="summaryTables" onclick="toggleCheckbox(this)" class="Checked"></div> Summary tables
               <br/>
               <div class="li">
@@ -188,24 +191,26 @@
               <div class="li">
                 <div id="testDetails" onclick="toggleCheckbox(this)" class="Checked"></div> Tests details
               </div>
-
             </div>
-
             <div class="checkboxContainer">
               <div id="failedTests" onclick="toggleCheckbox(this)" class="Checked"></div> Failed tests
             </div>
-
             <div class="checkboxContainer">
               <div id="testsByClasses" onclick="toggleCheckbox(this)" class="Checked"></div> Tests by classes
+              <div class="li">
+                <div id="failedTestsStatuses" onclick="toggleStatusesCheckbox(this)" class="Checked" title="failed"></div>  <div class="Tag StatusTag NumberTagRed">FAILED</div>
+              </div>
+              <div class="li">
+                <div id="passedTestsStatuses" onclick="toggleStatusesCheckbox(this)" class="Checked" title="passed"></div>   <div class="Tag StatusTag NumberTagGreen">PASSED</div>
+              </div>
+              <div class="li">
+                <div id="warnTestsStatuses" onclick="toggleStatusesCheckbox(this)" class="Checked" title="warn"></div>   <div class="Tag StatusTag NumberTagYellow">PASSED</div>
+              </div>
             </div>
-
             <div  class="checkboxContainer">
               <div id="mostSlowest" onclick="toggleCheckbox(this)" class="Checked"></div> Most 5 slowest tests
             </div>
-
-
             <input type="button" value="X" class="fsSubmitButton" onclick="popup('popUpDiv')"/>
-
           </div>
           <div class="SummaryDiv" id="summaryTablesElement">
 
@@ -408,7 +413,7 @@
 
 
           <xsl:variable name="testsFailedSet" select="//t:TestRun/t:Results/t:UnitTestResult[@outcome='Failed']" />
-          <xsl:variable name="testsFailedCount" select="count(testsFailedSet)" />
+          <xsl:variable name="testsFailedCount" select="count($testsFailedSet)" />
           <xsl:if test="$testsFailedSet">
             <div id="failedTestsElement">
               <table>
@@ -418,7 +423,7 @@
                   <tr>
                     <td class="column1Failed"></td>
                     <td class="Function">
-                      Failed tests
+                      Failed tests (<xsl:value-of select="$testsFailedCount"/>)
                     </td>
 
                     <td class="ex">
@@ -435,7 +440,6 @@
                             <th scope="col" class="TestsTable" abbr="Status">Status</th>
                             <th scope="col" class="TestsTable" abbr="Test">Test</th>
                             <th scope="col" class="TestsTable" abbr="Message">Message</th>
-                            <th scope="col" class="TestsTable" abbr="Message">Owner</th>
                             <th scope="col" class="TestsTable" abbr="Actions"></th>
                             <th scope="col" class="TestsTable" abbr="Exception">Duration</th>
                           </tr>
@@ -446,7 +450,7 @@
                             <xsl:call-template name="tDetails">
                               <xsl:with-param name="testId" select="@testId" />
                               <xsl:with-param name="testDescription" select="./../t:Description" />
-                                <xsl:with-param name="fullTestName" select="@testId" />
+                              <xsl:with-param name="fullTestName" select="@testId" />
                             </xsl:call-template>
                           </xsl:for-each>
                         </tbody>
@@ -507,7 +511,6 @@
                             <th scope="col" class="TestsTable" abbr="Status">Status</th>
                             <th scope="col" class="TestsTable" abbr="Test">Test</th>
                             <th scope="col" class="TestsTable" abbr="Message">Message</th>
-                            <th scope="col" class="TestsTable" abbr="Message">Owner</th>
                             <th scope="col" class="TestsTable" abbr="Actions"></th>
                             <th scope="col" class="TestsTable" abbr="Exception">Duration</th>
                           </tr>
@@ -540,7 +543,6 @@
                   <th scope="col">Time</th>
                   <th scope="col" abbr="Status">Status</th>
                   <th scope="col" abbr="Test">Test</th>
-                  <th scope="col" abbr="Message">Owner</th>
                   <th scope="col" abbr="Message">Duration</th>
                 </tr>
               </thead>
@@ -559,7 +561,7 @@
                       <td class="Function slowest">
                         <xsl:value-of select="trxreport:RemoveAssemblyName(/t:TestRun/t:TestDefinitions/t:UnitTest[@id=$testId]/t:TestMethod/@className)"/>.<xsl:value-of select="@testName"/>
                       </td>
-                      <td>
+                      <!--<td>
                         <xsl:variable name="nameSet" select="/t:TestRun/t:TestDefinitions/t:UnitTest[@id=$testId]/t:Owners/t:Owner"/>
                         <xsl:variable name="nameCount" select="count($nameSet)"/>
                         <xsl:for-each select="$nameSet">
@@ -568,7 +570,7 @@
                             <br/>
                           </xsl:if>
                         </xsl:for-each>
-                      </td>
+                      </td>-->
                       <td class="Message slowest">
                         <xsl:value-of select="trxreport:ToExactTimeDefinition(@duration)"/>
                       </td>
@@ -576,7 +578,7 @@
                   </xsl:if>
                 </xsl:for-each>
                 <tr>
-                  <td colspan="5">
+                  <td colspan="4">
                     <h6>TRX Html Viewer log - Niv Navick 2015</h6>
                   </td>
                 </tr>
@@ -658,7 +660,7 @@
             <xsl:with-param name="testId" select="$testId" />
           </xsl:call-template>
         </td>
-        <td class="Message">
+        <!--<td class="Message">
           <xsl:variable name="nameSet" select="/t:TestRun/t:TestDefinitions/t:UnitTest[@id=$testId]/t:Owners/t:Owner"/>
           <xsl:variable name="nameCount" select="count($nameSet)"/>
           <xsl:for-each select="$nameSet">
@@ -667,7 +669,7 @@
               <br/>
             </xsl:if>
           </xsl:for-each>
-        </td>
+        </td>-->
         <td class="Messages">
           <xsl:call-template name="stracktracButtonInject">
             <xsl:with-param name="testId" select="$testId" />
@@ -677,6 +679,9 @@
           </xsl:call-template>
 
           <xsl:call-template name="stdErrButtonInject">
+            <xsl:with-param name="testId" select="$testId" />
+          </xsl:call-template>
+          <xsl:call-template name="descriptionButtonInject">
             <xsl:with-param name="testId" select="$testId" />
           </xsl:call-template>
           <xsl:call-template name="imageExtractor">
@@ -691,7 +696,7 @@
       </tr>
       <tr id="{generate-id($testId)}Stacktrace" class="hiddenRow">
         <!--Outer-->
-        <td colspan="6" class="testOutputs">
+        <td colspan="5" class="testOutputs">
           <table>
             <!--Inner-->
             <tbody>
@@ -711,7 +716,7 @@
       </tr>
       <tr id="{generate-id($testId)}StdOut" class="hiddenRow">
         <!--Outer-->
-        <td colspan="6" class="testOutputs">
+        <td colspan="5" class="testOutputs">
           <table>
             <!--Inner-->
             <tbody>
@@ -731,7 +736,7 @@
       </tr>
       <tr id="{generate-id($testId)}StdErr" class="hiddenRow">
         <!--Outer-->
-        <td colspan="6" class="testOutputs">
+        <td colspan="5" class="testOutputs">
           <table>
             <!--Inner-->
             <tbody>
@@ -742,6 +747,26 @@
               </tr>
               <tr class="visibleRow">
                 <td class="alert-status-err">
+                  <xsl:value-of select="/t:TestRun/t:Results/t:UnitTestResult[@testId=$testId]/t:Output/t:StdErr" />
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="{generate-id($testId)}Description" class="hiddenRow">
+        <!--Outer-->
+        <td colspan="5" class="testOutputs">
+          <table>
+            <!--Inner-->
+            <tbody>
+              <tr>
+                <td class="testOutputsTitle">
+                  Description
+                </td>
+              </tr>
+              <tr class="visibleRow">
+                <td class="alert-status-description">
                   <xsl:value-of select="/t:TestRun/t:Results/t:UnitTestResult[@testId=$testId]/t:Output/t:StdErr" />
                 </td>
               </tr>
@@ -793,10 +818,18 @@
     </xsl:if>
   </xsl:template>
 
+  <xsl:template name="descriptionButtonInject">
+    <xsl:param name="testId" />
+    <xsl:variable name="description" select="/t:TestRun/t:Results/t:UnitTestResult[@testId=$testId]/t:Output/t:StdErr"/>
+    <xsl:if test="$description">
+      <div class="descriptionButton tooltip" title="Description"  onclick="ShowHide('{generate-id($testId)}Description');"></div>
+    </xsl:if>
+  </xsl:template>
+
   <xsl:template name="debugInfo">
     <xsl:param name="testId" />
     <xsl:for-each select="/t:TestRun/t:Results/t:UnitTestResult[@testId=$testId]/t:Output">
-      <xsl:variable name="MessageText" select="t:ErrorInfo/t:Message"/>
+      <xsl:variable name="MessageText" select="trxreport:RepalceSlash(t:ErrorInfo/t:Message)"/>
       <xsl:if test="$MessageText">
         <xsl:variable name="MessageLengthMoreThan300" select="trxreport:ShortenMessage($MessageText)"/>
         <xsl:choose>

@@ -51,9 +51,9 @@ img {
 
 
 .UnChecked {
-    width: 20px;
-    height: 20px;
-    background-size: 20px 20px;
+    width: 17px;
+    height: 17px;
+    background-size: 17px 17px;
     float: left;
     padding-left: 6px;
     padding-right: 6px;
@@ -63,9 +63,9 @@ img {
 }
 
 .Checked {
-    width: 20px;
-    height: 20px;
-    background-size: 20px 20px;
+    width: 17px;
+    height: 17px;
+    background-size: 17px 17px;
     float: left;
     padding-left: 6px;
     padding-right: 6px;
@@ -109,7 +109,6 @@ img {
 
 #popUpDiv {
     position: fixed;
-    background: url(pop-back.jpg) no-repeat;
     width: 400px;
     height: auto;
     min-height: 150px;

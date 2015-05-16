@@ -61,6 +61,20 @@ function toggleCheckbox(element) {
     updateLocalStorage(checkbox.id, document.getElementById(checkbox.id + "Element").style.display);
 }
 
+function toggleStatusesCheckbox(element) {
+    var checkbox = element;
+    if (checkbox.className == "Checked") {
+        checkbox.className = "UnChecked";
+        FilterTestsByStatuses(element.title, "none");
+        updateLocalStorage(checkbox.id, "none");
+    } else {
+        checkbox.className = "Checked";
+        FilterTestsByStatuses(element.title, "table-row");
+        updateLocalStorage(checkbox.id, "table-row");
+    }
+
+
+}
 
 function updateLocalStorage(id, value) {
     localStorage.setItem(id, value);
@@ -75,17 +89,55 @@ function updateViewBasedOnSettings(id) {
     }
 }
 
+function FilterTestsByStatuses(status, display) {
+    var elements = document.getElementsByClassName(status);
+    for (var j = 0; j < elements.length; j++) {
+        elements[j].parentNode.style.display = display;
+    }
+}
+
+function ShowStatusesLocalStorgeValues() {
+    var elementsNames =
+    [
+        "failedTestsStatuses",
+        "passedTestsStatuses",
+        "warnTestsStatuses"
+    ];
+
+    for (var i = 0; i < elementsNames.length; i++) {
+        var localStorageData = localStorage.getItem(elementsNames[i]);
+        var checkbox = document.getElementById(elementsNames[i]);
+        FilterTestsByStatuses(checkbox.title, localStorageData);
+        UpdateCheckboxState(checkbox, localStorageData);
+    }
+}
+
 function ShowLocalStorgeValues() {
-    var elementsNames = ["failedTests", "testsByClasses", "mostSlowest", "summaryTables", "TotalTests", "testStatuses", "testDetails"];
+
+
+    var elementsNames =
+    [
+        "failedTests",
+        "testsByClasses",
+        "mostSlowest",
+        "summaryTables",
+        "TotalTests",
+        "testStatuses",
+        "testDetails"
+    ];
+
     for (var i = 0; i < elementsNames.length; i++) {
         var localStorageData = localStorage.getItem(elementsNames[i]);
         document.getElementById(elementsNames[i] + "Element").style.display = localStorageData;
         var checkbox = document.getElementById(elementsNames[i]);
-        if (localStorageData == "none") {
-            checkbox.className = "UnChecked";
-        } else {
-            checkbox.className = "Checked";
-        }
+        UpdateCheckboxState(checkbox, localStorageData);
     }
+}
 
+function UpdateCheckboxState(checkbox, localStorageData) {
+    if (localStorageData == "none") {
+        checkbox.className = "UnChecked";
+    } else {
+        checkbox.className = "Checked";
+    }
 }
