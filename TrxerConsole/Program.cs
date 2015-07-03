@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Xml;
 using System.Xml.Xsl;
@@ -46,6 +47,12 @@ namespace TrxerConsole
         /// <param name="xsl">Xsl document</param>
         private static void Transform(string fileName, string destinationFile, XmlDocument xsl)
         {
+            if (fileName.EndsWith("*.trx"))
+            {
+                string parentDir = Directory.GetParent(fileName).FullName;
+                fileName = Directory.GetFiles(parentDir, "*.trx").FirstOrDefault();
+            }
+
             XslCompiledTransform x = new XslCompiledTransform(true);
             x.Load(xsl, new XsltSettings(true, true), null);
             Console.WriteLine("Transforming...");
