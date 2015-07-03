@@ -26,11 +26,17 @@ namespace TrxerConsole
         {
             if (args.Any() == false)
             {
-                Console.WriteLine("No trx file,  Trxer.exe <filename>");
+                Console.WriteLine("No trx file,  Trxer.exe <filename> <destination-file>");
                 return;
             }
             Console.WriteLine("Trx File\n{0}", args[0]);
-            Transform(args[0], PrepareXsl());
+
+            string destinationFile = args.Count() < 2 ? string.Empty : args[1];
+            if (!string.IsNullOrEmpty(destinationFile))
+            {
+                Console.WriteLine("Destination file \n{0}", args[1]);
+            }
+            Transform(args[0], destinationFile, PrepareXsl());
         }
 
         /// <summary>
@@ -38,12 +44,20 @@ namespace TrxerConsole
         /// </summary>
         /// <param name="fileName">Trx file path</param>
         /// <param name="xsl">Xsl document</param>
-        private static void Transform(string fileName, XmlDocument xsl)
+        private static void Transform(string fileName, string destinationFile, XmlDocument xsl)
         {
             XslCompiledTransform x = new XslCompiledTransform(true);
             x.Load(xsl, new XsltSettings(true, true), null);
             Console.WriteLine("Transforming...");
-            x.Transform(fileName, fileName + OUTPUT_FILE_EXT);
+
+            if (!string.IsNullOrEmpty(destinationFile))
+            {
+                x.Transform(fileName, destinationFile);
+            }
+            else
+            {
+                x.Transform(fileName, fileName + OUTPUT_FILE_EXT);
+            }
             Console.WriteLine("Done transforming xml into html");
         }
 
