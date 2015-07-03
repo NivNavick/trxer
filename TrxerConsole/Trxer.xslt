@@ -12,6 +12,10 @@
     <![CDATA[
     public string RemoveAssemblyName(string asm) 
     {
+      if (!asm.Contains(","))
+      {
+        return asm;
+      }
       return asm.Substring(0,asm.IndexOf(','));
     }
     public string RemoveNamespace(string asm) 
