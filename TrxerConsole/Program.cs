@@ -49,8 +49,8 @@ namespace TrxerConsole
         {
             if (fileName.EndsWith("*.trx"))
             {
-                string parentDir = Directory.GetParent(fileName).FullName;
-                fileName = Directory.GetFiles(parentDir, "*.trx").FirstOrDefault();
+                DirectoryInfo parentDir = new DirectoryInfo(Directory.GetParent(fileName).FullName);
+                fileName =  parentDir.GetFiles("*.trx").OrderByDescending(el=>el.LastWriteTime).FirstOrDefault().FullName;
             }
 
             XslCompiledTransform x = new XslCompiledTransform(true);
