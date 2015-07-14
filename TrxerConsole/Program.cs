@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Xml;
+using System.Xml.Linq;
 using System.Xml.Xsl;
 
 namespace TrxerConsole
@@ -56,16 +58,41 @@ namespace TrxerConsole
             XslCompiledTransform x = new XslCompiledTransform(true);
             x.Load(xsl, new XsltSettings(true, true), null);
             Console.WriteLine("Transforming...");
+            string resultFilePath;
 
             if (!string.IsNullOrEmpty(destinationFile))
             {
                 x.Transform(fileName, destinationFile);
+                resultFilePath = destinationFile;
             }
             else
             {
                 x.Transform(fileName, fileName + OUTPUT_FILE_EXT);
+                resultFilePath = fileName + OUTPUT_FILE_EXT;
             }
+            string outputHtml = FormatMessages(resultFilePath);
+
+            File.WriteAllText(resultFilePath, outputHtml.ToString());
+
             Console.WriteLine("Done transforming xml into html");
+        }
+
+        /// <summary>
+        /// Formats the font color and size depending on the particular message. Also adds new 
+        /// lines to make the message easier for reading
+        /// </summary>
+        /// <param name="resultFilePath"></param>
+        /// <returns></returns>
+        private static string FormatMessages(string resultFilePath)
+        {
+            StringBuilder outputHtml = new StringBuilder(File.ReadAllText(resultFilePath));
+            //outputHtml.Replace("s)", "s)<br>");
+            outputHtml.Replace("-&gt;", "<br>-&gt;");
+            outputHtml.Replace("s)\r\n", "s)<br>\r\n");
+            outputHtml.Replace("-&gt; done:", "<font color=\"green\"><b>-&gt; done:</b></font>");
+            outputHtml.Replace("-&gt; error:", "<br><font color=\"red\"><strong>-&gt; error:</strong></font>");
+            outputHtml.Replace("-&gt; skipped because of previous errors", "<font color=\"orange\">-&gt; skipped because of previous errors</font>");
+            return outputHtml.ToString();
         }
 
         /// <summary>
