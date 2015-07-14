@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Xml;
 using System.Xml.Linq;
 using System.Xml.Xsl;
@@ -85,14 +86,20 @@ namespace TrxerConsole
         /// <returns></returns>
         private static string FormatMessages(string resultFilePath)
         {
+            string result;
             StringBuilder outputHtml = new StringBuilder(File.ReadAllText(resultFilePath));
-            //outputHtml.Replace("s)", "s)<br>");
-            outputHtml.Replace("-&gt;", "<br>-&gt;");
-            outputHtml.Replace("s)\r\n", "s)<br>\r\n");
-            outputHtml.Replace("-&gt; done:", "<font color=\"green\"><b>-&gt; done:</b></font>");
-            outputHtml.Replace("-&gt; error:", "<br><font color=\"red\"><strong>-&gt; error:</strong></font>");
-            outputHtml.Replace("-&gt; skipped because of previous errors", "<font color=\"orange\">-&gt; skipped because of previous errors</font>");
-            return outputHtml.ToString();
+            outputHtml.Replace(">Given", "><font color=\"green\">Given");
+            outputHtml.Replace("-&gt; done:", "<br>-&gt; done:");
+            outputHtml.Replace("-&gt; error:", "</font><br><font color=\"red\"><strong>Error:</strong>");
+            outputHtml.Replace("-&gt; skipped because of previous errors", "</font><br><font color=\"orange\">Skipped:");
+            outputHtml.Replace("<br>Test method", "</font><br><font color=\"red\">Test method");
+            Regex regEx = new Regex(@"-&gt; done:.*s\)", RegexOptions.IgnoreCase);
+            result = regEx.Replace(outputHtml.ToString(), "");
+            regEx = new Regex("</font><br><font color=\"orange\">Skipped:\r\nPage source:.*.html");
+            result = regEx.Replace(result.ToString(), "");
+            regEx = new Regex(@"Screenshot:.*.png");
+            result = regEx.Replace(result, "");
+            return result;
         }
 
         /// <summary>
