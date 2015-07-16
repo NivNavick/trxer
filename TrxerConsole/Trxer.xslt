@@ -241,7 +241,7 @@
                 <tr>
                   <td class="column1Failed"></td>
                   <td class="Function">
-                    Faileds
+                    Failed
                   </td>
                   <td class="Message" name="{generate-id(faileds)}Id">
                     <xsl:value-of select="concat(testsFailedCount,' Tests')" />
