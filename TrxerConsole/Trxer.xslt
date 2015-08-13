@@ -490,7 +490,10 @@
             <tbody>
               <tr class="visibleRow">
                 <td class="ex">
-                  <xsl:value-of select="/t:TestRun/t:Results/t:UnitTestResult[@testId=$testId]/t:Output/t:ErrorInfo/t:StackTrace" />
+                  <xsl:value-of select="text" />
+                  <xsl:call-template name="break">
+                    <xsl:with-param name="text" select="/t:TestRun/t:Results/t:UnitTestResult[@testId=$testId]/t:Output/t:ErrorInfo/t:StackTrace" />
+                  </xsl:call-template>
                 </td>
               </tr>
             </tbody>
@@ -538,7 +541,10 @@
 
       <xsl:variable name="MessageErrorStacktrace" select="t:ErrorInfo/t:StackTrace"/>
 
-      <xsl:variable name="StdOut" select="t:StdOut"/>
+      <xsl:variable name="StdOut" select="text" />
+      <xsl:call-template name="break">
+        <xsl:with-param name="text" select="t:StdOut" />
+      </xsl:call-template>
       <xsl:if test="$StdOut or $MessageErrorStacktrace">
         <xsl:value-of select="$StdOut"/>
         <xsl:if test="$MessageErrorStacktrace">
@@ -548,8 +554,10 @@
           <br/>
         </xsl:if>
       </xsl:if>
-      <xsl:value-of select="t:StdErr" />
-      <xsl:variable name="StdErr" select="t:StdErr"/>
+      <xsl:variable name="StdErr" select="text" />
+      <xsl:call-template name="break">
+        <xsl:with-param name="text" select="t:StdErr" />
+      </xsl:call-template>
       <xsl:if test="$StdErr">
         <xsl:value-of select="$StdErr"/>
         <br/>
@@ -563,6 +571,23 @@
 
 
     </xsl:for-each>
+  </xsl:template>
+
+  <xsl:template name="break">
+    <xsl:param name="text" />
+    <xsl:param name="replace" select="'&#10;'" />
+    <xsl:choose>
+      <xsl:when test="contains($text,$replace)">
+        <xsl:value-of select="substring-before($text,$replace)"/>
+        <br />
+        <xsl:call-template name="break">
+          <xsl:with-param name="text" select="substring-after($text,$replace)"/>
+        </xsl:call-template>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:value-of select="$text" />
+      </xsl:otherwise>
+    </xsl:choose>
   </xsl:template>
 </xsl:stylesheet>
 
