@@ -481,7 +481,45 @@
           <xsl:value-of select="trxreport:ToExactTimeDefinition(@duration)" />
         </td>
       </tr>
-      <tr id="{generate-id($testId)}Stacktrace" class="hiddenRow">
+      <tr id="{generate-id($testId)}StdOut" class="hiddenRow">
+        <!--Outer-->
+        <td colspan="6">
+          <div id="exceptionArrow">↳</div>
+          <table>
+            <!--Inner-->
+            <tbody>
+              <tr class="visibleRow">
+                <td class="ex">
+                  <xsl:value-of select="text" />
+                  <xsl:call-template name="break">
+                    <xsl:with-param name="text" select="/t:TestRun/t:Results/t:UnitTestResult[@testId=$testId]/t:Output/t:StdOut" />
+                  </xsl:call-template>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="{generate-id($testId)}StdErr" class="hiddenRow">
+        <!--Outer-->
+        <td colspan="6">
+          <div id="exceptionArrow">↳</div>
+          <table>
+            <!--Inner-->
+            <tbody>
+              <tr class="visibleRow">
+                <td class="ex">
+                  <xsl:value-of select="text" />
+                  <xsl:call-template name="break">
+                    <xsl:with-param name="text" select="/t:TestRun/t:Results/t:UnitTestResult[@testId=$testId]/t:Output/t:StdErr" />
+                  </xsl:call-template>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="{generate-id($testId)}StackTrace" class="hiddenRow">
         <!--Outer-->
         <td colspan="6">
           <div id="exceptionArrow">↳</div>
@@ -525,51 +563,35 @@
           <div class="atachmentImage" onclick="show('floatingImageBackground');updateFloatingImage('{$MessageErrorInfo}');"></div>
         </xsl:when>
       </xsl:choose>
-
     </xsl:for-each>
   </xsl:template>
-
-
-
-
-
-
 
   <xsl:template name="debugInfo">
     <xsl:param name="testId" />
     <xsl:for-each select="/t:TestRun/t:Results/t:UnitTestResult[@testId=$testId]/t:Output">
-
-      <xsl:variable name="MessageErrorStacktrace" select="t:ErrorInfo/t:StackTrace"/>
-
-      <xsl:variable name="StdOut" select="text" />
+      <xsl:variable name="Message" select="text" />
       <xsl:call-template name="break">
-        <xsl:with-param name="text" select="t:StdOut" />
+        <xsl:with-param name="text" select="t:ErrorInfo/t:Message" />
       </xsl:call-template>
-      <xsl:if test="$StdOut or $MessageErrorStacktrace">
-        <xsl:value-of select="$StdOut"/>
-        <xsl:if test="$MessageErrorStacktrace">
-          <a style="float:right;" id="{generate-id($testId)}StacktraceToggle" href="javascript:ShowHide('{generate-id($testId)}Stacktrace','{generate-id($testId)}StacktraceToggle','Show Stacktrace','Hide Stacktrace');">Show Stacktrace</a>
-        </xsl:if>
-        <xsl:if test="$StdOut">
-          <br/>
-        </xsl:if>
+
+      <xsl:variable name="StdOut" select="t:StdOut" />
+      <xsl:variable name="StdErr" select="t:StdErr" />
+      <xsl:variable name="StackTrace" select="t:ErrorInfo/t:StackTrace"/>
+      <xsl:if test="$StdOut">
+        <div class="OpenMoreButton" style="float:right;" onclick="ShowHide('{generate-id($testId)}StdOut','{generate-id($testId)}StdOutButton','Show StdOut','Hide StdOut');">
+          <div class="MoreButtonText" id="{generate-id($testId)}StdOutButton">Show StdOut</div>
+        </div>
       </xsl:if>
-      <xsl:variable name="StdErr" select="text" />
-      <xsl:call-template name="break">
-        <xsl:with-param name="text" select="t:StdErr" />
-      </xsl:call-template>
       <xsl:if test="$StdErr">
-        <xsl:value-of select="$StdErr"/>
-        <br/>
+        <div class="OpenMoreButton" style="float:right;" onclick="ShowHide('{generate-id($testId)}StdErr','{generate-id($testId)}StdErrButton','Show StdErr','Hide StdErr');">
+          <div class="MoreButtonText" id="{generate-id($testId)}StdErrButton">Show StdErr</div>
+        </div>
       </xsl:if>
-      <xsl:variable name="MessageErrorInfo" select="t:ErrorInfo/t:Message"/>
-      <xsl:if test="$MessageErrorInfo">
-        <xsl:value-of select="$MessageErrorInfo"/>
-        <br/>
+      <xsl:if test="$StackTrace">
+        <div class="OpenMoreButton" style="float:right;" onclick="ShowHide('{generate-id($testId)}StackTrace','{generate-id($testId)}StackTraceButton','Show StackTrace','Hide StackTrace');">
+          <div class="MoreButtonText" id="{generate-id($testId)}StackTraceButton">Show StackTrace</div>
+        </div>
       </xsl:if>
-
-
-
     </xsl:for-each>
   </xsl:template>
 
