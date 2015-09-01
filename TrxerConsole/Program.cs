@@ -26,7 +26,7 @@ namespace TrxerConsole
         {
             if (args.Any() == false)
             {
-                Console.WriteLine("No trx file,  Trxer.exe <filename>");
+                Console.WriteLine("No trx file, use:\nTrxerConsole.exe <filename>\nTrxerConsole.exe -d <dirname> <searchpatten> <targetdir>");
                 return;
             }
             var xslt = PrepareXsl();
@@ -34,7 +34,7 @@ namespace TrxerConsole
             {
                 if (args.Length < 4)
                 {
-                    Console.WriteLine("No trx file,  Trxer.exe -d <dirname> <searchpatten> <targetdir>");
+                    Console.WriteLine("No trx file, use:\nTrxerConsole.exe <filename>\nTrxerConsole.exe -d <dirname> <searchpatten> <targetdir>");
                     return;
                 }
                 var outDir = args[3];
