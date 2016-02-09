@@ -4,6 +4,8 @@ using System.IO;
 using System.Linq;
 using System.Xml;
 using System.Xml.Xsl;
+using System.Text;
+using System.Text.RegularExpressions;
 
 namespace TrxerConsole
 {
@@ -26,7 +28,7 @@ namespace TrxerConsole
         {
             if (args.Any() == false)
             {
-                Console.WriteLine("No trx file, use:\nTrxerConsole.exe <filename>\nTrxerConsole.exe -d <dirname> <searchpatten> <targetdir>");
+                Console.WriteLine("No trx file, use:\nTrxerConsole.exe <filename>\nTrxerConsole.exe -d <dirname> <searchpatten> <targetdir> <destination-file>");
                 return;
             }
             var xslt = PrepareXsl();
@@ -49,7 +51,16 @@ namespace TrxerConsole
             else
             {
                 Console.WriteLine("Trx File\n{0}", args[0]);
-                Transform(args[0], xslt);
+                string destinationFile = args.Count() < 2 ? string.Empty : args[1];
+
+                if (!string.IsNullOrEmpty(destinationFile))
+                {
+                    Console.WriteLine("Destination file \n{0}", args[1]);
+                }
+                else {
+                    Console.WriteLine("Destination not specified");
+                }
+                Transform(args[0], destinationFile, PrepareXsl());
             }
         }
 
@@ -69,25 +80,74 @@ namespace TrxerConsole
             Console.WriteLine("Done transforming xml into html");
         }
 
+
+
         /// <summary>
         /// Transforms trx int html document using xslt
         /// </summary>
         /// <param name="fileName">Trx file path</param>
         /// <param name="xsl">Xsl document</param>
-        private static void Transform(string fileName, XmlDocument xsl)
+        private static void Transform(string fileName, string destinationFile, XmlDocument xsl)
         {
+            if (fileName.EndsWith("*.trx"))
+            {
+                DirectoryInfo parentDir = new DirectoryInfo(Directory.GetParent(fileName).FullName);
+                fileName = parentDir.GetFiles("*.trx").OrderByDescending(el => el.LastWriteTime).FirstOrDefault().FullName;
+            }
             XslCompiledTransform x = new XslCompiledTransform(true);
             x.Load(xsl, new XsltSettings(true, true), null);
             Console.WriteLine("Transforming...");
-            x.Transform(fileName, fileName + OUTPUT_FILE_EXT);
+
+            string resultFilePath;
+
+            if (!string.IsNullOrEmpty(destinationFile))
+            {
+                x.Transform(fileName, destinationFile);
+                resultFilePath = destinationFile;
+            }
+            else
+            {
+                x.Transform(fileName, fileName + OUTPUT_FILE_EXT);
+                resultFilePath = fileName + OUTPUT_FILE_EXT;
+            }
+            string outputHtml = FormatMessages(resultFilePath);
+
+            File.WriteAllText(resultFilePath, outputHtml.ToString());
+
+
+
             Console.WriteLine("Done transforming xml into html");
         }
 
-        /// <summary>
-        /// Loads xslt form embedded resource
+        /// Formats the font color and size depending on the particular message. Also adds new 
+        /// lines to make the message easier for reading
         /// </summary>
-        /// <returns>Xsl document</returns>
-        private static XmlDocument PrepareXsl()
+        /// <param name="resultFilePath"></param>
+        /// <returns></returns>
+        private static string FormatMessages(string resultFilePath)
+        {
+            string result;
+            StringBuilder outputHtml = new StringBuilder(File.ReadAllText(resultFilePath));
+            outputHtml.Replace(">Given", "><font color=\"green\">Given");
+            outputHtml.Replace("-&gt; done:", "<br>-&gt; done:");
+            outputHtml.Replace("-&gt; error:", "</font><br><font color=\"red\"><strong>Error:</strong>");
+            outputHtml.Replace("-&gt; skipped because of previous errors", "</font><br><font color=\"orange\">Skipped:");
+            outputHtml.Replace("<br>Test method", "</font><br><font color=\"red\">Test method");
+            Regex regEx = new Regex(@"-&gt; done:.*s\)", RegexOptions.IgnoreCase);
+            result = regEx.Replace(outputHtml.ToString(), "");
+            regEx = new Regex("</font><br><font color=\"orange\">Skipped:\r\nPage source:.*.html");
+            result = regEx.Replace(result.ToString(), "");
+            regEx = new Regex(@"Screenshot:.*.png");
+            result = regEx.Replace(result, "");
+            return result;
+        }
+
+
+    /// <summary>
+    /// Loads xslt form embedded resource
+    /// </summary>
+    /// <returns>Xsl document</returns>
+    private static XmlDocument PrepareXsl()
         {
             XmlDocument xslDoc = new XmlDocument();
             Console.WriteLine("Loading xslt template...");
