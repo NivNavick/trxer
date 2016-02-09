@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Xml;
 using System.Xml.Xsl;
@@ -26,11 +26,47 @@ namespace TrxerConsole
         {
             if (args.Any() == false)
             {
-                Console.WriteLine("No trx file,  Trxer.exe <filename>");
+                Console.WriteLine("No trx file, use:\nTrxerConsole.exe <filename>\nTrxerConsole.exe -d <dirname> <searchpatten> <targetdir>");
                 return;
             }
-            Console.WriteLine("Trx File\n{0}", args[0]);
-            Transform(args[0], PrepareXsl());
+            var xslt = PrepareXsl();
+            if (args[0] == "-d")
+            {
+                if (args.Length < 4)
+                {
+                    Console.WriteLine("No trx file, use:\nTrxerConsole.exe <filename>\nTrxerConsole.exe -d <dirname> <searchpatten> <targetdir>");
+                    return;
+                }
+                var outDir = args[3];
+                if (!Directory.Exists(outDir))
+                    Directory.CreateDirectory(outDir);
+                foreach (var fileName in Directory.GetFiles(args[1], args[2]))
+                {
+                    Console.WriteLine("Trx File\n{0}", fileName);
+                    Transform(fileName, xslt, outDir);
+                }
+            }
+            else
+            {
+                Console.WriteLine("Trx File\n{0}", args[0]);
+                Transform(args[0], xslt);
+            }
+        }
+
+        /// <summary>
+        /// Transforms trx int html document using xslt
+        /// </summary>
+        /// <param name="fileName">Trx file path</param>
+        /// <param name="xsl">Xsl document</param>
+        /// <param name="outputDir">Out directory</param>
+        private static void Transform(string fileName, XmlDocument xsl, string outputDir)
+        {
+            XslCompiledTransform x = new XslCompiledTransform(true);
+            x.Load(xsl, new XsltSettings(true, true), null);
+            Console.WriteLine("Transforming...");
+            var fNameOnly = Path.GetFileName(fileName);
+            x.Transform(fileName, Path.Combine(outputDir, fNameOnly + OUTPUT_FILE_EXT));
+            Console.WriteLine("Done transforming xml into html");
         }
 
         /// <summary>
