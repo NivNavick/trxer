@@ -12,7 +12,10 @@
     <![CDATA[
     public string RemoveAssemblyName(string asm) 
     {
-      return asm.Substring(0,asm.IndexOf(','));
+        if (asm.IndexOf(',') > 0)
+            return asm.Substring(0,asm.IndexOf(','));
+        else
+            return asm;
     }
     public string RemoveNamespace(string asm) 
     {
@@ -27,19 +30,24 @@
     private string ToExtactTime(double ms)
     {
       if (ms < 1000)
-        return ms + " ms";
+        return ms.ToString();
 
       if (ms >= 1000 && ms < 60000)
-        return string.Format("{0:0.00} seconds", TimeSpan.FromMilliseconds(ms).TotalSeconds);
+        return string.Format("{0:0.00}", TimeSpan.FromMilliseconds(ms).TotalSeconds);
 
       if (ms >= 60000 && ms < 3600000)
-        return string.Format("{0:0.00} minutes", TimeSpan.FromMilliseconds(ms).TotalMinutes);
+        return string.Format("{0:0.00}", TimeSpan.FromMilliseconds(ms).TotalMinutes);
 
-      return string.Format("{0:0.00} hours", TimeSpan.FromMilliseconds(ms).TotalHours);
+      return string.Format("{0:0.00}", TimeSpan.FromMilliseconds(ms).TotalHours);
     }
     
     public string ToExactTimeDefinition(string duration)
     {
+          Console.WriteLine("**************Duration : " + duration + "       *********************");
+          
+          if (string.IsNullOrEmpty(duration))
+                return "none";
+        
          return  ToExtactTime(TimeSpan.Parse(duration).TotalMilliseconds);
     }
     
