@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Xml;
 using System.Xml.Xsl;
@@ -22,7 +23,7 @@ namespace TrxerConsole
         /// Main entry of TrxerConsole
         /// </summary>
         /// <param name="args">First cell shoud be TRX path</param>
-        static void Main(string[] args)
+        internal static void Main(string[] args)
         {
             if (args.Any() == false)
             {
@@ -43,7 +44,16 @@ namespace TrxerConsole
             XslCompiledTransform x = new XslCompiledTransform(true);
             x.Load(xsl, new XsltSettings(true, true), null);
             Console.WriteLine("Transforming...");
-            x.Transform(fileName, fileName + OUTPUT_FILE_EXT);
+
+            try
+            {
+                x.Transform(fileName, fileName + OUTPUT_FILE_EXT);
+            }
+            catch (FileNotFoundException)
+            {
+                Console.WriteLine("ERROR. File not found: " + fileName);
+            }
+
             Console.WriteLine("Done transforming xml into html");
         }
 
