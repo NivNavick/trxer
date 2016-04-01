@@ -22,7 +22,7 @@ namespace TrxerConsole
         /// Main entry of TrxerConsole
         /// </summary>
         /// <param name="args">First cell shoud be TRX path</param>
-        static void Main(string[] args)
+        internal static void Main(string[] args)
         {
             if (args.Any() == false)
             {
@@ -54,7 +54,16 @@ namespace TrxerConsole
             XslCompiledTransform x = new XslCompiledTransform(true);
             x.Load(xsl, new XsltSettings(true, true), null);
             Console.WriteLine("Transforming...");
-            x.Transform(fileName, outputFile);
+
+            try
+            {
+                x.Transform(fileName, outputFile);
+            }
+            catch (FileNotFoundException)
+            {
+                Console.WriteLine("ERROR. File not found: " + fileName);
+            }
+
             Console.WriteLine("Done transforming xml into html");
         }
 
