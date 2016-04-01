@@ -44,14 +44,16 @@ namespace TrxerConsole
             XslCompiledTransform x = new XslCompiledTransform(true);
             x.Load(xsl, new XsltSettings(true, true), null);
             Console.WriteLine("Transforming...");
+
             try
             {
                 x.Transform(fileName, fileName + OUTPUT_FILE_EXT);
             }
             catch (FileNotFoundException)
             {
-                Console.WriteLine("File not found");
+                Console.WriteLine("ERROR. File not found: " + fileName);
             }
+
             Console.WriteLine("Done transforming xml into html");
         }
 

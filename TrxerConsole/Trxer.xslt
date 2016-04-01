@@ -40,8 +40,12 @@
     
     public string ToExactTimeDefinition(string duration)
     {
-         return  ToExtactTime(TimeSpan.Parse(duration).TotalMilliseconds);
-    }
+         // Fix in order to prevent crash when execution is aborted
+         if(duration != null && duration.Length > 0)
+           return  ToExtactTime(TimeSpan.Parse(duration).TotalMilliseconds);
+         else
+           return "0";
+   }
     
     public string ToExactTimeDefinition(string start,string finish)
     {
