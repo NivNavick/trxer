@@ -40,7 +40,7 @@
     
     public string ToExactTimeDefinition(string duration)
     {
-         return  ToExtactTime(TimeSpan.Parse(duration).TotalMilliseconds);
+      return  string.IsNullOrWhiteSpace(duration) ? ToExtactTime(0) : ToExtactTime(TimeSpan.Parse(duration).TotalMilliseconds);
     }
     
     public string ToExactTimeDefinition(string start,string finish)
@@ -351,7 +351,7 @@
             </tbody>
           </table>
           <Table>
-            <caption>Five most slowest tests</caption>
+            <caption>Top 5 slowest tests</caption>
             <thead>
               <tr class="odd">
                 <th scope="col">Time</th>
