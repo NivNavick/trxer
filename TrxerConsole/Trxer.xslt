@@ -351,7 +351,7 @@
             </tbody>
           </table>
           <Table>
-            <caption>Five most slowest tests</caption>
+            <caption>Top 5 slowest tests</caption>
             <thead>
               <tr class="odd">
                 <th scope="col">Time</th>
