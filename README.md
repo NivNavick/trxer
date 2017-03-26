@@ -69,6 +69,10 @@ The output will be at the trx folder under the name "file.trx.html"<br/>
 ```bash
 TrxerConsole.exe <TRX file>
 ```
+or
+```bash
+TrxerConsole.exe -d <dirname> <searchpatten> <targetdir>
+```
 
 This is how it looks like
 
