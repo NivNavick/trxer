@@ -2,6 +2,8 @@ table a,
 table a:link,
 table a:visited {
     border: none;
+    font-weight: bolder;
+    text-decoration:underline;
 }
 
 img {

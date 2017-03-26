@@ -1,8 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
+using System.Text;
+using System.Text.RegularExpressions;
 using System.Xml;
+using System.Xml.Linq;
 using System.Xml.Xsl;
 
 namespace TrxerConsole
@@ -26,11 +30,17 @@ namespace TrxerConsole
         {
             if (args.Any() == false)
             {
-                Console.WriteLine("No trx file,  Trxer.exe <filename>");
+                Console.WriteLine("No trx file,  Trxer.exe <filename> <destination-file>");
                 return;
             }
             Console.WriteLine("Trx File\n{0}", args[0]);
-            Transform(args[0], PrepareXsl());
+
+            string destinationFile = args.Count() < 2 ? string.Empty : args[1];
+            if (!string.IsNullOrEmpty(destinationFile))
+            {
+                Console.WriteLine("Destination file \n{0}", args[1]);
+            }
+            Transform(args[0], destinationFile, PrepareXsl());
         }
 
         /// <summary>
@@ -38,13 +48,58 @@ namespace TrxerConsole
         /// </summary>
         /// <param name="fileName">Trx file path</param>
         /// <param name="xsl">Xsl document</param>
-        private static void Transform(string fileName, XmlDocument xsl)
+        private static void Transform(string fileName, string destinationFile, XmlDocument xsl)
         {
+            if (fileName.EndsWith("*.trx"))
+            {
+                DirectoryInfo parentDir = new DirectoryInfo(Directory.GetParent(fileName).FullName);
+                fileName =  parentDir.GetFiles("*.trx").OrderByDescending(el=>el.LastWriteTime).FirstOrDefault().FullName;
+            }
+
             XslCompiledTransform x = new XslCompiledTransform(true);
             x.Load(xsl, new XsltSettings(true, true), null);
             Console.WriteLine("Transforming...");
-            x.Transform(fileName, fileName + OUTPUT_FILE_EXT);
+            string resultFilePath;
+
+            if (!string.IsNullOrEmpty(destinationFile))
+            {
+                x.Transform(fileName, destinationFile);
+                resultFilePath = destinationFile;
+            }
+            else
+            {
+                x.Transform(fileName, fileName + OUTPUT_FILE_EXT);
+                resultFilePath = fileName + OUTPUT_FILE_EXT;
+            }
+            string outputHtml = FormatMessages(resultFilePath);
+
+            File.WriteAllText(resultFilePath, outputHtml.ToString());
+
             Console.WriteLine("Done transforming xml into html");
+        }
+
+        /// <summary>
+        /// Formats the font color and size depending on the particular message. Also adds new 
+        /// lines to make the message easier for reading
+        /// </summary>
+        /// <param name="resultFilePath"></param>
+        /// <returns></returns>
+        private static string FormatMessages(string resultFilePath)
+        {
+            string result;
+            StringBuilder outputHtml = new StringBuilder(File.ReadAllText(resultFilePath));
+            outputHtml.Replace(">Given", "><font color=\"green\">Given");
+            outputHtml.Replace("-&gt; done:", "<br>-&gt; done:");
+            outputHtml.Replace("-&gt; error:", "</font><br><font color=\"red\"><strong>Error:</strong>");
+            outputHtml.Replace("-&gt; skipped because of previous errors", "</font><br><font color=\"orange\">Skipped:");
+            outputHtml.Replace("<br>Test method", "</font><br><font color=\"red\">Test method");
+            Regex regEx = new Regex(@"-&gt; done:.*s\)", RegexOptions.IgnoreCase);
+            result = regEx.Replace(outputHtml.ToString(), "");
+            regEx = new Regex("</font><br><font color=\"orange\">Skipped:\r\nPage source:.*.html");
+            result = regEx.Replace(result.ToString(), "");
+            regEx = new Regex(@"Screenshot:.*.png");
+            result = regEx.Replace(result, "");
+            return result;
         }
 
         /// <summary>
