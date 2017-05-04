@@ -1,0 +1,132 @@
+
+.wrapOverall {
+    width: auto;
+    margin: -8px 0px 0px 0px;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+      min-width: 920px;
+}
+
+.hWhite {
+    color: white;
+}
+
+.titleCenterd {
+    position: relative;
+    top: 12px;
+}
+
+.StatusesBorders {
+    border-width: 0;
+    border-right: 1px solid;
+    border-left: 1px solid;
+    width: 100px;
+}
+
+.PackageStatus {
+    width: 100px;
+}
+
+#OptionsDiv {
+    width: 100%;
+    height: 100px;
+    background-color: rgb(245, 244, 242);
+    position: absolute;
+}
+
+.SummaryTable {
+    width: auto;
+    max-width: 407px;
+    float: left;
+    margin-right: 20px;
+}
+
+.SummaryTable td {
+        text-align: left;
+}
+
+#divToRefresh > div > table.SummaryTable > tbody > tr > th {
+    width: auto;
+}
+
+.DetailsTable {
+    width: auto;
+    max-width: 407px;
+    float: left;
+    margin-right: 20px;
+    text-align: left;
+    word-wrap: break-word;
+}
+
+.StatusesTable {
+    width: auto;
+}
+
+#divToRefresh > div.SummaryDiv > table.DetailsTable > tbody > tr > td {
+    text-align: left;
+    word-wrap: break-word;
+}
+
+#divToRefresh > div.SummaryDiv > table.DetailsTable > tbody > tr > th {
+    width: 30px;
+}
+
+#TotalTestsTable {
+    min-width: 250px;
+    width: auto;
+    float: left;
+    margin-right: 20px;
+}
+
+.SummaryDiv {
+    width: 90%;
+    margin: 1em auto;
+    border-collapse: collapse;
+}
+
+.Summary {
+    float: left;
+    border-collapse: collapse;
+}
+
+.Atached {
+    width: 30px;
+}
+
+.column1 {
+    background: rgb(245, 244, 242);
+    width: 170px;
+}
+
+.column1Failed {
+    background: #d8534f;
+    width: 30px;
+}
+
+#ReportsTable > tbody > tr > th {
+    background: #E8E8E8;
+    width: 170px;
+}
+
+#dataViewer {
+    width: 240px;
+}
+
+.hiddenRow {
+    display: none;
+    visibility: hidden;
+}
+
+.visibleRow {
+    visibility: visible;
+}
+
+.atachmentImage {
+    float: right;
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    background-size: 20px 20px;
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAEI0lEQVRYhe2WX0hsRRzHv3Nm5/zbI2qwbCiIhm0oFKqJhioBAoIvQosgKSDdS08GCFx6qTTwrcIltDXC7ksokCQEV8QwiGhfWo0sMA1FvDf1cq+qW1zdc85MLzvb7LoW3Kz74g+GM+f3m5nv5/x+M8MBru3anrCRywKU0iIAJgDX9/3j/w8JgGmanYyxn3Vd/4Uxtm4Yxqv/lZZWyBkKhV6zLCtg2zZs2yaGYdxoaGi4NFv/xnIWtSzrGdM032aMvUgpZYFAAL7vI51Oc9d1H5yfn8P3/ccWE0LcB/C+53nfFQRwHOdLxljEsiyYpgkFAGdnZ/A8D5zzxxWH7/vwff+PsrKyl7e2tk4BpQQTExNBSmlE13UYhgHGGCilYIxB13VYlgXbthEMBv+22bYtSktLzx3H4er4TDlhGEawt7f3OambBaipqTECgQB0XQelNEsthABjzF1YWPjAtm3XMAyYppnTDMOA4zje8PDwUjKZfHd7e/vWxsbGm5OTk59VVlYeyTmGYUDXddTV1RlSNyA7lFKiaRoIIRBCgHOeBaCUurW1tcuapr1OCGGEEBBCspCapvlTU1Mft7e3f7W5ubm3srJilpSUPOrs7Pyxra3th2g0emt3dzdEKYWmadC0v/b+hVMga+V5XvaZTqcFgKN0Oi183wfnXNYTnuchGo1+29zc/MX4+PhxV1fX1MDAwNc9PT13BgcHq05OTr4ZGRm5LfePECJHT1OFOedZYbm467pwXRcAsn0VznVddHd330kkEvfi8fhbh4eHL2Q27lNLS0vvxeNx0dLSsug4zkkhiJwMSAg1A7IByHn3PC8LYNv2r7Ztk1Qq9bymaaCUghACznkwHA5Hjo+PHxYXFz8sdIpyANTU5vfz4yrk8vJycSgUoq2trduyxpRSBIPBR9Fo9P7BwYG3t7dXqu6rgiWQTQrlT5B9GZPxubm5rmQy6cdisU+bmpq2AYhwOHwyPT39iRDiMBaLvXR0dFQq11YtoL6oAPm+y/pCCKytrb0yPj6+XF1d/f3i4uJoKpUKBYPB309PTzdGR0et+fn5d/JPVkEA+VXqMVFh8uPKYnR1dfXDvr6+2/39/XONjY0/7e/vm7Ozsx2JROINzvnTlNILH5cDIIOSUt4HGT9LJpMVruvqcqwaBwBCCNvZ2bk5NjZ2E4CbWZsQQrLA/5gBCSEvGiXNekdHx4z0519Eqi8znsm46s/PaA6AZVlCFVeh8p9qXDVVVBVXy5W5ObNzsr1IJOJWVVXdk2VQy5Hf8scUuuEKlZZzDl3Xz+vr63+7kIGioqL0zMzMR0NDQzfW19dDQogr/wEpLy8/HRsb+7yiouKB9OWIcM5DhJBnAThXLZ6xMyHENoC7mqaJCwAAIIRgyNucV2g+AJcQUrhe13ZtT8L+BBA9B35dQKL8AAAAAElFTkSuQmCCMTExNg==');
+}

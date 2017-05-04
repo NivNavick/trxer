@@ -1,0 +1,147 @@
+
+.alert-status-failed {
+    background-color: #f2dede;
+    color: #a94442;
+    border: 1px solid rgb(221, 221, 221);
+    border-top: none;
+    text-align: left;
+    max-width: 30px;
+}
+
+.alert-status-out {
+    background-color: #d8f2ff;
+    color: #4f8fae;
+    border: 1px solid rgb(221, 221, 221);
+    border-top: none;
+    text-align: left;
+    max-width: 30px;
+}
+
+.alert-status-err {
+    background-color: #ffeea4;
+    color: #c6a71d;
+    border: 1px solid rgb(221, 221, 221);
+    border-top: none;
+    text-align: left;
+    max-width: 30px;
+}
+
+
+.alert-status-description {
+    background-color: #71dfa2;
+    color: #218c51;
+    border: 1px solid rgb(221, 221, 221);
+    border-top: none;
+    text-align: left;
+    max-width: 30px;
+}
+
+.Tag {
+    display: inline;
+    padding-left: 3px;
+    padding-right: 3px;
+    margin-right: 4px;
+    text-align: center;
+    margin-bottom: 2px;
+    line-height: 27px;
+    height: auto;
+}
+
+.NumberTag {
+    color: #678197;
+    border: 1px solid #78bcff;
+    border-radius: 8px;
+}
+
+.StatusTag {
+    color: white;
+    font-size: 100%;
+    background-color: #ffffff;
+    border-radius: .25em;
+}
+
+.NumberTagRed {
+    background-color: #d8534f;
+}
+
+.NumberTagGreen {
+    background-color: #5bab5b;
+}
+
+.NumberTagYellow {
+    background-color: #efac4e;
+}
+
+.graphsDiv {
+    text-align: center;
+    margin-bottom: 2px;
+    line-height: 27px;
+    height: 10px;
+    float: left;
+}
+
+.noTopBorder {
+    text-align: left;
+    border-top: 0;
+}
+
+.graphsDivTotal {
+    height: 30px;
+}
+
+.graphsMenuSquare {
+    width: 10px;
+    height: 10px;
+    float: left;
+}
+
+.graphMenuText {
+    width: auto;
+    float: left;
+    padding-left: 10px;
+}
+
+.StatusBar {
+    width: 100%;
+    height: 60px;
+}
+
+.statusBarInner {
+    position: relative;
+    width: 100%;
+    height: 70%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: auto;
+    margin-bottom: auto;
+    top: 15%;
+}
+
+.statusBarPassed,
+.statusBarCompleted {
+    background-color: #5bab5b;
+}
+
+.statusBarFailed,
+.statusBarError {
+    background-color: #b93333;
+}
+
+.statusBarFailedInner,
+.statusBarErrorInner {
+    background-color: #a90000;
+}
+
+.statusBarPassedInner,
+.statusBarCompletedInner {
+    background-color: #339833;
+}
+
+.graphsDivVertical {
+    /* text-align: center; */
+    margin-bottom: 2px;
+    /* line-height: 27px; */
+    width: 30px;
+    height: 10px;
+    float: left;
+}

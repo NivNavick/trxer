@@ -1,0 +1,98 @@
+
+tr.odd .column1 {
+    background: rgb(245, 244, 242);
+}
+
+tr.odd.column1Failed {
+    background: #a90000;
+    width: 30px;
+}
+
+tr.odd.column1Warn {
+    background: #efac4e;
+    width: 30px;
+}
+
+tr.odd.column1Passed {
+    background: #339833;
+    width: 30px;
+}
+
+tr.odd td, tr.sep td {
+    background: #FFFFFF;
+}
+
+tr.odd .ex,
+tr.sep .ex,
+td.ex {
+    text-align: left;
+    width: 100px;
+}
+
+th.statusCount,
+td.statusCount {
+    width: auto;
+}
+
+td.slowest {
+    width: auto;
+}
+
+td.Message {
+    text-align: center;
+    width: auto;
+    word-wrap: break-word;
+}
+
+td.TestsCount {
+    text-align: left;
+    width: auto;
+    word-wrap: break-word;
+}
+
+td.Messages {
+    text-align: left;
+    width: auto;
+    word-wrap: break-word;
+    max-width: 550px;
+}
+
+td.Function {
+    text-align: left;
+}
+
+td.outcomeMessage {
+    max-width: 240px;
+}
+
+tr.odd .failed,
+tr.sep.failed,
+td.failed,
+tr.odd .info,
+td.info,
+tr.sep .info,
+tr.odd .passed,
+tr.sep.passed,
+tr.odd .warn,
+tr.sep .warn,
+td.warn,
+td.passed {
+    width: 90px;
+    text-align: left;
+}
+
+thead th.TestsTable {
+    font-size: 17px;
+    font-weight: normal;
+}
+
+td.testOutputs {
+    border-top: none;
+}
+
+td.testOutputsTitle {
+    color: black;
+    font-weight: bold;
+    text-align: left;
+    border: 1px solid rgb(221, 221, 221);
+}
