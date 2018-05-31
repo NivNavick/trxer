@@ -46,18 +46,33 @@
     <Compile Include="ResourceReader.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Trxer.xslt">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="functions.js" />
-    <EmbeddedResource Include="Trxer.css" />
-    <EmbeddedResource Include="TrxerTable.css" />
+    <EmbeddedResource Include="Javascript\Graphs.js" />
+    <EmbeddedResource Include="Css\Trxer.css" />
+    <EmbeddedResource Include="Css\TrxerTable.css" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Examples\NivNavick_NIVNAVICK-PC 2014-07-28 21_47_29.trx.html" />
+    <EmbeddedResource Include="Javascript\Utils.js" />
+    <EmbeddedResource Include="Javascript\ImageView.js" />
+    <EmbeddedResource Include="Css\HtmlTags.css" />
+    <EmbeddedResource Include="Css\Pie.css" />
+    <EmbeddedResource Include="Css\ImageView.css" />
+    <EmbeddedResource Include="Css\Buttons.css" />
+    <EmbeddedResource Include="Css\ToolTip.css" />
+    <EmbeddedResource Include="Css\Statuses.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Css\settingsPopup.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Javascript\settingsPopup.js" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
