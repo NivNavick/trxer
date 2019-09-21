@@ -51,7 +51,7 @@ tr.sep .column1 {
 tr.odd .ex,
 tr.sep .ex,
 td.ex {
-    width: 100%;
+    width: calc(100% - 100px);
     text-align: left;
     max-width: 1000px;
 }
@@ -175,6 +175,10 @@ tr.sep.passed,
 td.passed {
     color: #58ba58;
     background: #c0eec0;
+}
+
+td.top {
+    vertical-align: top;
 }
 
 td {

@@ -1,11 +1,15 @@
-﻿
+﻿/// <summary>
+/// Moved inline C# from XSL to this class because .NET Core can't compiled inline code.
+/// This class is registered in the main program with AddExtensionObject
+/// </summary>
+
 namespace TrxReporter
 {
 	using System;
 	using System.Text;
 	using System.Text.RegularExpressions;
 
-	public class Wheels
+	public class Pens
 	{
 
 		public string ExtractImageUrl(string text)
@@ -24,6 +28,11 @@ namespace TrxReporter
 		}
 
 
+		/// <summary>
+		/// Format output written by SpedFlow/Gherkin including images
+		/// </summary>
+		/// <param name="output"></param>
+		/// <returns></returns>
 		public string FormatOutput(string output)
 		{
 			var builder = new StringBuilder();

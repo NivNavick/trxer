@@ -1,8 +1,8 @@
 ﻿namespace TrxReporter
 {
 	using System;
-    using System.IO;
-    using System.Linq;
+	using System.IO;
+	using System.Linq;
 	using System.Xml;
 	using System.Xml.Xsl;
 
@@ -10,8 +10,8 @@
 	class Program
 	{
 
-		private const string XSLT_FILE = "TrxReporter.xslt";
-		private const string OUTPUT_FILE_EXT = ".html";
+		private const string XsltFile = "TrxReporter.xslt";
+		private const string OutputFileExt = ".html";
 
 
 		static void Main(string[] args)
@@ -28,21 +28,16 @@
 		}
 
 
-		/// <summary>
-		/// Transforms trx int html document using xslt
-		/// </summary>
-		/// <param name="fileName">.trx file path</param>
-		/// <param name="xsl">Xsl document</param>
 		private static void Transform(string fileName, XmlDocument xsl)
 		{
 			var compiled = new XslCompiledTransform(true);
 			compiled.Load(xsl, new XsltSettings(true, true), null);
 
 			var args = new XsltArgumentList();
-			args.AddExtensionObject("urn:Wheels", new Wheels());
+			args.AddExtensionObject("urn:Pens", new Pens());
 
 			Console.WriteLine("Transforming...");
-			using (var writer = new StreamWriter(fileName + OUTPUT_FILE_EXT))
+			using (var writer = new StreamWriter(fileName + OutputFileExt))
 			{
 				compiled.Transform(fileName, args, writer);
 			}
@@ -50,24 +45,18 @@
 			Console.WriteLine("Done transforming xml into html");
 		}
 
-		/// <summary>
-		/// Loads xslt form embedded resource
-		/// </summary>
-		/// <returns>Xsl document</returns>
+
 		private static XmlDocument PrepareXsl()
 		{
 			Console.WriteLine("Loading xslt template...");
 			var doc = new XmlDocument();
-			doc.Load(ResourceReader.StreamFromResource(XSLT_FILE));
+			doc.Load(ResourceReader.StreamFromResource(XsltFile));
 			MergeCss(doc);
 			MergeJavaScript(doc);
 			return doc;
 		}
 
-		/// <summary>
-		/// Merges all javascript linked to page into html report itself
-		/// </summary>
-		/// <param name="doc">Xsl document</param>
+
 		private static void MergeJavaScript(XmlDocument doc)
 		{
 			Console.WriteLine("Loading javascript...");
@@ -77,10 +66,7 @@
 			script.InnerText = ResourceReader.LoadTextFromResource(src.Value);
 		}
 
-		/// <summary>
-		/// Merges all css linked to page into html report itself
-		/// </summary>
-		/// <param name="doc">Xsl document</param>
+
 		private static void MergeCss(XmlDocument doc)
 		{
 			Console.WriteLine("Loading css...");

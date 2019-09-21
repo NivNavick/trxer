@@ -3,7 +3,7 @@
     xmlns:msxsl="urn:schemas-microsoft-com:xslt" exclude-result-prefixes="msxsl"
     xmlns:t="http://microsoft.com/schemas/VisualStudio/TeamTest/2010"
     xmlns:trxreport="urn:my-scripts"
-    xmlns:wheels="urn:Wheels">
+    xmlns:pens="urn:Pens">
   <xsl:output method="html" indent="yes"/>
   <xsl:key name="TestMethods" match="t:TestMethod" use="@className"/>
   <!--<xsl:namespace-alias stylesheet-prefix="t" result-prefix="#default"/>-->
@@ -120,19 +120,19 @@
                   <tr class="odd">
                     <th class="column1">Start Time</th>
                     <td>
-                      <xsl:value-of select="wheels:GetShortDateTime(@start)" />
+                      <xsl:value-of select="pens:GetShortDateTime(@start)" />
                     </td>
                   </tr>
                   <tr>
                     <th class="column1">End Time</th>
                     <td>
-                      <xsl:value-of select="wheels:GetShortDateTime(@finish)" />
+                      <xsl:value-of select="pens:GetShortDateTime(@finish)" />
                     </td>
                   </tr>
                   <tr>
                     <th class="column1">Duration</th>
                     <td>
-                      <xsl:value-of select="wheels:ToExactTimeDefinition(@start,@finish)"/>
+                      <xsl:value-of select="pens:ToExactTimeDefinition(@start,@finish)"/>
                     </td>
                   </tr>
                 </xsl:for-each>
@@ -191,7 +191,7 @@
                     </canvas>
                   </td>
                   <td class="Function">
-                    <xsl:value-of select="wheels:RemoveAssemblyName(@className)" />
+                    <xsl:value-of select="pens:RemoveAssemblyName(@className)" />
                   </td>
                   <td class="Message" name="{generate-id(@className)}Id">
                     <xsl:value-of select="concat($testsCount,' Tests')" />
@@ -248,18 +248,18 @@
                   <xsl:variable name="testId" select="@testId" />
                   <tr>
                     <!--th scope="row" class="column1">
-                      <xsl:value-of select="wheels:GetShortDateTime(@startTime)" />
+                      <xsl:value-of select="pens:GetShortDateTime(@startTime)" />
                     </th-->
                     <xsl:call-template name="tStatus">
                       <xsl:with-param name="testId" select="@testId" />
                     </xsl:call-template>
                     <td class="Function slowest">
-                      <xsl:value-of select="wheels:RemoveAssemblyName(/t:TestRun/t:TestDefinitions/t:UnitTest[@id=$testId]/t:TestMethod/@className)"/>
+                      <xsl:value-of select="pens:RemoveAssemblyName(/t:TestRun/t:TestDefinitions/t:UnitTest[@id=$testId]/t:TestMethod/@className)"/>
                       .<xsl:value-of select="@testName"/>
                     </td>
                     <td class="Message slowest">
                       <div style="white-space: nowrap">
-                        <xsl:value-of select="wheels:ToExactTimeDefinition(@duration)"/>
+                        <xsl:value-of select="pens:ToExactTimeDefinition(@duration)"/>
                       </div>
                     </td>
                   </tr>
@@ -268,7 +268,7 @@
             </tbody>
           </Table>
           <h6 style="text-align:center">
-            &#169; <xsl:value-of select="wheels:GetYear()"/> Waters Corporation, Internal Use Only
+            &#169; <xsl:value-of select="pens:GetYear()"/> Waters Corporation, Internal Use Only
           </h6>
 
         </div>
@@ -337,92 +337,92 @@
     <xsl:for-each select="/t:TestRun/t:Results/t:UnitTestResult[@testId=$testId]">
       <xsl:choose>
         <xsl:when test="@outcome='Passed'">
-          <td class="passed">
+          <td class="passed top">
             PASSED
             <div class="times">
-              <xsl:value-of select="wheels:GetShortDateTime(@startTime)" />
+              <xsl:value-of select="pens:GetShortDateTime(@startTime)" />
               <xsl:if test="($withDuration='yes')">
                 <br/>
                 <br/>
-                <xsl:value-of select="wheels:ToExactTimeDefinition(@duration)" />
+                <xsl:value-of select="pens:ToExactTimeDefinition(@duration)" />
               </xsl:if>
             </div>
           </td>
         </xsl:when>
         <xsl:when test="@outcome='Failed'">
-          <td class="failed">
+          <td class="failed top">
             FAILED
             <div class="times">
-              <xsl:value-of select="wheels:GetShortDateTime(@startTime)" />
+              <xsl:value-of select="pens:GetShortDateTime(@startTime)" />
               <xsl:if test="($withDuration='yes')">
                 <br/>
                 <br/>
-                <xsl:value-of select="wheels:ToExactTimeDefinition(@duration)" />
+                <xsl:value-of select="pens:ToExactTimeDefinition(@duration)" />
               </xsl:if>
             </div>
           </td>
         </xsl:when>
         <xsl:when test="@outcome='Inconclusive'">
-          <td class="warn">
+          <td class="warn top">
             Inconclusive
             <div class="times">
-              <xsl:value-of select="wheels:GetShortDateTime(@startTime)" />
+              <xsl:value-of select="pens:GetShortDateTime(@startTime)" />
               <xsl:if test="($withDuration='yes')">
                 <br/>
                 <br/>
-                <xsl:value-of select="wheels:ToExactTimeDefinition(@duration)" />
+                <xsl:value-of select="pens:ToExactTimeDefinition(@duration)" />
               </xsl:if>
             </div>
           </td>
         </xsl:when>
         <xsl:when test="@outcome='Timeout'">
-          <td class="failed">
+          <td class="failed top">
             Timeout
             <div class="times">
-              <xsl:value-of select="wheels:GetShortDateTime(@startTime)" />
+              <xsl:value-of select="pens:GetShortDateTime(@startTime)" />
               <xsl:if test="($withDuration='yes')">
                 <br/>
                 <br/>
-                <xsl:value-of select="wheels:ToExactTimeDefinition(@duration)" />
+                <xsl:value-of select="pens:ToExactTimeDefinition(@duration)" />
               </xsl:if>
             </div>
           </td>
         </xsl:when>
         <xsl:when test="@outcome='Error'">
-          <td class="failed">
+          <td class="failed top">
             Error
             <div class="times">
-              <xsl:value-of select="wheels:GetShortDateTime(@startTime)" />
+              <xsl:value-of select="pens:GetShortDateTime(@startTime)" />
               <xsl:if test="($withDuration='yes')">
                 <br/>
                 <br/>
-                <xsl:value-of select="wheels:ToExactTimeDefinition(@duration)" />
+                <xsl:value-of select="pens:ToExactTimeDefinition(@duration)" />
               </xsl:if>
             </div>
           </td>
         </xsl:when>
         <xsl:when test="@outcome='Warn'">
-          <td class="warn">
+          <td class="warn top">
             Warn
             <div class="times">
-              <xsl:value-of select="wheels:GetShortDateTime(@startTime)" />
+              <xsl:value-of select="pens:GetShortDateTime(@startTime)" />
               <xsl:if test="($withDuration='yes')">
                 <br/>
                 <br/>
-                <xsl:value-of select="wheels:ToExactTimeDefinition(@duration)" />
+                <xsl:value-of select="pens:ToExactTimeDefinition(@duration)" />
               </xsl:if>
             </div>
           </td>
         </xsl:when>
         <xsl:otherwise>
-          <td class="info">
+          <td class="info top">
             OTHER
             <div class="times">
-              <xsl:value-of select="wheels:GetShortDateTime(@startTime)" />
+              <xsl:value-of select="pens:GetShortDateTime(@startTime)" />
               <xsl:if test="($withDuration='yes')">
                 <br/>
                 <br/>
-                <xsl:value-of select="wheels:ToExactTimeDefinition(@duration)" />
+                <xsl:value-of select="pens:ToExactTimeDefinition(@duration)" />
               </xsl:if>
             </div>
           </td>
@@ -440,10 +440,10 @@
       <tr class="Test">
         <!--th scope="row" class="column1">
           <div style="white-space: nowrap">
-            <xsl:value-of select="wheels:GetShortDateTime(@startTime)" />
+            <xsl:value-of select="pens:GetShortDateTime(@startTime)" />
             <br/>
             <br/>
-            <xsl:value-of select="wheels:ToExactTimeDefinition(@duration)" />
+            <xsl:value-of select="pens:ToExactTimeDefinition(@duration)" />
           </div>
         </th-->
 
@@ -494,10 +494,10 @@
     <xsl:param name="testId" />
     <xsl:for-each select="/t:TestRun/t:Results/t:UnitTestResult[@testId=$testId]/t:Output">
 
-      <xsl:variable name="MessageErrorStacktrace" select="wheels:ExtractImageUrl(t:ErrorInfo/t:StackTrace)"/>
-      <xsl:variable name="StdOut" select="wheels:ExtractImageUrl(t:StdOut)"/>
-      <xsl:variable name="StdErr" select="wheels:ExtractImageUrl(t:StdErr)"/>
-      <xsl:variable name="MessageErrorInfo" select="wheels:ExtractImageUrl(t:ErrorInfo/t:Message)"/>
+      <xsl:variable name="MessageErrorStacktrace" select="pens:ExtractImageUrl(t:ErrorInfo/t:StackTrace)"/>
+      <xsl:variable name="StdOut" select="pens:ExtractImageUrl(t:StdOut)"/>
+      <xsl:variable name="StdErr" select="pens:ExtractImageUrl(t:StdErr)"/>
+      <xsl:variable name="MessageErrorInfo" select="pens:ExtractImageUrl(t:ErrorInfo/t:Message)"/>
       <xsl:choose>
         <xsl:when test="$MessageErrorStacktrace">
           <div class="atachmentImage" onclick="show('floatingImageBackground');updateFloatingImage('{$MessageErrorStacktrace}');"></div>
@@ -526,7 +526,7 @@
       <xsl:variable name="StdOut" select="t:StdOut"/>
 
       <xsl:if test="$StdOut or $MessageErrorStacktrace">
-        <xsl:value-of select="wheels:FormatOutput($StdOut)" disable-output-escaping="yes" />
+        <xsl:value-of select="pens:FormatOutput($StdOut)" disable-output-escaping="yes" />
         <xsl:if test="$MessageErrorStacktrace">
           <div class="OpenMoreButton">
             <div class="MoreButtonText" id="Button">
