@@ -107,6 +107,12 @@ address {
     top: 15%;
 }
 
+.storage {
+    font-size:10pt;
+    color: #797979;
+    text-align: left;
+}
+
 #floatingImage {
     position: relative;
     margin-left: 8%;
@@ -235,9 +241,7 @@ td.slowest {
 }
 
 .SummaryDiv {
-    width: 90%;
-    border-top: 1px solid #e5eff8;
-    border-right: 1px solid #e5eff8;
+    width: 95%;
     margin: 1em auto;
     border-collapse: collapse;
 }

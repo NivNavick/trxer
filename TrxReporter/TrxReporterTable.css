@@ -1,3 +1,18 @@
+table.summaryLayout {
+    margin-top: 0px;
+    border: none;
+    width: 90%;
+    float: left;
+}
+tr.summaryLayout {
+    border: none;
+}
+td.summaryLayout {
+    vertical-align: top;
+    border: none;
+    padding-right: 0px;
+}
+
 table a,
 table a:link,
 table a:visited {
