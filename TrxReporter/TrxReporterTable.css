@@ -7,10 +7,11 @@ table a:visited {
 img {
     border: 0;
     margin-top: .5em;
+    zoom: 120%;
 }
 
 table {
-    width: 90%;
+    width: 95%;
     margin: 1em auto;
     border-collapse: collapse;
     border: 1px solid #a2caf2;
@@ -50,14 +51,45 @@ tr.sep .column1 {
 tr.odd .ex,
 tr.sep .ex,
 td.ex {
+    width: 100%;
     text-align: left;
-    width: 100px;
+    max-width: 1000px;
 }
+div.exMessage {
+    color: #c71010;
+}
+pre.exMessage {
+    font-size: 12px !important;
+    color: #800000;
+}
+div.exScroller {
+    width: 100%;
+    overflow-x: scroll;
+}
+
+div.times {
+    margin-top: 10px;
+    white-space: nowrap;
+    font-size: 16px;
+    color: #567997;
+}
+div.times br {
+    margin-top: 5px;
+}
+
 
 td.exShow {
     text-align: left;
     width: 100px;
     color: #000;
+}
+
+div.testName {
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    padding: 5px;
+    background: #d0d0d0;
 }
 
 td.statusCount {
@@ -81,9 +113,23 @@ td.Message {
 
 td.Messages {
     text-align: left;
-    width: auto;
+    width: 100%;
     word-wrap: break-word;
     max-width: 600px;
+    font-size: 14px;
+}
+a.Message {
+    font-size: 14px !important;
+    font-weight: bold;
+}
+
+pre.traceMessage {
+    font-size:13px;
+}
+span.traceMessage {
+    font-style: italic;
+    margin-left: 1.5em;
+    color: #999999;
 }
 
 .Atached {
@@ -127,14 +173,12 @@ td.failed {
 tr.odd .passed,
 tr.sep.passed,
 td.passed {
-    color: #7CCD7C;
+    color: #58ba58;
     background: #c0eec0;
-    width: 90px;
 }
 
 td {
     color: #425b71;
-    ;
     padding: .3em 1em;
     text-align: center;
     border-left: 1px solid #a2caf2;
@@ -168,15 +212,15 @@ tfoot th {
     background: #f4f9fe;
 }
 
-    tfoot th strong {
-        font: bold 1.2em "Century Gothic","Trebuchet MS",Arial,Helvetica,sans-serif;
-        margin: .5em .5em .5em 0;
-        color: #678197;
-    }
+tfoot th strong {
+    font: bold 1.2em "Century Gothic","Trebuchet MS",Arial,Helvetica,sans-serif;
+    margin: .5em .5em .5em 0;
+    color: #678197;
+}
 
-    tfoot th em {
-        color: #678197;
-        font-weight: bold;
-        font-size: 1.1em;
-        font-style: normal;
-    }
+tfoot th em {
+    color: #678197;
+    font-weight: bold;
+    font-size: 1.1em;
+    font-style: normal;
+}

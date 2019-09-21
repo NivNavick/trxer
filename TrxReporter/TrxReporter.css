@@ -54,6 +54,7 @@ address {
 }
 
 .StatusBar {
+    color:white;
     width: 100%;
     height: 60px;
 }
@@ -64,6 +65,22 @@ address {
 
 .statusBarFailed {
     background-color: #b93333;
+}
+
+.statusBarCompleted {
+    background-color: #d5bb2b;
+}
+
+.statusBarCompletedInner {
+    position: relative;
+    background-color: #b59b0c;
+    width: 100%;
+    height: 70%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: auto;
+    margin-bottom: auto;
+    top: 15%;
 }
 
 .statusBarFailedInner {
@@ -236,7 +253,8 @@ td.slowest {
 
 .column1 {
     background: #dbedff;
-    width: 170px;
+    width: auto !important;
+    white-space: nowrap;
 }
 
 .column1Failed {
@@ -297,7 +315,7 @@ td.slowest {
 
 .OpenMoreButton {
     height: auto;
-    width: 200px;
+    width: 160px;
     cursor: pointer;
     text-decoration: none;
     text-align: center;
@@ -307,17 +325,16 @@ td.slowest {
     float: right;
 }
 
-    .OpenMoreButton:hover {
-        background-color: #bfe3ff;
-        text-decoration: none;
-    }
-
+.OpenMoreButton:hover {
+    background-color: #bfe3ff;
+    text-decoration: none;
+}
 
 
 #MoreButtonText {
     color: #1b99fb;
     top: 0;
-    left: 25px;
+    left: 20px;
     font-weight: normal;
     text-align: center;
     font-size: 15px;
