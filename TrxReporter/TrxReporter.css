@@ -199,7 +199,7 @@ a:focus {
     width: auto;
     max-width: 407px;
     float: left;
-    margin-right: 20px;
+    margin-right: 0px;
 }
 
 #divToRefresh > div > table.SummaryTable > tbody > tr > th {
@@ -210,7 +210,7 @@ a:focus {
     width: auto;
     max-width: 407px;
     float: left;
-    margin-right: 20px;
+    margin-right: 0px;
     text-align: left;
     word-wrap: break-word;
 }
@@ -237,11 +237,11 @@ td.slowest {
     min-width: 250px;
     width: auto;
     float: left;
-    margin-right: 20px;
+    margin-right: 0px;
 }
 
 .SummaryDiv {
-    width: 95%;
+    width: 90%;
     margin: 1em auto;
     border-collapse: collapse;
 }

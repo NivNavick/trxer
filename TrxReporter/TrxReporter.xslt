@@ -38,7 +38,7 @@
           <div class="SummaryDiv">
             <table class="summaryLayout">
               <tr class="summaryLayout">
-                <td rowspan="2" class="summaryLayout">
+                <td class="summaryLayout">
                   <table id="TotalTestsTable">
                     <caption>Results Summary</caption>
                     <thead>
@@ -62,7 +62,7 @@
                     </tbody>
                   </table>
                 </td>
-                <td rowspan="2" class="summaryLayout">
+                <td class="summaryLayout">
                   <table class="DetailsTable StatusesTable">
                     <caption>Tests Statuses</caption>
                     <tbody>
@@ -118,63 +118,69 @@
                   </table>
                 </td>
                 <td class="summaryLayout">
-                  <table class="SummaryTable">
-                    <caption>Run Time Summary</caption>
-                    <tbody>
-                      <xsl:for-each select="/t:TestRun/t:Times">
-                        <tr class="odd">
-                          <th class="column1">Start Time</th>
-                          <td>
-                            <xsl:value-of select="pens:GetShortDateTime(@start)" />
-                          </td>
-                        </tr>
-                        <tr>
-                          <th class="column1">End Time</th>
-                          <td>
-                            <xsl:value-of select="pens:GetShortDateTime(@finish)" />
-                          </td>
-                        </tr>
-                        <tr>
-                          <th class="column1">Duration</th>
-                          <td>
-                            <xsl:value-of select="pens:ToExactTimeDefinition(@start,@finish)"/>
-                          </td>
-                        </tr>
-                      </xsl:for-each>
-                    </tbody>
+                  <table class="summaryLayout">
+                    <tr>
+                      <td class="summaryLayout">
+                        <table class="SummaryTable">
+                          <caption>Run Time Summary</caption>
+                          <tbody>
+                            <xsl:for-each select="/t:TestRun/t:Times">
+                              <tr class="odd">
+                                <th class="column1">Start Time</th>
+                                <td>
+                                  <xsl:value-of select="pens:GetShortDateTime(@start)" />
+                                </td>
+                              </tr>
+                              <tr>
+                                <th class="column1">End Time</th>
+                                <td>
+                                  <xsl:value-of select="pens:GetShortDateTime(@finish)" />
+                                </td>
+                              </tr>
+                              <tr>
+                                <th class="column1">Duration</th>
+                                <td>
+                                  <xsl:value-of select="pens:ToExactTimeDefinition(@start,@finish)"/>
+                                </td>
+                              </tr>
+                            </xsl:for-each>
+                          </tbody>
+                        </table>
+                      </td>
+                      <td class="summaryLayout">
+                        <table class="DetailsTable">
+                          <caption>Tests Details</caption>
+                          <tbody>
+                            <tr class="odd">
+                              <th class="column1">User</th>
+                              <td>
+                                <xsl:value-of select="/t:TestRun/@runUser" />
+                              </td>
+                            </tr>
+                            <tr>
+                              <th scope="row" class="column1">Machine</th>
+                              <td>
+                                <xsl:value-of select="//t:UnitTestResult/@computerName" />
+                              </td>
+                            </tr>
+                            <tr>
+                              <th scope="row" class="column1">Description</th>
+                              <td>
+                                <xsl:value-of select="/t:TestRun/t:TestRunConfiguration/t:Description"/>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                    </tr>
+                    <tr class="summaryLayout">
+                      <td colspan="2" class="summaryLayout" style="vertical-align:top">
+                        <div class="storage">
+                          <xsl:value-of select="t:TestRun/t:TestDefinitions/t:UnitTest/@storage" />
+                        </div>
+                      </td>
+                    </tr>
                   </table>
-                </td>
-                <td class="summaryLayout">
-                  <table class="DetailsTable">
-                    <caption>Tests Details</caption>
-                    <tbody>
-                      <tr class="odd">
-                        <th class="column1">User</th>
-                        <td>
-                          <xsl:value-of select="/t:TestRun/@runUser" />
-                        </td>
-                      </tr>
-                      <tr>
-                        <th scope="row" class="column1">Machine</th>
-                        <td>
-                          <xsl:value-of select="//t:UnitTestResult/@computerName" />
-                        </td>
-                      </tr>
-                      <tr>
-                        <th scope="row" class="column1">Description</th>
-                        <td>
-                          <xsl:value-of select="/t:TestRun/t:TestRunConfiguration/t:Description"/>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </td>
-              </tr>
-              <tr class="summaryLayout">
-                <td colspan="2" class="summaryLayout" style="vertical-align:top">
-                  <div class="storage">
-                    <xsl:value-of select="t:TestRun/t:TestDefinitions/t:UnitTest/@storage" />
-                  </div>
                 </td>
               </tr>
             </table>

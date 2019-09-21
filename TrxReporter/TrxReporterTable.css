@@ -1,7 +1,8 @@
 table.summaryLayout {
-    margin-top: 0px;
-    border: none;
-    width: 90%;
+    margin-top: 0px !important;
+    margin-right: 0px !important;
+    padding: 0px;
+    border: none !important;
     float: left;
 }
 tr.summaryLayout {
@@ -11,6 +12,10 @@ td.summaryLayout {
     vertical-align: top;
     border: none;
     padding-right: 0px;
+    padding-left: 0px;
+    margin-top: 0px;
+    padding-top: 0px;
+    white-space: nowrap;
 }
 
 table a,
