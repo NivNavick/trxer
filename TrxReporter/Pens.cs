@@ -74,6 +74,25 @@ namespace TrxReporter
 		}
 
 
+		/// <summary>
+		/// Custom name from test name and storage directory, extracting
+		/// the Bamboo build part of the directory path.
+		/// </summary>
+		/// <param name="name"></param>
+		/// <param name="storage"></param>
+		/// <returns></returns>
+		public string MakeCustomName (string name, string storage)
+		{
+			var parts = storage.Split(System.IO.Path.DirectorySeparatorChar);
+			if (parts.Length > 1)
+			{
+				return parts[2] + " - " + name.Substring(name.IndexOf('@') + 1);
+			}
+
+			return name;
+		}
+
+
 		public string RemoveAssemblyName(string asm)
 		{
 			int idx = asm.IndexOf(',');

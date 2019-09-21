@@ -28,8 +28,11 @@
           </div>
           <br />
 
+          <xsl:variable name="testRunName" select="/t:TestRun/@name" />
+          <xsl:variable name="storage" select="/t:TestRun/t:TestDefinitions/t:UnitTest/@storage" />
+
           <xsl:call-template name="tTitleBar">
-            <xsl:with-param name="title" select="/t:TestRun/@name"/>
+            <xsl:with-param name="title" select="pens:MakeCustomName($testRunName,$storage)"/>
             <xsl:with-param name="countersExecuted" select="/t:TestRun/t:ResultSummary/t:Counters/@executed"/>
             <xsl:with-param name="countersPassed" select="/t:TestRun/t:ResultSummary/t:Counters/@passed"/>
             <xsl:with-param name="countersFailed" select="/t:TestRun/t:ResultSummary/t:Counters/@failed"/>
@@ -176,7 +179,7 @@
                     <tr class="summaryLayout">
                       <td colspan="2" class="summaryLayout" style="vertical-align:top">
                         <div class="storage">
-                          <xsl:value-of select="t:TestRun/t:TestDefinitions/t:UnitTest/@storage" />
+                          <xsl:value-of select="/t:TestRun/t:TestDefinitions/t:UnitTest/@storage" />
                         </div>
                       </td>
                     </tr>
@@ -293,7 +296,7 @@
             </tbody>
           </Table>
           <h6 style="text-align:center">
-            &#169; <xsl:value-of select="pens:GetYear()"/> Waters Corporation, Internal Use Only
+            &#169; <xsl:value-of select="pens:GetYear()"/>, Internal Use Only
           </h6>
 
         </div>

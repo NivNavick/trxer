@@ -51,6 +51,7 @@ address {
 .titleCenterd {
     position: relative;
     top: 12px;
+    text-shadow: 1px 1px 1px #194c19;
 }
 
 .StatusBar {
