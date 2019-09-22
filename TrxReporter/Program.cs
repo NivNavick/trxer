@@ -16,14 +16,14 @@
 
 		static void Main(string[] args)
 		{
-			Console.WriteLine(System.Reflection.Assembly.GetExecutingAssembly().FullName);
-
 			if (args.Any() == false)
 			{
 				Console.WriteLine("No trx file, TrxReporter.exe <filename>");
 				return;
 			}
-			Console.WriteLine("File\n{0}", args[0]);
+
+			Console.WriteLine($"... transforming {args[0]}");
+
 			Transform(args[0], PrepareXsl());
 		}
 
@@ -36,19 +36,19 @@
 			var args = new XsltArgumentList();
 			args.AddExtensionObject("urn:Pens", new Pens());
 
-			Console.WriteLine("Transforming...");
+			Console.WriteLine("... transforming");
 			using (var writer = new StreamWriter(fileName + OutputFileExt))
 			{
 				compiled.Transform(fileName, args, writer);
 			}
 
-			Console.WriteLine("Done transforming xml into html");
+			Console.WriteLine($"... {fileName + OutputFileExt}");
 		}
 
 
 		private static XmlDocument PrepareXsl()
 		{
-			Console.WriteLine("Loading xslt template...");
+			Console.WriteLine("... loading xslt template");
 			var doc = new XmlDocument();
 			doc.Load(ResourceReader.StreamFromResource(XsltFile));
 			MergeCss(doc);
@@ -59,7 +59,7 @@
 
 		private static void MergeJavaScript(XmlDocument doc)
 		{
-			Console.WriteLine("Loading javascript...");
+			Console.WriteLine("... loading javascript");
 			var script = doc.GetElementsByTagName("script")[0];
 			var src = script.Attributes["src"];
 			script.Attributes.Remove(src);
@@ -69,7 +69,7 @@
 
 		private static void MergeCss(XmlDocument doc)
 		{
-			Console.WriteLine("Loading css...");
+			Console.WriteLine("... loading css");
 			var head = doc.GetElementsByTagName("head")[0];
 			var links = doc.GetElementsByTagName("link");
 
