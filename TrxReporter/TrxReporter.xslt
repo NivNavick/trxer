@@ -298,8 +298,12 @@
           <h6 style="text-align:center">
             &#169; <xsl:value-of select="pens:GetYear()"/>, Internal Use Only
           </h6>
-
         </div>
+
+        <div id="pictureBox" class="pictureBox" onclick="ClosePictureBox()">
+          <img class="pictureBoxImg" id="pictureBoxImg" />
+        </div>
+
       </body>
       <script>
         CalculateTotalPrecents();

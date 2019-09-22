@@ -217,4 +217,21 @@ function CalculateTestsStatuses(testContaineId, canvasId) {
 }
 
 
+function OpenInPictureBox(img) {
+    var box = document.getElementById("pictureBox");
+    var pic = document.getElementById("pictureBoxImg");
+    pic.src = img.src;
+    box.style.display = "block";
+}
 
+document.onkeyup = function(e) {
+    if ((e.key === "Escape") &&
+        (document.getElementById("pictureBox").style.display === "block"))
+    {
+        ClosePictureBox();
+    }
+}
+
+function ClosePictureBox() {
+    document.getElementById("pictureBox").style.display = "none";
+}

@@ -51,7 +51,7 @@ namespace TrxReporter
 			}
 
 			return builder.ToString()
-				.Replace("HTMLREPORT_START_", "<br/><img src=")
+				.Replace("HTMLREPORT_START_", "<br/><img onclick=\"OpenInPictureBox(this)\" src=")
 				.Replace("HTMLREPORT_END_", "/><br/>");
 
 		}
