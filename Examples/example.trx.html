@@ -55,6 +55,7 @@ address {
 .titleCenterd {
     position: relative;
     top: 12px;
+    text-shadow: 1px 1px 1px #194c19;
 }
 
 .StatusBar {
@@ -203,7 +204,7 @@ a:focus {
     width: auto;
     max-width: 407px;
     float: left;
-    margin-right: 20px;
+    margin-right: 0px;
 }
 
 #divToRefresh > div > table.SummaryTable > tbody > tr > th {
@@ -214,7 +215,7 @@ a:focus {
     width: auto;
     max-width: 407px;
     float: left;
-    margin-right: 20px;
+    margin-right: 0px;
     text-align: left;
     word-wrap: break-word;
 }
@@ -241,11 +242,11 @@ td.slowest {
     min-width: 250px;
     width: auto;
     float: left;
-    margin-right: 20px;
+    margin-right: 0px;
 }
 
 .SummaryDiv {
-    width: 95%;
+    width: 90%;
     margin: 1em auto;
     border-collapse: collapse;
 }
@@ -384,11 +385,52 @@ td.slowest {
 .visibleRow {
     visibility: visible;
 }
+
+
+#pictureBox,
+.pictureBox {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    padding-top: 50px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.8);
+}
+.pictureBoxImg {
+    margin: auto;
+    display: block;
+    width: 94%;
+    max-width: 2000px;
+    animation-name: zoom;
+    animation-duration: 0.5s;
+}
+
+@keyframes zoom {
+    from {
+        transform: scale(0)
+    }
+
+    to {
+        transform: scale(1)
+    }
+}
+/* 100% Image Width on Smaller Screens */
+@media only screen and (max-width: 700px) {
+    .modal-content {
+        width: 100%;
+    }
+}
 </style>
     <style>table.summaryLayout {
-    margin-top: 0px;
-    border: none;
-    width: 90%;
+    margin-top: 0px !important;
+    margin-right: 0px !important;
+    padding: 0px;
+    border: none !important;
     float: left;
 }
 tr.summaryLayout {
@@ -398,6 +440,10 @@ td.summaryLayout {
     vertical-align: top;
     border: none;
     padding-right: 0px;
+    padding-left: 0px;
+    margin-top: 0px;
+    padding-top: 0px;
+    white-space: nowrap;
 }
 
 table a,
@@ -409,7 +455,6 @@ table a:visited {
 img {
     border: 0;
     margin-top: .5em;
-    zoom: 120%;
 }
 
 table {
@@ -849,8 +894,24 @@ function CalculateTestsStatuses(testContaineId, canvasId) {
 }
 
 
+function OpenInPictureBox(img) {
+    var box = document.getElementById("pictureBox");
+    var pic = document.getElementById("pictureBoxImg");
+    pic.src = img.src;
+    box.style.display = "block";
+}
 
-</script><title>NivNavick@NIVNAVICK-PC 2014-07-28 21:47:29</title>
+document.onkeyup = function(e) {
+    if ((e.key === "Escape") &&
+        (document.getElementById("pictureBox").style.display === "block"))
+    {
+        ClosePictureBox();
+    }
+}
+
+function ClosePictureBox() {
+    document.getElementById("pictureBox").style.display = "none";
+}</script><title>NivNavick@NIVNAVICK-PC 2014-07-28 21:47:29</title>
   </head>
   <body>
     <div id="divToRefresh" class="wrapOverall">
@@ -859,7 +920,7 @@ function CalculateTestsStatuses(testContaineId, canvasId) {
         <div class="statusBarFailedInner">
           <center>
             <h1>
-              <div class="titleCenterd">NivNavick@NIVNAVICK-PC 2014-07-28 21:47:29</div>
+              <div class="titleCenterd">nivnavick - NIVNAVICK-PC 2014-07-28 21:47:29</div>
             </h1>
           </center>
         </div>
@@ -929,7 +990,7 @@ function CalculateTestsStatuses(testContaineId, canvasId) {
               </table>
             </td>
             <td class="summaryLayout">
-              <table>
+              <table class="summaryLayout">
                 <tr>
                   <td class="summaryLayout">
                     <table class="SummaryTable">
@@ -1743,9 +1804,10 @@ message</br>
         </tbody>
       </Table>
       <h6 style="text-align:center">
-            © 2019 Waters Corporation, Internal Use Only
+            © 2019, Internal Use Only
           </h6>
     </div>
+    <div id="pictureBox" class="pictureBox" onclick="ClosePictureBox()"><img class="pictureBoxImg" id="pictureBoxImg"></div>
   </body><script>
         CalculateTotalPrecents();
       </script></html>

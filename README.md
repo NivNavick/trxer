@@ -7,6 +7,7 @@
   <li>Target .NET Core 2.2.</li>
   <li>Simpler layout</li>
   <li>Handles output from SpecFlow including an interactive screen capture/image viewer.</li>
+  <li>Custom title shows Bamboo build directory</li>
 </ul>
 
 
