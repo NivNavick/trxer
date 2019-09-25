@@ -76,6 +76,7 @@ td.ex {
 }
 div.exMessage {
     color: #c71010;
+    display: inline;
 }
 pre.exMessage {
     font-size: 12px !important;
@@ -132,7 +133,6 @@ td.Message {
 
 td.Messages {
     text-align: left;
-    width: 100%;
     word-wrap: break-word;
     max-width: 600px;
     font-size: 14px;
@@ -209,6 +209,10 @@ td {
     word-wrap: break-word;
 }
 
+td.scenario {
+    font-weight: bold;
+}
+
 th {
     font-weight: normal;
     color: #678197;
@@ -221,11 +225,26 @@ th {
 thead th.TestsTable {
     font-size: 17px;
     font-weight: normal;
+    margin-top:0px;
 }
 
 thead th {
     background: #dbedff;
     text-align: center;
+    font: bold 1.2em/2em "Century Gothic","Trebuchet MS",Arial,Helvetica,sans-serif;
+    color: #66a3d3;
+}
+
+thead th.features {
+    background: #fffadd;
+    text-align: center;
+    font: bold 1.2em/2em "Century Gothic","Trebuchet MS",Arial,Helvetica,sans-serif;
+    color: #66a3d3;
+}
+
+thead th.featuresLeft {
+    background: #fffadd;
+    text-align: left;
     font: bold 1.2em/2em "Century Gothic","Trebuchet MS",Arial,Helvetica,sans-serif;
     color: #66a3d3;
 }
