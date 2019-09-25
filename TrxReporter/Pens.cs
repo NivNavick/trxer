@@ -40,8 +40,13 @@ namespace TrxReporter
 			{
 				if (line.StartsWith("->"))
 				{
-					var esc = "->" + line.Substring(2).Replace("<", "&lt;").Replace(">", "&gt;");
-					builder.Append($"<span class=\"traceMessage\">{esc}</span><br/>\n");
+					var text = line.Substring(2).Trim();
+					var esc = "-> " + text.Replace("<", "&lt;").Replace(">", "&gt;");
+
+					if (text.StartsWith("error"))
+						builder.Append($"<span class=\"traceError\">{esc}</span><br/>\n");
+					else
+						builder.Append($"<span class=\"traceMessage\">{esc}</span><br/>\n");
 				}
 				else
 				{

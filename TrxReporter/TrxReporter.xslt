@@ -33,7 +33,7 @@
           <xsl:variable name="testRunName" select="/t:TestRun/@name" />
           <xsl:variable name="storage" select="/t:TestRun/t:TestDefinitions/t:UnitTest/@storage" />
 
-          <xsl:call-template name="tTitleBar">
+          <xsl:call-template name="BuildTitleBar">
             <xsl:with-param name="title" select="pens:MakeCustomName($testRunName,$storage)"/>
             <xsl:with-param name="countersExecuted" select="/t:TestRun/t:ResultSummary/t:Counters/@executed"/>
             <xsl:with-param name="countersPassed" select="/t:TestRun/t:ResultSummary/t:Counters/@passed"/>
@@ -201,12 +201,13 @@
           <xsl:variable name="features" select="//t:TestMethod[generate-id(.)=generate-id(key('TestMethods', @className))]" />
           <xsl:variable name="featureCount" select="count($features)" />
           <table id="ReportsTable">
-            <caption>All Scenarios By Feature (<xsl:value-of select="$featureCount" />)</caption>
+            <caption>
+              All Scenarios By Feature (<xsl:value-of select="$featureCount" />)
+            </caption>
             <thead>
               <tr>
                 <th class="features" scope="col" abbr="Status">Status</th>
                 <th class="featuresLeft" scope="col" abbr="Feature">Feature</th>
-                <th class="features" scope="col" abbr="Count">Count</th>
               </tr>
             </thead>
             <tbody>
@@ -215,7 +216,7 @@
                 <xsl:variable name="scenarioCount" select="count($scenarios)" />
 
                 <!-- Scenario header -->
-                
+
                 <tr class="Scenario">
                   <td class="PackageStatus">
                     <canvas id="{generate-id(@className)}canvas" width="100" height="25">
@@ -224,17 +225,9 @@
                   <td class="scenario" style="text-align:left">
                     <xsl:value-of select="pens:RemoveAssemblyName(@className)" />
                   </td>
-                  <td class="Message" name="{generate-id(@className)}Id">
-                    <xsl:value-of select="$scenarioCount" /> Scenarios
-                  </td>
-                  <!--td class="ex">
-                    <div class="OpenMoreButton" onclick="ShowHide('{generate-id(@className)}TestsContainer','{generate-id(@className)}Button','Show Tests','Hide Tests');">
-                      <div class="MoreButtonText" id="{generate-id(@className)}Button">Show Tests</div>
-                    </div>
-                  </td-->
                 </tr>
-                <tr>
-                  <td colspan="3">
+                <tr id="{generate-id(@className)}TestsContainer">
+                  <td colspan="2">
                     <div id="exceptionArrow">↳</div>
                     <table>
                       <thead>
@@ -242,7 +235,9 @@
                           <th scope="col" class="TestsTable" style="width:80px;">
                             <div style="width:80px;min-width:80px;display:block;">Status</div>
                           </th>
-                          <th scope="col" class="TestsTable" style="text-align:left">Scenario</th>
+                          <th scope="col" class="TestsTable" style="text-align:left">
+                            Scenario (<xsl:value-of select="$scenarioCount" />)
+                          </th>
                           <th scope="col" class="TestsTable" style="width:100px;">
                             <div style="width:100px;min-width:100px;">Duration</div>
                           </th>
@@ -255,7 +250,7 @@
                       </thead>
                       <tbody>
                         <xsl:for-each select="$scenarios">
-                          <xsl:call-template name="tScenario">
+                          <xsl:call-template name="BuildScenarioRow">
                             <xsl:with-param name="scenarioId" select="./../@id" />
                             <!--xsl:with-param name="testDescription" select="./../t:Description" /-->
                           </xsl:call-template>
@@ -264,31 +259,11 @@
                     </table>
                   </td>
                 </tr>
-                
-                <tr id="{generate-id(@className)}TestsContainer" class="hiddenRow">
-                  <td colspan="3">
-                    <div id="exceptionArrow">↳</div>
-                    <table>
-                      <thead>
-                        <tr class="odd">
-                          <th scope="col" class="TestsTable">Time/Duration</th>
-                          <th scope="col" class="TestsTable" abbr="Message">Message</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <xsl:for-each select="$scenarios">
-                          <xsl:call-template name="tDetails">
-                            <xsl:with-param name="testId" select="./../@id" />
-                            <xsl:with-param name="testDescription" select="./../t:Description" />
-                          </xsl:call-template>
-                        </xsl:for-each>
-                      </tbody>
-                    </table>
-                  </td>
-                </tr>
 
                 <script>
-                  CalculateTestsStatuses('<xsl:value-of select="generate-id(@className)"/>TestsContainer','<xsl:value-of select="generate-id(@className)"/>canvas');
+                  CalculateTestsStatuses(
+                  '<xsl:value-of select="generate-id(@className)"/>TestsContainer',
+                  '<xsl:value-of select="generate-id(@className)"/>canvas');
                 </script>
               </xsl:for-each>
             </tbody>
@@ -300,7 +275,7 @@
             <caption>Five slowest features</caption>
             <thead>
               <tr class="odd">
-                <th class="features" scope="col">Status/Time</th>
+                <th class="features" scope="col">Status</th>
                 <th class="featuresLeft" scope="col" abbr="Feature">Feature</th>
                 <th class="features" scope="col" abbr="Duration">Duration</th>
               </tr>
@@ -311,12 +286,10 @@
                 <xsl:if test="position() &gt;= 1 and position() &lt;=5">
                   <xsl:variable name="testId" select="@testId" />
                   <tr>
-                    <!--th scope="row" class="column1">
-                      <xsl:value-of select="pens:GetShortDateTime(@startTime)" />
-                    </th-->
-                    <xsl:call-template name="tStatus">
-                      <xsl:with-param name="testId" select="@testId" />
+                    <xsl:call-template name="BuildStatusColumn">
+                      <xsl:with-param name="outcome" select="/t:TestRun/t:Results/t:UnitTestResult[@testId=$testId]/@outcome" />
                     </xsl:call-template>
+                    
                     <td class="Function slowest">
                       <xsl:value-of select="pens:RemoveAssemblyName(/t:TestRun/t:TestDefinitions/t:UnitTest[@id=$testId]/t:TestMethod/@className)"/>
                       .<xsl:value-of select="@testName"/>
@@ -347,9 +320,9 @@
     </html>
   </xsl:template>
 
-  <!-- titleBar =============================================================================== -->
+  <!-- BuildTitleBar ========================================================================== -->
 
-  <xsl:template name="tTitleBar">
+  <xsl:template name="BuildTitleBar">
     <xsl:param name="title" />
     <xsl:param name="countersExecuted" />
     <xsl:param name="countersPassed" />
@@ -397,151 +370,15 @@
     </xsl:choose>
   </xsl:template>
 
-  <!-- status ================================================================================= -->
+  <!-- BuildScenarioRow ======================================================================= -->
 
-  <xsl:template name="tStatus">
-    <xsl:param name="testId" />
-    <xsl:param name="withDuration" />
-    <xsl:for-each select="/t:TestRun/t:Results/t:UnitTestResult[@testId=$testId]">
-      <xsl:choose>
-        <xsl:when test="@outcome='Passed'">
-          <td class="passed top">
-            PASSED
-            <div class="times">
-              <xsl:value-of select="pens:GetShortDateTime(@startTime)" />
-              <xsl:if test="($withDuration='yes')">
-                <br/>
-                <br/>
-                <xsl:value-of select="pens:ToExactTimeDefinition(@duration)" />
-              </xsl:if>
-            </div>
-          </td>
-        </xsl:when>
-        <xsl:when test="@outcome='Failed'">
-          <td class="failed top">
-            FAILED
-            <div class="times">
-              <xsl:value-of select="pens:GetShortDateTime(@startTime)" />
-              <xsl:if test="($withDuration='yes')">
-                <br/>
-                <br/>
-                <xsl:value-of select="pens:ToExactTimeDefinition(@duration)" />
-              </xsl:if>
-            </div>
-          </td>
-        </xsl:when>
-        <xsl:when test="@outcome='Inconclusive'">
-          <td class="warn top">
-            Inconclusive
-            <div class="times">
-              <xsl:value-of select="pens:GetShortDateTime(@startTime)" />
-              <xsl:if test="($withDuration='yes')">
-                <br/>
-                <br/>
-                <xsl:value-of select="pens:ToExactTimeDefinition(@duration)" />
-              </xsl:if>
-            </div>
-          </td>
-        </xsl:when>
-        <xsl:when test="@outcome='Timeout'">
-          <td class="failed top">
-            Timeout
-            <div class="times">
-              <xsl:value-of select="pens:GetShortDateTime(@startTime)" />
-              <xsl:if test="($withDuration='yes')">
-                <br/>
-                <br/>
-                <xsl:value-of select="pens:ToExactTimeDefinition(@duration)" />
-              </xsl:if>
-            </div>
-          </td>
-        </xsl:when>
-        <xsl:when test="@outcome='Error'">
-          <td class="failed top">
-            Error
-            <div class="times">
-              <xsl:value-of select="pens:GetShortDateTime(@startTime)" />
-              <xsl:if test="($withDuration='yes')">
-                <br/>
-                <br/>
-                <xsl:value-of select="pens:ToExactTimeDefinition(@duration)" />
-              </xsl:if>
-            </div>
-          </td>
-        </xsl:when>
-        <xsl:when test="@outcome='Warn'">
-          <td class="warn top">
-            Warn
-            <div class="times">
-              <xsl:value-of select="pens:GetShortDateTime(@startTime)" />
-              <xsl:if test="($withDuration='yes')">
-                <br/>
-                <br/>
-                <xsl:value-of select="pens:ToExactTimeDefinition(@duration)" />
-              </xsl:if>
-            </div>
-          </td>
-        </xsl:when>
-        <xsl:otherwise>
-          <td class="info top">
-            OTHER
-            <div class="times">
-              <xsl:value-of select="pens:GetShortDateTime(@startTime)" />
-              <xsl:if test="($withDuration='yes')">
-                <br/>
-                <br/>
-                <xsl:value-of select="pens:ToExactTimeDefinition(@duration)" />
-              </xsl:if>
-            </div>
-          </td>
-        </xsl:otherwise>
-      </xsl:choose>
-    </xsl:for-each>
-  </xsl:template>
-
-  <!-- tTestHeader ============================================================================ -->
-
-  <xsl:template name="tScenario">
+  <xsl:template name="BuildScenarioRow">
     <xsl:param name="scenarioId" />
     <xsl:for-each select="/t:TestRun/t:Results/t:UnitTestResult[@testId=$scenarioId]">
-      <tr class="Test" id="{generate-id(@className)}TestsContainer">
-        <xsl:choose>
-          <xsl:when test="@outcome='Passed'">
-            <td class="passed top">
-              PASSED
-            </td>
-          </xsl:when>
-          <xsl:when test="@outcome='Failed'">
-            <td class="failed top">
-              FAILED
-            </td>
-          </xsl:when>
-          <xsl:when test="@outcome='Inconclusive'">
-            <td class="warn top">
-              Inconclusive
-            </td>
-          </xsl:when>
-          <xsl:when test="@outcome='Timeout'">
-            <td class="failed top">
-              Timeout
-            </td>
-          </xsl:when>
-          <xsl:when test="@outcome='Error'">
-            <td class="failed top">
-              Error
-            </td>
-          </xsl:when>
-          <xsl:when test="@outcome='Warn'">
-            <td class="warn top">
-              Warn
-            </td>
-          </xsl:when>
-          <xsl:otherwise>
-            <td class="info top">
-              OTHER
-            </td>
-          </xsl:otherwise>
-        </xsl:choose>
+      <tr class="Test">
+        <xsl:call-template name="BuildStatusColumn">
+          <xsl:with-param name="outcome" select="@outcome" />
+        </xsl:call-template>
         <td class="Function">
           <xsl:value-of select="@testName" />
         </td>
@@ -559,7 +396,7 @@
           <xsl:text disable-output-escaping="yes"><![CDATA[&nbsp;]]></xsl:text>
         </td>
         <td class="Test Messages" colspan="3">
-          <xsl:call-template name="debugInfo">
+          <xsl:call-template name="BuildDetailInfo">
             <xsl:with-param name="testId" select="$scenarioId" />
           </xsl:call-template>
         </td>
@@ -567,94 +404,53 @@
     </xsl:for-each>
   </xsl:template>
 
-  <!-- tDetails =============================================================================== -->
+  <!-- BuildStatusColumn ====================================================================== -->
 
-  <xsl:template name="tDetails">
-    <xsl:param name="testId" />
-    <xsl:param name="testDescription" />
-    <xsl:for-each select="/t:TestRun/t:Results/t:UnitTestResult[@testId=$testId]">
-      <tr class="Test">
-        <!--th scope="row" class="column1">
-          <div style="white-space: nowrap">
-            <xsl:value-of select="pens:GetShortDateTime(@startTime)" />
-            <br/>
-            <br/>
-            <xsl:value-of select="pens:ToExactTimeDefinition(@duration)" />
-          </div>
-        </th-->
-
-        <xsl:call-template name="tStatus">
-          <xsl:with-param name="testId" select="$testId" />
-          <xsl:with-param name="withDuration" select="'yes'" />
-        </xsl:call-template>
-
-        <td class="Messages">
-          <div class="testName">
-            <xsl:value-of select="@testName" />
-          </div>
-          <xsl:call-template name="imageExtractor">
-            <xsl:with-param name="testId" select="$testId" />
-          </xsl:call-template>
-
-          <xsl:call-template name="debugInfo">
-            <xsl:with-param name="testId" select="$testId" />
-          </xsl:call-template>
+  <xsl:template name="BuildStatusColumn">
+    <xsl:param name="outcome" />
+    <xsl:choose>
+      <xsl:when test="$outcome='Passed'">
+        <td class="passed top">
+          PASSED
         </td>
-      </tr>
-      <tr id="{generate-id($testId)}Stacktrace" class="hiddenRow">
-        <!--Outer-->
-        <td colspan="2">
-          <div id="exceptionArrow">↳</div>
-          <table>
-            <!--Inner-->
-            <tbody>
-              <tr class="visibleRow">
-                <td class="ex">
-                  <div class="exScroller">
-                    <pre class="exMessage">
-                      <xsl:value-of select="/t:TestRun/t:Results/t:UnitTestResult[@testId=$testId]/t:Output/t:ErrorInfo/t:StackTrace" />
-                    </pre>
-                  </div>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+      </xsl:when>
+      <xsl:when test="$outcome='Failed'">
+        <td class="failed top">
+          FAILED
         </td>
-      </tr>
-    </xsl:for-each>
+      </xsl:when>
+      <xsl:when test="$outcome='Inconclusive'">
+        <td class="warn top">
+          Inconclusive
+        </td>
+      </xsl:when>
+      <xsl:when test="$outcome='Timeout'">
+        <td class="failed top">
+          Timeout
+        </td>
+      </xsl:when>
+      <xsl:when test="$outcome='Error'">
+        <td class="failed top">
+          Error
+        </td>
+      </xsl:when>
+      <xsl:when test="$outcome='Warn'">
+        <td class="warn top">
+          Warn
+        </td>
+      </xsl:when>
+      <xsl:otherwise>
+        <td class="info top">
+          OTHER
+        </td>
+      </xsl:otherwise>
+    </xsl:choose>
+
   </xsl:template>
 
-  <!-- imageExtractor ========================================================================= -->
+  <!-- BuildDetailInfo ======================================================================== -->
 
-  <xsl:template name="imageExtractor">
-    <xsl:param name="testId" />
-    <xsl:for-each select="/t:TestRun/t:Results/t:UnitTestResult[@testId=$testId]/t:Output">
-
-      <xsl:variable name="MessageErrorStacktrace" select="pens:ExtractImageUrl(t:ErrorInfo/t:StackTrace)"/>
-      <xsl:variable name="StdOut" select="pens:ExtractImageUrl(t:StdOut)"/>
-      <xsl:variable name="StdErr" select="pens:ExtractImageUrl(t:StdErr)"/>
-      <xsl:variable name="MessageErrorInfo" select="pens:ExtractImageUrl(t:ErrorInfo/t:Message)"/>
-      <xsl:choose>
-        <xsl:when test="$MessageErrorStacktrace">
-          <div class="atachmentImage" onclick="show('floatingImageBackground');updateFloatingImage('{$MessageErrorStacktrace}');"></div>
-        </xsl:when>
-        <xsl:when test="$StdOut">
-          <div class="atachmentImage" onclick="show('floatingImageBackground');updateFloatingImage('{$StdOut}');"></div>
-        </xsl:when>
-        <xsl:when test="$StdErr">
-          <div class="atachmentImage" onclick="show('floatingImageBackground');updateFloatingImage('{$StdErr}');"></div>
-        </xsl:when>
-        <xsl:when test="$MessageErrorInfo">
-          <div class="atachmentImage" onclick="show('floatingImageBackground');updateFloatingImage('{$MessageErrorInfo}');"></div>
-        </xsl:when>
-      </xsl:choose>
-
-    </xsl:for-each>
-  </xsl:template>
-
-  <!-- debugInfo ============================================================================== -->
-
-  <xsl:template name="debugInfo">
+  <xsl:template name="BuildDetailInfo">
     <xsl:param name="testId" />
 
     <xsl:for-each select="/t:TestRun/t:Results/t:UnitTestResult[@testId=$testId]/t:Output">
@@ -663,14 +459,14 @@
 
       <xsl:if test="$StdOut or $MessageErrorStacktrace">
         <xsl:value-of select="pens:FormatOutput($StdOut)" disable-output-escaping="yes" />
-        <xsl:if test="$MessageErrorStacktrace">
+        <!--xsl:if test="$MessageErrorStacktrace">
           <div class="OpenMoreButton">
             <div class="MoreButtonText" id="Button">
               <a class="Message" id="{generate-id($testId)}StacktraceToggle"
                   href="javascript:ShowHide('{generate-id($testId)}Stacktrace','{generate-id($testId)}StacktraceToggle','Show Stacktrace','Hide Stacktrace');">Show Stacktrace</a>
             </div>
           </div>
-        </xsl:if>
+        </xsl:if-->
         <xsl:if test="$StdOut">
           <br/>
         </xsl:if>
@@ -692,16 +488,17 @@
       </xsl:if>
 
       <xsl:if test="$StdErr or $MessageErrorInfo">
-        <div class="stacktrace" id="{generate-id($testId)}Stacktrace" style="display:none">
+        <xsl:variable name="trace" select="/t:TestRun/t:Results/t:UnitTestResult[@testId=$testId]/t:Output/t:ErrorInfo/t:StackTrace" />
+        <div class="stacktrace visibleRow" id="{generate-id($testId)}Stacktrace">
           <div id="exceptionArrow">↳</div>
           <table>
-            <!--Inner-->
             <tbody>
               <tr class="visibleRow">
                 <td class="ex">
                   <div class="exScroller">
                     <pre class="exMessage">
-                      <xsl:value-of select="/t:TestRun/t:Results/t:UnitTestResult[@testId=$testId]/t:Output/t:ErrorInfo/t:StackTrace" />
+                      <!-- trim off the first space char -->
+                      <xsl:value-of select="substring($trace,2)" />
                     </pre>
                   </div>
                 </td>

@@ -3,13 +3,18 @@ var myColor = ["#c0eec0", "#fed9d9", "#FBE87E"];//green,red,yellow
 var myStrokeColor = ["#7CCD7C", "#d42945", "#ffcc00"];
 
 function ShowHide(id1, id2, textOnHide, textOnShow) {
-    if (document.getElementById(id1).className == 'visibleRow') {
+    var row = document.getElementById(id1);
+    if (row.classList.contains('visibleRow'))
+    {
         document.getElementById(id2).innerHTML = textOnHide;
-        document.getElementById(id1).className = 'hiddenRow';
+        row.classList.remove('visibleRow');
+        row.classList.add('hiddenRow');
     }
-    else {
+    else
+    {
         document.getElementById(id2).innerHTML = textOnShow;
-        document.getElementById(id1).className = 'visibleRow';
+        row.classList.remove('hiddenRow');
+        row.classList.add('visibleRow');
     }
 }
 
@@ -44,43 +49,6 @@ function GetTotal() {
     }
     return myTotal;
 }
-
-function CreateHorizontalBars(id, totalPass, totalFailed, totalWarn) {
-
-    if (isNaN(totalPass) || isNaN(totalFailed) || isNaN(totalWarn)) {
-        drawLine(30, 4.5, 3, 30.5, id);
-    }
-    var canvas;
-    var ctx;
-    var myArray = new Array(3);
-    myArray[0] = totalPass;
-    myArray[1] = totalFailed;
-    myArray[2] = totalWarn;
-
-    canvas = document.getElementById(id);
-    ctx = canvas.getContext("2d");
-
-    var cw = canvas.width;
-    var ch = canvas.height;
-
-    var width = 6;
-    var currX = -12;
-
-    ctx.translate(cw / 2, ch / 2);
-
-    ctx.rotate(Math.PI / 2);
-
-    ctx.restore();
-
-    for (var i = 0 ; i < myArray.length; i++) {
-        ctx.moveTo(100, 0);
-        ctx.fillStyle = myColor[i];
-        var h = myArray[i];
-        ctx.fillRect(currX, (canvas.height - h) + 25, width, h);
-        currX += width + 1;
-    }
-}
-
 
 
 function CreatePie() {
@@ -168,17 +136,17 @@ var myParsedData = [];
 function CalculateTotalPrecents() {
 
     var totalTests = allPassed + allFailed + allWarns;
-    var passedPrec = (allPassed / totalTests) * 100;
-    var failedPrec = (allFailed / totalTests) * 100;
-    var warnPrec = (allWarns / totalTests) * 100;
+    var passedPct = (allPassed / totalTests) * 100;
+    var failedPct = (allFailed / totalTests) * 100;
+    var warnPct = (allWarns / totalTests) * 100;
 
-    myData.push(passedPrec);
-    myData.push(failedPrec);
-    myData.push(warnPrec);
+    myData.push(passedPct);
+    myData.push(failedPct);
+    myData.push(warnPct);
 
-    myParsedData.push(allPassed + " (" + Math.round(passedPrec).toFixed(2) + "%)");
-    myParsedData.push(allFailed + " (" + Math.round(failedPrec).toFixed(2) + "%)");
-    myParsedData.push(allWarns + " (" + Math.round(warnPrec).toFixed(2) + "%)");
+    myParsedData.push(allPassed + " (" + Math.round(passedPct).toFixed(2) + "%)");
+    myParsedData.push(allFailed + " (" + Math.round(failedPct).toFixed(2) + "%)");
+    myParsedData.push(allWarns + " (" + Math.round(warnPct).toFixed(2) + "%)");
 
     document.getElementById('dataViewer').innerHTML = "<tr class='odd'><td><canvas id='canvas' width='260' height='150'>This text is displayed if your browser does not support HTML5 Canvas.</canvas></td></tr>";
     CreatePie();
@@ -208,12 +176,48 @@ function CalculateTestsStatuses(testContaineId, canvasId) {
     }
 
     var totalTests = totalFailed + totalInconclusive + totalPassed;
-    var passedPrec = (totalPassed / totalTests) * 100;
-    var failedPrec = (totalFailed / totalTests) * 100;
-    var warnPrec = (totalInconclusive / totalTests) * 100;
+    var passedPct = (totalPassed / totalTests) * 100;
+    var failedPct = (totalFailed / totalTests) * 100;
+    var warnPct = (totalInconclusive / totalTests) * 100;
+
+    CreateHorizontalBars(canvasId, passedPct, failedPct, warnPct);
+}
 
 
-    CreateHorizontalBars(canvasId, passedPrec, failedPrec, warnPrec);
+function CreateHorizontalBars(id, totalPass, totalFailed, totalWarn) {
+
+    if (isNaN(totalPass) || isNaN(totalFailed) || isNaN(totalWarn)) {
+        drawLine(30, 4.5, 3, 30.5, id);
+    }
+    var canvas;
+    var ctx;
+    var myArray = new Array(3);
+    myArray[0] = totalPass;
+    myArray[1] = totalFailed;
+    myArray[2] = totalWarn;
+
+    canvas = document.getElementById(id);
+    ctx = canvas.getContext("2d");
+
+    var cw = canvas.width;
+    var ch = canvas.height;
+
+    var width = 6;
+    var currX = -12;
+
+    ctx.translate(cw / 2, ch / 2);
+
+    ctx.rotate(Math.PI / 2);
+
+    ctx.restore();
+
+    for (var i = 0; i < myArray.length; i++) {
+        ctx.moveTo(100, 0);
+        ctx.fillStyle = myColor[i];
+        var h = myArray[i];
+        ctx.fillRect(currX, (canvas.height - h) + 25, width, h);
+        currX += width + 1;
+    }
 }
 
 

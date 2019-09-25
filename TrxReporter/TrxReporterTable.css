@@ -150,6 +150,11 @@ span.traceMessage {
     margin-left: 1.5em;
     color: #999999;
 }
+span.traceError {
+    font-style: italic;
+    margin-left: 1.5em;
+    color: #FF0000;
+}
 
 .Atached {
     width: 30px
