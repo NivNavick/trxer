@@ -1,0 +1,26 @@
+---
+logVerbose: false
+isDotNetCore: true
+solutionName: Trxer
+displayName: TrxerConsole
+hasSubSystemTests: false
+projectsToBuild:
+- projectFile: Trxer.sln
+  buildTool: dotnet
+  arguments: -c Release 
+codeQuality:
+  resharperInspectCode:
+    run: false
+  sonarQube:
+    run: false
+    testRunnerType: vstest
+scan:
+  whiteSource:
+    run: true
+packaging:
+  isReferencePackage: true
+  tool: dotnet
+  configuration: Release
+  fileSpec: src\\*.csproj
+  createSubsysJsonFile: false
+  updateModConfigJsonFile: false
