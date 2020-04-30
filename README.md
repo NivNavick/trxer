@@ -1,75 +1,50 @@
 
-![11910876](https://cloud.githubusercontent.com/assets/11910876/7189304/c483f1b0-e486-11e4-9a95-44a1243fea5d.png)
-<h3>Transforms trx file into html</h3><br/>
-Trxer is a new way to view Trx Reports,all you need is a browser<br/>
-Trxer website: http://wingsrom.ro/trxer/<br/>
+<h2>Transforms trx file into html</h2>
 
-<b>Navigate Easily</b><br/>
-Trxer so friendly UI will make your life easier,much easier.You can navigate through test classed,<br/>
-see outputs,messages,stacktrace,test duration and much more.
+<p>This is a customized fork of Trxer by NivNavick.</p>
 
-<b>Read Clearly</b><br/>
-TRXER html report is eye friendly which means you will understand all you need at one glimpse look.<br/>
-No mess,no misunderstood fonts.
-
-<b>Find Problem Faster</b><br/>
-With our friendly UI, 
-you can watch stacktraces,outputs and messages so you can determine what's the problem as quickly as lightning.<br/>
-
-<b>Using Graphs</b><br/>
-We draw graphs for you so you can see the status of each test class and the total passed,<br/>
-failed and warnings of all tests which you can download and use later.
-
-<b>Colors</b>
-TRXER html report is colorful.<br/>
-Each color:<br/>
 <ul>
-  <li>green</li>
-  <li>red</li>
-  <li>yellow</li>
+  <li>Target .NET Core 3.1</li>
+  <li>Simpler layout</li>
+  <li>Handles output from SpecFlow showing gherkin</li>
+  <li>Handled both images embedded by SpecFlow and embedding external images</li>
+  <li>Click images to show them zoomed in modal dialog</li>
+  <li>Custom title shows Bamboo build directory</li>
 </ul>
-indicate test status and tells you whether test passed,failed or got warned during run.
 
-<b>Images</b><br/>
-assume you have an image to show in the report , just put it's url in the test message,stdout or stderror and<br/>
-Trxer autimatically will show your image in the final html report<br/>
-<br/>
-What you should do is surround the url with Quotes like the folowing:<br/>
-```bash
-"image url here"
-```
+<p>If appropriate Bamboo environment variables are available then the report includes:</p>
 
-![trxdemo2](https://cloud.githubusercontent.com/assets/11910876/7187656/ccb4093a-e47a-11e4-8cb0-7d4ad975d52e.PNG)
+<ul>
+  <li>Bamboo branch name along with build number</li>
+  <li>Branch name is hyperlinked to results URL page</li>
+</ul>
 
-<b>Stacktraces</b><br/>
-Providing a clear view to understand stacktraces:<br/>
-![trxdemo3](https://cloud.githubusercontent.com/assets/11910876/7187675/e637ec96-e47a-11e4-85f9-37c715540706.PNG)
+<p>Example Bamboo environment variables, as PowerShell settings:</p>
 
-<b>Status Bar</b><br/>
-Status bar indicate whether test run has failed or passed
+<ul>
+  <li>$env:bamboo_resultsUrl = 'https://code.company.com/bamboo/browse/APP-CAA-BCE-825';</li>
+  <li>$env:bamboo_planRepository_branchName = 'develop';</li>
+  <li>$env:bamboo_buildNumber = '825';</li>
+</ul>
 
-Outcome=Failed
-![statusbar](https://cloud.githubusercontent.com/assets/11910876/7199615/cdbba732-e4fe-11e4-8a41-78d54233d004.PNG)
+<h2>Usage</h2>
 
-Outcome=Passed
-![statusbarpassed](https://cloud.githubusercontent.com/assets/11910876/7199789/1490669c-e500-11e4-9cc6-c16f74ec9d1c.PNG)
+PS> <b>dotnet .\TrxReporter.dll --input &lt;path-to-trx&gt; [--output &lt;output-path&gt;] [--title &lt;title&gt;]</b>
 
-<b>Supporting Versions</b><br/>
-TRXER supports visual studio 2010 and higher (xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010")<br/>
-but can easily supports lower versions by lowering the '2010' year to whatever you like.
+On Linux, use parameter:value delimeter for example
 
-<b>Supporting Browsers</b><br/>
-Trxer supported by all major browsers that supports Html5 Canvas<br/>
+PS> <b>dotnet .\TrxReporter.dll --input:&lt;path-to-trx&gt; [--output:&lt;output-path&gt;] [--title:&lt;title&gt;]</b>
 
-<b>Usage</b><br/>
-Trxer is an EXE file.<br/>
-Trxer.exe <file.trx><br/>
-The output will be at the trx folder under the name "file.trx.html"<br/>
+<ul>
+--input path can be absolute or relative
 
-```bash
-TrxerConsole.exe <TRX file>
-```
 
-This is how it looks like
+--output path can be a directory or file, absolute or relative. If no filename is specified then the .trx filename is used.
 
-![alt tag](https://cloud.githubusercontent.com/assets/11910876/7106811/6332ee2a-e157-11e4-94cf-bf3683ca545d.PNG)
+--title of the report, default is "Testing Report"
+</ul>
+
+<h3>Original Trxer</h3>
+<p>TrxerConsole: https://github.com/NivNavick/trxer/tree/master/TrxerConsole</p>
+
+

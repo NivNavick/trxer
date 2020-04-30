@@ -1,0 +1,377 @@
+
+/* Elements  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+
+html, pre {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font: 14px/18px "Trebuchet MS",Verdana,Arial,Helvetica,sans-serif;
+    margin: 0px 0px 0px 0px;
+    padding: 0px;
+    min-width: 890px;
+}
+
+footer {
+    color: #6c7e8e;
+    font: 12px/14px "Trebuchet MS",Verdana,Arial,Helvetica,sans-serif;
+    letter-spacing: .15em;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+img {
+    border: 0;
+    margin-top: .5em;
+}
+
+a:link {
+    color: #d42945;
+    text-decoration: none;
+    border-bottom: 1px dotted #ffbac8;
+}
+
+a:visited {
+    color: #d42945;
+    border-bottom: none;
+    text-decoration: none;
+}
+
+a:hover,
+a:focus {
+    color: #f03b58;
+    border-bottom: 1px solid #f03b58;
+    text-decoration: none;
+}
+
+/* TitleBar  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+
+.titleBar {
+    margin-top: 20px;
+    width: 100%;
+    height: 75px;
+}
+
+    .titleBar.passed {
+        background-color: #5bab5b;
+    }
+
+        .titleBar.passed > div {
+            background-color: #339833;
+        }
+
+    .titleBar.failed {
+        background-color: #b93333;
+    }
+
+        .titleBar.failed > div {
+            background-color: #a90000;
+        }
+
+    .titleBar.completed {
+        background-color: #d5bb2b;
+    }
+
+        .titleBar.completed > div {
+            background-color: #b59b0c;
+        }
+
+    .titleBar > div {
+        position: relative;
+        top: 8px;
+        width: 100%;
+        height: 55px;
+        display: inline-block;
+        text-align: center;
+        vertical-align: top;
+        padding-top: 5px;
+        color: white;
+        font-size: 25px;
+        font-weight: bold;
+        line-height: 25px;
+        text-shadow: 1px 1px 1px #194c19;
+    }
+
+        .titleBar > div > span.subtitle {
+            font-size: 16px;
+            margin-top: 4px;
+            margin-bottom: 2px;
+        }
+
+/* Summary - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+
+.summaryWrapper {
+    width: 90%;
+    margin: 1em auto;
+}
+
+    .summaryWrapper > div {
+        float: left;
+        margin-right: 40px;
+        vertical-align: top;
+    }
+
+
+/* Informational Table - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+
+table.info {
+    width: 95%;
+    margin: 1em auto;
+    border-collapse: collapse;
+    border: 1px solid #a2caf2;
+}
+
+    table.info > caption {
+        caption-side: top;
+        color: #9ba9b4;
+        font-size: 16px;
+        letter-spacing: .2em;
+        margin: 1em 0 0 0;
+        padding: 0;
+        text-align: center;
+        font-weight: normal;
+        border-top: 1px solid #a2caf2;
+        border-left: 1px solid #a2caf2;
+        border-right: 1px solid #a2caf2;
+    }
+
+    table.info > thead > tr > th {
+        background: #dbedff;
+        border-left: 1px solid #a2caf2;
+        border-top: 1px solid #a2caf2;
+        text-align: center;
+        color: #66a3d3;
+        font: 1.2em/2em "Century Gothic","Trebuchet MS",Arial,Helvetica,sans-serif;
+        font-weight: normal !important;
+        padding: .2em 1em;
+    }
+
+    table.info > tbody > tr > th {
+        background: #dbedff;
+        border-top: 1px solid #a2caf2;
+        color: #678197;
+        font-weight: normal;
+        text-align: left;
+        white-space: nowrap;
+        padding: .3em 1em;
+    }
+
+    table.info > tbody > tr > td {
+        color: #425b71;
+        text-align: left;
+        padding: .3em 1em;
+        border-left: 1px solid #a2caf2;
+        border-top: 1px solid #a2caf2;
+        word-wrap: break-word;
+    }
+
+/* Scenario Table  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+
+table.section {
+    margin-top: 40px !important;
+}
+
+th.section {
+    background-color: #fffadd !important;
+    font-weight: bold !important;
+}
+
+td.scenario {
+    font-weight: bold;
+}
+
+    td.scenario .counts {
+        float: right;
+        width: 40%;
+        font-weight: normal;
+    }
+
+    td.scenario .failed {
+        color: #d42945 !important;
+    }
+
+    td.scenario .passed {
+        color: #58ba58 !important;
+    }
+
+td.statusGraph {
+    width: 100px;
+}
+
+td.info {
+    color: #c7c7c7 !important;
+    background: #e0e0e0;
+    font-weight: bold;
+}
+
+td.failed {
+    color: #d42945 !important;
+    background: #fed9d9;
+    font-weight: bold;
+}
+
+td.passed {
+    color: #58ba58 !important;
+    background: #c0eec0;
+    font-weight: bold;
+}
+
+td.warn {
+    color: #E4C100 !important;
+    background: #FBE87E;
+    font-weight: bold;
+}
+
+.hiddenRow {
+    display: none;
+    visibility: hidden;
+}
+
+.visibleRow {
+    visibility: visible;
+}
+
+span.twister {
+    color: #678197;
+    font-size: larger;
+    margin-right: 5px;
+}
+
+span.featureHead {
+    cursor: pointer;
+    padding-right: 20px;
+}
+
+    span.featureHead:hover {
+        color: #1b99fb;
+    }
+
+td.messages {
+    text-align: left;
+    word-wrap: break-word;
+    max-width: 600px;
+    font-size: 14px;
+}
+
+span.traceMessage {
+    font-style: italic;
+    margin-left: 1.5em;
+    color: #999999;
+}
+
+span.traceError {
+    font-style: italic;
+    margin-left: 1.5em;
+    color: #FF0000;
+}
+
+div.errorMessage {
+    color: #c71010;
+    font-style: italic;
+    display: inline;
+}
+
+div.exceptionScroller {
+    width: calc(100% - 50px);
+    overflow-x: scroll;
+    margin: 1em auto;
+    border: 1px solid #a2caf2;
+}
+
+pre.exception {
+    font-size: 13px !important;
+    color: #800000;
+}
+
+div.toggler {
+    color: #9bafc0;
+    font-size: 14px;
+    font-weight: normal;
+    font-family: "Trebuchet MS", Arial, Arial, Helvetica, sans-serif;
+    width: 100px;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+    float: right;
+}
+
+    div.toggler:hover {
+        color: #f03b58;
+        text-decoration: underline;
+    }
+
+/* PictureBox  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+
+#pictureBox,
+div.pictureBox {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    padding-top: 50px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.8);
+}
+
+    div.pictureBox > img {
+        margin: auto;
+        display: block;
+        width: 94%;
+        max-width: 2000px;
+        animation-name: zoom;
+        animation-duration: 0.5s;
+    }
+
+@keyframes zoom {
+    from {
+        transform: scale(0)
+    }
+
+    to {
+        transform: scale(1)
+    }
+}
+/* 100% Image Width on Smaller Screens */
+@media only screen and (max-width: 700px) {
+    .modal-content {
+        width: 100%;
+    }
+}
+
+/* General - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+
+.centered {
+    text-align: center !important;
+}
+
+.left {
+    text-align: left !important;
+}
+
+.nowrap {
+    white-space: nowrap;
+}
+
+
+div.dropArrow {
+    float: left;
+    font-size: 20px;
+}
+
+div.wrapper {
+    width: auto;
+    margin: 0px 0px 0px 0px;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#summaryGraph {
+    width: 250px;
+}
