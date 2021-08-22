@@ -23,8 +23,8 @@ jobs:
       run: |
         msbuild /p:configuration=Release /p:DeployExtension=false /p:ZipPackageCompressionLevel=normal /v:m
         
-    - name: create artifact 'TrxerConsole'
+    - name: create artifact
       uses: actions/checkout@v2
       with:
-        name: TrxerConsole
+        name: trxer-console
         path: ${{ github.workspace }}\TrxerConsole\bin\Release\TrxerConsole.exe
