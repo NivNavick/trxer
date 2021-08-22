@@ -12,10 +12,10 @@ jobs:
       with:
         fetch-depth: 0
 
-    - name: nuget restore
+    - name: Nuget Restore
       run: nuget restore -Verbosity quiet
 
-    - name: setup-msbuild
+    - name: Setup-MSBuild
       uses: microsoft/setup-msbuild@v1
 
     - name: Build
@@ -23,8 +23,9 @@ jobs:
       run: |
         msbuild /p:configuration=Release /p:DeployExtension=false /p:ZipPackageCompressionLevel=normal /v:m
         
-    - name: upload artifact
+    - name: Upload Artifact
       uses: actions/upload-artifact@v2
       with:
         name: trxer-console
         path: ${{ github.workspace }}\TrxerConsole\bin\Release\TrxerConsole.exe
+        retention-days: 90
