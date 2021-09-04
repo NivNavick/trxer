@@ -1,4 +1,4 @@
-name: CI/SCHEDULE
+name: CI/SCHEDULE/MANUAL TRIGGER
 
 on: 
   push:
@@ -7,6 +7,7 @@ on:
     branches: [ master ]
   schedule:
     - cron:  '0 0 1 */3 *'
+  workflow_dispatch:
 
 jobs:
   build:
