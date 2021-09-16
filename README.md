@@ -2,6 +2,8 @@
 ![11910876](https://cloud.githubusercontent.com/assets/11910876/7189304/c483f1b0-e486-11e4-9a95-44a1243fea5d.png)
 <h3>Transforms trx file into html</h3><br/>
 
+[![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
+
 ![qtest-mstest-parser](https://github.com/abhinavminhas/trxer/actions/workflows/main.yml/badge.svg)
 ![maintainer](https://img.shields.io/badge/Maintainer-abhinavminhas-e65c00)
 
