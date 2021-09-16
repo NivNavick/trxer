@@ -1,4 +1,5 @@
-name: CI/SCHEDULE/MANUAL TRIGGER
+#CI/SCHEDULE/MANUAL TRIGGER
+name: Build
 
 on: 
   push:
