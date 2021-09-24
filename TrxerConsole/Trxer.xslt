@@ -523,16 +523,16 @@
       <xsl:variable name="MessageErrorInfo" select="trxreport:ExtractImageUrl(t:ErrorInfo/t:Message)"/>
       <xsl:choose>
         <xsl:when test="$MessageErrorStacktrace">
-          <div class="atachmentImage" onclick="show('floatingImageBackground');updateFloatingImage('{$MessageErrorStacktrace}');"></div>
+          <div class="attachmentImage" onclick="show('floatingImageBackground');updateFloatingImage('{$MessageErrorStacktrace}');"></div>
         </xsl:when>
         <xsl:when test="$StdOut">
-          <div class="atachmentImage" onclick="show('floatingImageBackground');updateFloatingImage('{$StdOut}');"></div>
+          <div class="attachmentImage" onclick="show('floatingImageBackground');updateFloatingImage('{$StdOut}');"></div>
         </xsl:when>
         <xsl:when test="$StdErr">
-          <div class="atachmentImage" onclick="show('floatingImageBackground');updateFloatingImage('{$StdErr}');"></div>
+          <div class="attachmentImage" onclick="show('floatingImageBackground');updateFloatingImage('{$StdErr}');"></div>
         </xsl:when>
         <xsl:when test="$MessageErrorInfo">
-          <div class="atachmentImage" onclick="show('floatingImageBackground');updateFloatingImage('{$MessageErrorInfo}');"></div>
+          <div class="attachmentImage" onclick="show('floatingImageBackground');updateFloatingImage('{$MessageErrorInfo}');"></div>
         </xsl:when>
       </xsl:choose>
 

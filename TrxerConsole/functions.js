@@ -1,4 +1,3 @@
-
 var myColor = ["#c0eec0", "#fed9d9", "#FBE87E"];//green,red,yellow
 var myStrokeColor = ["#7CCD7C", "#d42945", "#ffcc00"];
 
@@ -24,6 +23,7 @@ function show(id) {
     document.getElementById(id).style.visibility = "visible";
     document.getElementById(id).style.display = "block";
 }
+
 function hide(id) {
 
     document.getElementById(id).style.visibility = "hidden";
@@ -46,7 +46,6 @@ function GetTotal() {
 }
 
 function CreateHorizontalBars(id, totalPass, totalFailed, totalWarn) {
-
     if (isNaN(totalPass) || isNaN(totalFailed) || isNaN(totalWarn)) {
         drawLine(30, 4.5, 3, 30.5, id);
     }
@@ -80,8 +79,6 @@ function CreateHorizontalBars(id, totalPass, totalFailed, totalWarn) {
         currX += width + 1;
     }
 }
-
-
 
 function CreatePie() {
     var canvas;
@@ -158,13 +155,10 @@ function CreateText() {
 var allPassed = 0;
 var allFailed = 0;
 var allWarns = 0;
-
 var myData = [];
-
 var myParsedData = [];
 
 function CalculateTotalPrecents() {
-
     var totalTests = allPassed + allFailed + allWarns;
     var passedPrec = (allPassed / totalTests) * 100;
     var failedPrec = (allFailed / totalTests) * 100;
@@ -209,10 +203,5 @@ function CalculateTestsStatuses(testContaineId, canvasId) {
     var passedPrec = (totalPassed / totalTests) * 100;
     var failedPrec = (totalFailed / totalTests) * 100;
     var warnPrec = (totalInconclusive / totalTests) * 100;
-
-
     CreateHorizontalBars(canvasId, passedPrec, failedPrec, warnPrec);
 }
-
-
-
