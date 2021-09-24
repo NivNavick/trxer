@@ -10,18 +10,18 @@ namespace TrxerConsole
     class Program
     {
         /// <summary>
-        /// Embedded Resource name
+        /// Embedded resource name.
         /// </summary>
         private const string XSLT_FILE = "Trxer.xslt";
         /// <summary>
-        /// Trxer output format
+        /// Trxer output format.
         /// </summary>
         private const string OUTPUT_FILE_EXT = ".html";
 
         /// <summary>
-        /// Main entry of TrxerConsole
+        /// Main entry of TrxerConsole.
         /// </summary>
-        /// <param name="args">First cell shoud be TRX path</param>
+        /// <param name="args">First cell shoud be TRX path.</param>
         static void Main(string[] args)
         {
             if (args.Any() == false)
@@ -34,10 +34,10 @@ namespace TrxerConsole
         }
 
         /// <summary>
-        /// Transforms trx int html document using xslt
+        /// Transforms .trx into .html document using xslt.
         /// </summary>
-        /// <param name="fileName">Trx file path</param>
-        /// <param name="xsl">Xsl document</param>
+        /// <param name="fileName">Trx file path.</param>
+        /// <param name="xsl">Xsl document.</param>
         private static void Transform(string fileName, XmlDocument xsl)
         {
             XslCompiledTransform x = new XslCompiledTransform(true);
@@ -48,9 +48,9 @@ namespace TrxerConsole
         }
 
         /// <summary>
-        /// Loads xslt form embedded resource
+        /// Loads xslt form embedded resource.
         /// </summary>
-        /// <returns>Xsl document</returns>
+        /// <returns>Xsl document.</returns>
         private static XmlDocument PrepareXsl()
         {
             XmlDocument xslDoc = new XmlDocument();
@@ -62,9 +62,9 @@ namespace TrxerConsole
         }
 
         /// <summary>
-        /// Merges all javascript linked to page into Trxer html report itself
+        /// Merges all javascript linked to page into Trxer html report itself.
         /// </summary>
-        /// <param name="xslDoc">Xsl document</param>
+        /// <param name="xslDoc">Xsl document.</param>
         private static void MergeJavaScript(XmlDocument xslDoc)
         {
             Console.WriteLine("Loading javascript...");
@@ -76,9 +76,9 @@ namespace TrxerConsole
         }
 
         /// <summary>
-        /// Merges all css linked to page ito Trxer html report itself
+        /// Merges all css linked to page ito Trxer html report itself.
         /// </summary>
-        /// <param name="xslDoc">Xsl document</param>
+        /// <param name="xslDoc">Xsl document.</param>
         private static void MergeCss(XmlDocument xslDoc)
         {
             Console.WriteLine("Loading css...");
