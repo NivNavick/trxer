@@ -1,0 +1,46 @@
+name: Release
+
+env:
+    RELEASE_NAME: "v.1.0.1.0"
+    RELEASE_NOTES: |
+      - Green header status bar for all passed tests result file fix
+    
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    build:
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+
+    - name: Nuget Restore
+      run: nuget restore -Verbosity quiet
+
+    - name: Setup-MSBuild
+      uses: microsoft/setup-msbuild@v1
+
+    - name: Build
+      id: build
+      run: |
+        msbuild /p:configuration=Release /p:DeployExtension=false /p:ZipPackageCompressionLevel=normal /v:m
+    
+    - name: Archive Release
+      uses: thedoctor0/zip-release@master
+      with:
+        type: 'zip'
+        filename: 'trxer-console.zip'
+        path: ${{ github.workspace }}\TrxerConsole\bin\Release\TrxerConsole.exe
+        
+    - name: Upload Release
+      uses: ncipollo/release-action@v1
+      with:
+        tag: ${{ env.RELEASE_NAME }}
+        body: ${{ env.RELEASE_NOTES }}
+        draft: false
+        prerelease: false
+        artifacts: "trxer-console.zip"
+        token: ${{ secrets.GITHUB_TOKEN }}
