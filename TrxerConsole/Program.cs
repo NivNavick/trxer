@@ -7,12 +7,13 @@ using System.Xml.Xsl;
 
 namespace TrxerConsole
 {
-    class Program
+    internal class Program
     {
         /// <summary>
         /// Embedded Resource name
         /// </summary>
         private const string XSLT_FILE = "Trxer.xslt";
+
         /// <summary>
         /// Trxer output format
         /// </summary>
@@ -22,13 +23,20 @@ namespace TrxerConsole
         /// Main entry of TrxerConsole
         /// </summary>
         /// <param name="args">First cell shoud be TRX path</param>
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
+#if !DEBUG
             if (args.Any() == false)
             {
                 Console.WriteLine("No trx file,  Trxer.exe <filename>");
                 return;
             }
+#else
+            {
+                args = new[] { @"C:\Enginerd\Dev\enginerd\trxer\Examples\xunit-test-run-example.trx" };
+            }
+            #endif
+
             Console.WriteLine("Trx File\n{0}", args[0]);
             string outputFilePath;
             if (args.Length == 2)
