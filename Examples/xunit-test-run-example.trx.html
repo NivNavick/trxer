@@ -1,0 +1,2234 @@
+﻿<!DOCTYPE html><html xmlns:t="http://microsoft.com/schemas/VisualStudio/TeamTest/2010" xmlns:trxreport="urn:my-scripts">
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta charset="utf-8">
+    <style>
+.wrapOverall {
+    width: auto;
+    margin: -8px 0px 0px 0px;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+      min-width: 920px;
+}
+
+.hWhite {
+    color: white;
+}
+
+.titleCenterd {
+    position: relative;
+    top: 12px;
+}
+
+.StatusesBorders {
+    border-width: 0;
+    border-right: 1px solid;
+    border-left: 1px solid;
+    width: 100px;
+}
+
+.PackageStatus {
+    width: 100px;
+}
+
+#OptionsDiv {
+    width: 100%;
+    height: 100px;
+    background-color: rgb(245, 244, 242);
+    position: absolute;
+}
+
+.SummaryTable {
+    width: auto;
+    max-width: 407px;
+    float: left;
+    margin-right: 20px;
+}
+
+.SummaryTable td {
+        text-align: left;
+}
+
+#divToRefresh > div > table.SummaryTable > tbody > tr > th {
+    width: auto;
+}
+
+.DetailsTable {
+    width: auto;
+    max-width: 407px;
+    float: left;
+    margin-right: 20px;
+    text-align: left;
+    word-wrap: break-word;
+}
+
+.StatusesTable {
+    width: auto;
+}
+
+#divToRefresh > div.SummaryDiv > table.DetailsTable > tbody > tr > td {
+    text-align: left;
+    word-wrap: break-word;
+}
+
+#divToRefresh > div.SummaryDiv > table.DetailsTable > tbody > tr > th {
+    width: 30px;
+}
+
+#TotalTestsTable {
+    min-width: 250px;
+    width: auto;
+    float: left;
+    margin-right: 20px;
+}
+
+.SummaryDiv {
+    width: 90%;
+    margin: 1em auto;
+    border-collapse: collapse;
+}
+
+.Summary {
+    float: left;
+    border-collapse: collapse;
+}
+
+.Atached {
+    width: 30px;
+}
+
+.column1 {
+    background: rgb(245, 244, 242);
+    width: 170px;
+}
+
+.column1Failed {
+    background: #d8534f;
+    width: 30px;
+}
+
+#ReportsTable > tbody > tr > th {
+    background: #E8E8E8;
+    width: 170px;
+}
+
+#dataViewer {
+    width: 240px;
+}
+
+.hiddenRow {
+    display: none;
+    visibility: hidden;
+}
+
+.visibleRow {
+    visibility: visible;
+}
+
+.atachmentImage {
+    float: right;
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    background-size: 20px 20px;
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAEI0lEQVRYhe2WX0hsRRzHv3Nm5/zbI2qwbCiIhm0oFKqJhioBAoIvQosgKSDdS08GCFx6qTTwrcIltDXC7ksokCQEV8QwiGhfWo0sMA1FvDf1cq+qW1zdc85MLzvb7LoW3Kz74g+GM+f3m5nv5/x+M8MBru3anrCRywKU0iIAJgDX9/3j/w8JgGmanYyxn3Vd/4Uxtm4Yxqv/lZZWyBkKhV6zLCtg2zZs2yaGYdxoaGi4NFv/xnIWtSzrGdM032aMvUgpZYFAAL7vI51Oc9d1H5yfn8P3/ccWE0LcB/C+53nfFQRwHOdLxljEsiyYpgkFAGdnZ/A8D5zzxxWH7/vwff+PsrKyl7e2tk4BpQQTExNBSmlE13UYhgHGGCilYIxB13VYlgXbthEMBv+22bYtSktLzx3H4er4TDlhGEawt7f3OambBaipqTECgQB0XQelNEsthABjzF1YWPjAtm3XMAyYppnTDMOA4zje8PDwUjKZfHd7e/vWxsbGm5OTk59VVlYeyTmGYUDXddTV1RlSNyA7lFKiaRoIIRBCgHOeBaCUurW1tcuapr1OCGGEEBBCspCapvlTU1Mft7e3f7W5ubm3srJilpSUPOrs7Pyxra3th2g0emt3dzdEKYWmadC0v/b+hVMga+V5XvaZTqcFgKN0Oi183wfnXNYTnuchGo1+29zc/MX4+PhxV1fX1MDAwNc9PT13BgcHq05OTr4ZGRm5LfePECJHT1OFOedZYbm467pwXRcAsn0VznVddHd330kkEvfi8fhbh4eHL2Q27lNLS0vvxeNx0dLSsug4zkkhiJwMSAg1A7IByHn3PC8LYNv2r7Ztk1Qq9bymaaCUghACznkwHA5Hjo+PHxYXFz8sdIpyANTU5vfz4yrk8vJycSgUoq2trduyxpRSBIPBR9Fo9P7BwYG3t7dXqu6rgiWQTQrlT5B9GZPxubm5rmQy6cdisU+bmpq2AYhwOHwyPT39iRDiMBaLvXR0dFQq11YtoL6oAPm+y/pCCKytrb0yPj6+XF1d/f3i4uJoKpUKBYPB309PTzdGR0et+fn5d/JPVkEA+VXqMVFh8uPKYnR1dfXDvr6+2/39/XONjY0/7e/vm7Ozsx2JROINzvnTlNILH5cDIIOSUt4HGT9LJpMVruvqcqwaBwBCCNvZ2bk5NjZ2E4CbWZsQQrLA/5gBCSEvGiXNekdHx4z0519Eqi8znsm46s/PaA6AZVlCFVeh8p9qXDVVVBVXy5W5ObNzsr1IJOJWVVXdk2VQy5Hf8scUuuEKlZZzDl3Xz+vr63+7kIGioqL0zMzMR0NDQzfW19dDQogr/wEpLy8/HRsb+7yiouKB9OWIcM5DhJBnAThXLZ6xMyHENoC7mqaJCwAAIIRgyNucV2g+AJcQUrhe13ZtT8L+BBA9B35dQKL8AAAAAElFTkSuQmCCMTExNg==');
+}
+</style>
+    <style>
+tr.odd .column1 {
+    background: rgb(245, 244, 242);
+}
+
+tr.odd.column1Failed {
+    background: #a90000;
+    width: 30px;
+}
+
+tr.odd.column1Warn {
+    background: #efac4e;
+    width: 30px;
+}
+
+tr.odd.column1Passed {
+    background: #339833;
+    width: 30px;
+}
+
+tr.odd td, tr.sep td {
+    background: #FFFFFF;
+}
+
+tr.odd .ex,
+tr.sep .ex,
+td.ex {
+    text-align: left;
+    width: 100px;
+}
+
+th.statusCount,
+td.statusCount {
+    width: auto;
+}
+
+td.slowest {
+    width: auto;
+}
+
+td.Message {
+    text-align: center;
+    width: auto;
+    word-wrap: break-word;
+}
+
+td.TestsCount {
+    text-align: left;
+    width: auto;
+    word-wrap: break-word;
+}
+
+td.Messages {
+    text-align: left;
+    width: auto;
+    word-wrap: break-word;
+    max-width: 550px;
+}
+
+td.Function {
+    text-align: left;
+}
+
+td.outcomeMessage {
+    max-width: 240px;
+}
+
+tr.odd .failed,
+tr.sep.failed,
+td.failed,
+tr.odd .info,
+td.info,
+tr.sep .info,
+tr.odd .passed,
+tr.sep.passed,
+tr.odd .warn,
+tr.sep .warn,
+td.warn,
+td.passed {
+    width: 90px;
+    text-align: left;
+}
+
+thead th.TestsTable {
+    font-size: 17px;
+    font-weight: normal;
+}
+
+td.testOutputs {
+    border-top: none;
+}
+
+td.testOutputsTitle {
+    color: black;
+    font-weight: bold;
+    text-align: left;
+    border: 1px solid rgb(221, 221, 221);
+}
+</style>
+    <style>.stacktraceButton {
+    float: right;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    background-size: 20px 20px;
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgBAMAAACBVGfHAAAAKlBMVEUAAAD///8zMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzPvyKPfAAAADXRSTlMAABAgQFBgcICfr9/vtzdzsgAAAGtJREFUeF5jEEQDxAgIMMy9CwU3GRhBAhx34aABLKCDEDgAFshFCFwDC6xFCNwCCQjfRQKGQAFxZIFCoIA0ssBGoICoCxIIBArI3EUCB4ECsgiBKXMvogo4+CIEECowzRBwQQKKQ9kWMiIbAEM6BpTw/0DnAAAAAElFTkSuQmCCMjQz');
+}
+
+.stdErrButton {
+    float: right;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    background-size: 20px 20px;
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAM1BMVEUAAAD///8zMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzN/h6ohAAAAEHRSTlMAABAgMEBQYHCAj5+/z9/vnfKkYwAAALhJREFUeF7F00EWgyAMBNA0CEjFkPuftqVktDyh3bWzkcUHnfCk25f8CNCZWEqkMxcQ9JnwAUgFMgdJX0kzwKWBwhOwqWUbg6VuDqEeswxBrg1akzwCsTbwRL4+4xWwWIG1AuELSPi8O6r2wLWKmSi3qq4DZ0Wigqod8Gphwsp3YAdYV4D9HUQdJB4Al4BJYs0AuEVMEkkATsdAnYENAK9ANgNFJykGZAbEgJ8I8WhB7AdhzOHv/+YDc5kW7iYSK0MAAAAASUVORK5CYIIzMzI=');
+}
+
+.stdOutButton {
+    float: right;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    background-size: 20px 20px;
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAANlBMVEUAAAD///8zMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzOMbOi1AAAAEXRSTlMAABAgMEBQYHCAj5+vv8/f7/4ucL8AAACkSURBVHhezdNLDoQgFERRmv/fV/vfbFsJA21BR514xycVEkB9HnoLUItE7oEF1kD7IlgCEyvYHLjcsbdlPwE6cBhSg9npLzCxcbUlS3sCIvvwxt3iNY/vU2lyOAMg3I3GuJgbJTsBtJJqx+gKRn8EIib2O6CYyf0eWBjurEHayGgWIMBS1EQzA6qjBu3gx84VqFABFNphJtftLOXIDPD8aN//9b63QxX+eM9C6AAAAABJRU5ErkJggjMxNg==');
+}
+
+.descriptionButton {
+    float: right;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    background-size: 20px 20px;
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAA7EAAAOxAGVKw4bAAADmklEQVRYw9WXz2sbRxTHvyOv17OLba1A/gFybSN5Y+TFLvGSlKSlOTSH/gXpqT/xPdCeSuNTIKekJXeTQwIt/Q9y6KEpSQoJCkTrlS2tpSDHptCorCpttdKupOkhkpAUau3KKqXvpDfoMZ998+b73gD/sRG/AbIsR0RRPM9xXAxAqLVs1uv1rG3bTzKZzPHIAWRZDk5PT28B+ATA+glxDIAG4K5lWTvpdPrPUwEsLS2NhcPhqwC2AUg+k1UEcN00zdu5XK7hG0BRlAil9EcA757ymB/XarUru7u7x54B1tfXz/A8/xOAt0ZUay9d172cTCYzAwHW1tYigiD8OsLNOxC1Wu1CfyZ6ABYXF8dmZmYe+Ei75jjOlmVZL0Kh0EeEkO8AcCf8/5Fpmpe6a6IHYHNz80tCyC2vn+Q4jqpp2rO2r6rqHQCfDwj7KpFIfNt2OrQrKytBQsi2n5w2Go1C39IfHsK2V1dX76TT6WIPQOue+7pqgiDckGX5C8MwnI2NDQXAZx7CpMnJyS0AN3uOQFXV5wA2hiiuVwB+A7A24Py7LZlIJN7uAMRisYgkSS+HkeYhjZXL5cVMJnPEtVJ53uPmDMBDxtgP5XL5geu65WAweJbjuFsAVvy0AEEQzgF4DTA+Ph7zqmoAvnZdd8wwjFT7fiuK8oJSmvSTglYze31mgUAg5DHuIoCHPM8jHo+/t7e39wgAdF3XVFV1AYz7YAjBR9G8oRuMMaf9e3l5Oehzc/ToQLPZNAOBgJ+4v2zbft52pqamLg6xt9kBcBwnSyn1E/xzPp/vZIDn+Q/97l6v17MdANu2n1BKmddryBi737fkF4BVKpWnHYBcLnesqqrmVYgqlcr9LglfBiD7BNAMwzjqKULG2F1CyE0PwYX9/f2DtkMpfWcIAbv3RjMqFos7oVDomod+8HufT/uEahBMsVQq7ZymHdvVanVJ1/VXADA/P8+Fw+FLExMTJQDfe1DEnnbcA7CwsDA2Nzf3S0twTrJnjUbjG8uyUhzHTYmi+AEh5FMAZwdk4HGhUHg/n883/nEki8fjEVEU/5WRrFqtXtB1/XjgUKooyhlK6UiHUsdxLmuaNngo7cvESMZy27avpFIp72N5d03Mzs5ebY1qvh8mjLHrhULh9uHhof+HSbdFo1FJkqQtQsjHXp5mjLF7pVJp5+DgoDjyx2k0Gl0QBOEcz/OxdhtvNpum67pZ27afZrPZI/yf7G9FM1Sc/Jx6qQAAAABJRU5ErkJggjEwMDA=');
+}
+
+.testBaseActionButton {
+    float: right;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    background-size: 20px 20px;
+}
+
+.OpenMoreButton {
+    height: auto;
+    width: 200px;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+    color: #1b99fb;
+    background-color: white;
+    border: 1px solid #7ac5ff;
+    float: right;
+}
+
+.OpenStacktraceButton {
+    height: auto;
+    width: 200px;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+    color: #1b99fb;
+    background-color: white;
+    border: 1px solid #7ac5ff;
+    float: right;
+}
+
+.OpenMoreButton:hover {
+    background-color: #bfe3ff;
+    text-decoration: none;
+}
+
+#btn-download {
+    font-size: 14px;
+}
+
+
+#MoreButtonText {
+    color: #1b99fb;
+    top: 0;
+    left: 25px;
+    font-weight: normal;
+    text-align: center;
+    font-size: 15px;
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+}
+</style>
+    <style>#floatingImageDock {
+    background-color: #000000;
+    height: 60px;
+    width: 100%;
+    top: 0px;
+    position: absolute;
+}
+
+#floatingGrayBackground {
+    background-color: #000000;
+    opacity: 0.8;
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    float: left;
+    width: 100%;
+    height: 100%;
+    display: none;
+    z-index: 1;
+}
+
+
+#leftButton {
+    float: left;
+    position: fixed;
+}
+
+#imageViewTable {
+    border: none;
+}
+
+.arrowCell {
+    width: 40px;
+}
+
+#rightBtton img {
+    float: right;
+    position: fixed;
+}
+
+img.displayed {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+
+.floatingImageCloseButton {
+    color: white;
+    font-size: 30px;
+    width: 40px;
+    height: 40px;
+    margin-top: -20px;
+    text-align: center;
+    cursor: pointer;
+    float: right;
+    background-repeat: no-repeat;
+}
+
+#floatingImageTitle {
+    color: white;
+    font-size: 20px;
+    text-align: center;
+    margin-top: 20px;
+    float: inherit;
+    margin-left: auto;
+    margin-right: auto;
+    top: 50%;
+    left: 50%;
+}
+
+
+#floatingImageBackground {
+    /* TODO set a width and height here */
+    visibility: hidden;
+}
+
+#wrapperView {
+    position: absolute;
+    left: 50%;
+    top: 50%; /*move the object to the center of the parent object*/
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    /*these 5 settings change the base (or registration) point of the wrapper object to it's own center - so we align child center with parent center*/
+}
+
+
+
+
+
+.closeImageViewButton {
+    float: right;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    width: 90%;
+}
+
+
+#leftArrow {
+    width: 41px;
+    height: 74px;
+    cursor: pointer;
+    background-size: 41px 74px;
+    background-image: url('data:image/png;base64,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');
+}
+
+#rightArrow {
+    width: 41px;
+    height: 74px;
+    cursor: pointer;
+    background-size: 41px 74px;
+    background-image: url('data:image/png;base64,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');
+}
+
+div#navigation {
+    position: fixed;
+    width: 100%;
+    z-index: 100;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+    div#navigation table {
+        width: auto;
+        border: none;
+        border-top: none;
+    }
+
+        div#navigation table td {
+            border-top: none;
+        }
+
+    div#navigation table {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+.overFlowImage {
+    width: 100%;
+    position: relative;
+    display: inline-block;
+    /* overflow: hidden; */
+}
+
+    .overFlowImage img {
+        /* position: absolute; */
+        /* top: 50%; */
+        /* min-height: 100%; */
+        /* display: block; */
+        /* left: 50%; */
+        /* -webkit-transform: translate(-50%, -50%); */
+        /* min-width: 100%; */
+        width: 100%;
+        height: 100%;
+        max-width: 80%;
+    }
+</style>
+    <style>
+.alert-status-failed {
+    background-color: #f2dede;
+    color: #a94442;
+    border: 1px solid rgb(221, 221, 221);
+    border-top: none;
+    text-align: left;
+    max-width: 30px;
+}
+
+.alert-status-out {
+    background-color: #d8f2ff;
+    color: #4f8fae;
+    border: 1px solid rgb(221, 221, 221);
+    border-top: none;
+    text-align: left;
+    max-width: 30px;
+}
+
+.alert-status-err {
+    background-color: #ffeea4;
+    color: #c6a71d;
+    border: 1px solid rgb(221, 221, 221);
+    border-top: none;
+    text-align: left;
+    max-width: 30px;
+}
+
+
+.alert-status-description {
+    background-color: #71dfa2;
+    color: #218c51;
+    border: 1px solid rgb(221, 221, 221);
+    border-top: none;
+    text-align: left;
+    max-width: 30px;
+}
+
+.Tag {
+    display: inline;
+    padding-left: 3px;
+    padding-right: 3px;
+    margin-right: 4px;
+    text-align: center;
+    margin-bottom: 2px;
+    line-height: 27px;
+    height: auto;
+}
+
+.NumberTag {
+    color: #678197;
+    border: 1px solid #78bcff;
+    border-radius: 8px;
+}
+
+.StatusTag {
+    color: white;
+    font-size: 100%;
+    background-color: #ffffff;
+    border-radius: .25em;
+}
+
+.NumberTagRed {
+    background-color: #d8534f;
+}
+
+.NumberTagGreen {
+    background-color: #5bab5b;
+}
+
+.NumberTagYellow {
+    background-color: #efac4e;
+}
+
+.graphsDiv {
+    text-align: center;
+    margin-bottom: 2px;
+    line-height: 27px;
+    height: 10px;
+    float: left;
+}
+
+.noTopBorder {
+    text-align: left;
+    border-top: 0;
+}
+
+.graphsDivTotal {
+    height: 30px;
+}
+
+.graphsMenuSquare {
+    width: 10px;
+    height: 10px;
+    float: left;
+}
+
+.graphMenuText {
+    width: auto;
+    float: left;
+    padding-left: 10px;
+}
+
+.StatusBar {
+    width: 100%;
+    height: 60px;
+}
+
+.statusBarInner {
+    position: relative;
+    width: 100%;
+    height: 70%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: auto;
+    margin-bottom: auto;
+    top: 15%;
+}
+
+.statusBarPassed,
+.statusBarCompleted {
+    background-color: #5bab5b;
+}
+
+.statusBarFailed,
+.statusBarError {
+    background-color: #b93333;
+}
+
+.statusBarFailedInner,
+.statusBarErrorInner {
+    background-color: #a90000;
+}
+
+.statusBarPassedInner,
+.statusBarCompletedInner {
+    background-color: #339833;
+}
+
+.graphsDivVertical {
+    /* text-align: center; */
+    margin-bottom: 2px;
+    /* line-height: 27px; */
+    width: 30px;
+    height: 10px;
+    float: left;
+}
+</style>
+    <style>.tooltip {
+    display: inline;
+    position: relative;
+}
+
+    .tooltip:hover:after {
+        background: #333;
+        background: rgba(0,0,0,.8);
+        border-radius: 5px;
+        bottom: 26px;
+        color: #fff;
+        content: attr(title);
+        padding: 5px 15px;
+        position: absolute;
+        z-index: 98;
+        max-width: 300px;
+        width: auto;
+    }
+
+</style>
+    <style>
+html,
+body,
+form,
+fieldset,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+pre,
+blockquote,
+ul,
+ol,
+dl,
+address {
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    font-size: 25px;
+}
+
+body {
+    font: 16px/20px "Trebuchet MS",Verdana,Arial,Helvetica,sans-serif;
+    margin-top: -10px;
+    min-width: 890px;
+}
+
+p {
+    text-align: center;
+}
+
+a:link {
+    color: #d42945;
+    text-decoration: none;
+    border-bottom: 1px dotted #ffbac8;
+}
+
+a:visited {
+    color: #d42945;
+    border-bottom: none;
+    text-decoration: none;
+}
+
+a:hover,
+a:focus {
+    color: #f03b58;
+    border-bottom: 1px solid #f03b58;
+    text-decoration: none;
+}
+
+table a,
+table a:link,
+table a:visited {
+    border: none;
+}
+
+img {
+    border: 0;
+    margin-top: .5em;
+}
+
+table {
+    width: 90%;
+    margin: 1em auto;
+    border-collapse: collapse;
+    border: 1px solid #a2caf2;
+}
+
+caption {
+    color: #9ba9b4;
+    font-size: 16px;
+    letter-spacing: .2em;
+    margin: 1em 0 0 0;
+    padding: 0;
+    caption-side: top;
+    text-align: center;
+    font-weight: normal;
+    border-top: 1px solid #a2caf2;
+    border-left: 1px solid #a2caf2;
+    border-right: 1px solid #a2caf2;
+}
+
+
+td {
+    color: #425b71;
+    padding: .3em 1em;
+    text-align: center;
+    border-top: 1px solid #a2caf2;
+    word-wrap: break-word;
+    font-size: 14px;
+}
+
+th {
+    font-weight: normal;
+    color: #678197;
+    text-align: left;
+    border-top: 1px solid #a2caf2;
+    padding: .3em 1em;
+}
+
+thead th {
+    background: rgb(245, 244, 242);
+    text-align: center;
+    font: bold 1.2em/2em "Century Gothic","Trebuchet MS",Arial,Helvetica,sans-serif;
+    color: #66a3d3;
+}
+
+ul
+{
+    list-style-type: none;
+}</style>
+    <style>/* 
+  make each pie piece a rectangle twice as high as it is wide.
+  move the transform origin to the middle of the left side.
+  Also ensure that overflow is set to hidden.
+*/
+  .pie {
+		position:absolute;
+		width:100px;
+		height:200px;
+		overflow:hidden;
+		left:150px;
+		-moz-transform-origin:left center;
+		-ms-transform-origin:left center;
+		-o-transform-origin:left center;
+		-webkit-transform-origin:left center;
+		transform-origin:left center;
+	}
+/*
+  unless the piece represents more than 50% of the whole chart.
+  then make it a square, and ensure the transform origin is
+  back in the center.
+
+  NOTE: since this is only ever a single piece, you could
+  move this to a piece specific rule and remove the extra class
+*/
+	.pie.big {
+		width:200px;
+		height:200px;
+		left:50px;
+		-moz-transform-origin:center center;
+		-ms-transform-origin:center center;
+		-o-transform-origin:center center;
+		-webkit-transform-origin:center center;
+		transform-origin:center center;
+	}
+/*
+  this is the actual visible part of the pie. 
+  Give it the same dimensions as the regular piece.
+  Use border radius make it a half circle.
+  move transform origin to the middle of the right side.
+  Push it out to the left of the containing box.
+*/
+	.pie:BEFORE {
+		content:"";
+		position:absolute;
+		width:100px;
+		height:200px;
+		left:-100px;
+		border-radius:100px 0 0 100px;
+		-moz-transform-origin:right center;
+		-ms-transform-origin:right center;
+		-o-transform-origin:right center;
+		-webkit-transform-origin:right center;
+		transform-origin:right center;
+		
+	}
+ /* if it's part of a big piece, bring it back into the square */
+	.pie.big:BEFORE {
+		left:0px;
+	}
+/* 
+  big pieces will also need a second semicircle, pointed in the
+  opposite direction to hide the first part behind.
+*/
+	.pie.big:AFTER {
+		content:"";
+		position:absolute;
+		width:100px;
+		height:200px;
+		left:100px;
+		border-radius:0 100px 100px 0;
+	}
+/*
+  add colour to each piece.
+*/
+	.pie:nth-of-type(1):BEFORE,
+	.pie:nth-of-type(1):AFTER {
+		background-color:#fad446;	
+	}
+	.pie:nth-of-type(2):AFTER,
+	.pie:nth-of-type(2):BEFORE {
+		background-color:#5bab5b;	
+	}
+	.pie:nth-of-type(3):AFTER,
+	.pie:nth-of-type(3):BEFORE {
+		background-color:#d8534f;	
+	}
+	.pie:nth-of-type(4):AFTER,
+	.pie:nth-of-type(4):BEFORE {
+		background-color:orange;	
+	}
+/*
+  now rotate each piece based on their cumulative starting
+  position
+*/
+	.pie[data-start="30"] {
+		-moz-transform: rotate(30deg); /* Firefox */
+		-ms-transform: rotate(30deg); /* IE */
+		-webkit-transform: rotate(30deg); /* Safari and Chrome */
+		-o-transform: rotate(30deg); /* Opera */
+		transform:rotate(30deg);
+	}
+	.pie[data-start="60"] {
+		-moz-transform: rotate(60deg); /* Firefox */
+		-ms-transform: rotate(60deg); /* IE */
+		-webkit-transform: rotate(60deg); /* Safari and Chrome */
+		-o-transform: rotate(60deg); /* Opera */
+		transform:rotate(60deg);
+	}
+	.pie[data-start="100"] {
+		-moz-transform: rotate(100deg); /* Firefox */
+		-ms-transform: rotate(100deg); /* IE */
+		-webkit-transform: rotate(100deg); /* Safari and Chrome */
+		-o-transform: rotate(100deg); /* Opera */
+		transform:rotate(100deg);
+	}
+/*
+  and rotate the amount of the pie that's showing.
+
+  NOTE: add an extra degree to all but the final piece, 
+  to fill in unsightly gaps.
+*/
+	.pie[data-value="30"]:BEFORE {
+		-moz-transform: rotate(31deg); /* Firefox */
+		-ms-transform: rotate(31deg); /* IE */
+		-webkit-transform: rotate(31deg); /* Safari and Chrome */
+		-o-transform: rotate(31deg); /* Opera */
+		transform:rotate(31deg);
+	}
+	.pie[data-value="40"]:BEFORE {
+		-moz-transform: rotate(41deg); /* Firefox */
+		-ms-transform: rotate(41deg); /* IE */
+		-webkit-transform: rotate(41deg); /* Safari and Chrome */
+		-o-transform: rotate(41deg); /* Opera */
+		transform:rotate(41deg);
+	}
+	.pie[data-value="260"]:BEFORE {
+		-moz-transform: rotate(260deg); /* Firefox */
+		-ms-transform: rotate(260deg); /* IE */
+		-webkit-transform: rotate(260deg); /* Safari and Chrome */
+		-o-transform: rotate(260deg); /* Opera */
+		transform:rotate(260deg);
+	}
+/*
+NOTE: you could also apply custom classes (i.e. .s0 .v30)
+but if the CSS3 attr() function proposal ever gets implemented,
+then all the above custom piece rules could be replaced with
+the following:
+
+.pie[data-start] {
+   transform:rotate(attr(data-start,deg,0);
+}
+.pie[data-value]:BEFORE {
+   transform:rotate(attr(data-value,deg,0);
+}
+*/</style>
+    <style>/*WebDesignAndSuch.com*/
+
+
+
+
+
+@charset "UTF-8";
+
+#container {
+    width: 780px;
+    background: #FFFFFF;
+    margin: 0 auto;
+    font-size: 14px;
+    text-align: left;
+}
+
+#mainContent {
+    padding: 0 60px;
+    min-height: 600px;
+    line-height: 25px;
+}
+
+img {
+    border: 0px;
+}
+
+
+
+
+/*LINKS*/
+
+#mainContent a:link, #mainContent a:visited {
+    color: #fff;
+    text-decoration: none;
+    font-size: 18px;
+    background: #000000;
+    padding: 5px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+}
+
+#mainContent a:hover, #mainContent a:active {
+    color: #fff;
+    text-decoration: none;
+    font-size: 18px;
+    background: #333333;
+    padding: 5px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+}
+
+
+.UnChecked {
+    width: 17px;
+    height: 17px;
+    background-size: 17px 17px;
+    float: left;
+    padding-left: 6px;
+    padding-right: 6px;
+    cursor: pointer;
+    background-repeat: no-repeat;
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAA7EAAAOxAGVKw4bAAABhElEQVRYw+2Xv2oiURTGfwcv6BSCjMoIEx0GO4cU/slLBN8gT5Bu0y1p0sl2W+YJfAPZl8iGFDKVxYDGRgtlLDSi3G2uQdg2Y5r7dec03+8cTnE+wajZbOZLpdI9cAdEgMPXagvEwDBN0+fJZPIBIABRFF0VCoU/wDWX0Xi/39+Ox+N3CcMw77ruy5n5GzA6HA6br3TM5XJFEekD7RNEmqY30ul0fojIb9P8tVgsHmezmc5ibN/3xfO8gYj8NK0H6Xa7L0APeFsul93pdKqz3L3v+1Kr1V7NJv4qc3AAo6zNAebzufY8byQibSBSZ9e+udABcjweN0opAEfxzbIAFsACWAALYAEsgAWwAMokFgcoXsxUqZPXVpm41AP6YRg+JUmS6Wdcr9cF6JsyVlrroYj0gLbrugPgMSuIRqMh1Wp1cJaOhhIEQb5SqfwXzTJ404tm8s9otl6vbwSg1WpdOY5z0XC62+1u4zh+l1MnCIJ8uVy+F5FM47nWerharZ6TJPkA+AcFx3h8axb0kgAAAABJRU5ErkJggjQ2Ng==');
+}
+
+.Checked {
+    width: 17px;
+    height: 17px;
+    background-size: 17px 17px;
+    float: left;
+    padding-left: 6px;
+    padding-right: 6px;
+    cursor: pointer;
+    background-repeat: no-repeat;
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAA7EAAAOxAGVKw4bAAADUElEQVRYw72XTUwTURDH/1NW2o3RkHZpiS0thHiAhUPf6sGPePBIPJuoF2IwEaNGgwfFxIMm1QvxgF9RYzSReNHEAzHePHpQtzRA+GiwFqyJ0ECzJRVwl+dl0bosUKDLHOfNZH5v3rzJDMGUhoYGd1VVVQeAUwBkACLKK78ADAHo1TTtYTKZXAAAAgBZlkMej+cdgBZsjwwsLi62DgwMfKf6+nq31+v9VBQ8DqBP1/V8OSNWVFTsIqJjAKLLEJqm7SfG2CUiumsq70xNTXVNTk5yJ64dDAYpEAjEiOiqqbpMiqJ8ArAPQHx6elqZmJjgTuY+GAxSTU3NFzMTnwWz4ACgr9zBGxsbD3DOMyMjIxPLukwmwwOBQB8RRQHIQlG1l/XNGWMnieglgIKiKFez2ez9dDrNAcAwjLwgCAAgCk6kuampaQ8R9Zi/bCeAHkmSjqTT6eNWW0cARFF8AsBrUR+ysy07AGOsHUCrVc85v+I4gCzLESLqtjl6rarqK0cBQqEQeTyeZwB2W45+FgqFjtX8ygbg9/vPAzhqzfzS0tLZ4eHhrKMAzc3Ne4nots3Ry3g8/nYt3y0DhMNhl9vtfm5+t2LJzM3NXVzPX1jnZocBFAYHB9XVbCRJ6gRw0Cb17aOjo7lNAzDGzhHRPQA6Y+yEqqpvrDYtLS0yEd20cX8aj8ffl5JBYZXgZ4o62Q4iemWFqKurEyorK18A8Fjcv+Xz+c5Sn9AWgIiuA3AVqVZA+Hy+LgCKxXXJMIzTY2Nj+S0BcM5jRPRoeWKyQhiG8RXAdRvXe/39/R82UsS2AKqqPmaMCWYNrIAQBOEHgEqL25imadc2+otWLUJVVR8wxmAHASBiMTd0XW9LJpOFsgGsA2GV7kQi8XEzfWTdRlQCxGAul7ux2UZWUidcA+K3rutt4+PjC44CrAERSyQSX7bSygVzYxEB7CoFIhqNZl0u1wUAn7PZ7K1NBRWE5Vi//hvLZ2ZmlFQq5ehYXltbS36//99YzjnvJaJ9AKJerzcGoMspiHA4TNXV1bGi7aiXIpGIW5KkFatZucd084n/W81yudx+MsfokCiK27qczs/Ptw4NDX3/+6UikYjb5/N1EJGj6znnvHd2dvZhKpVaAIA/b8I7joolBuYAAAAASUVORK5CYII5MjY=');
+}
+
+.checkboxContainer {
+    padding-left: 6px;
+    padding-top: 3px;
+    padding-bottom: 17px;
+}
+
+.settingsIcon {
+    cursor: pointer;
+    top: 6px;
+    left: 6px;
+    float: left;
+    width: 32px;
+    height: 32px;
+    background-size: 32px 32px;
+    background-repeat: no-repeat;
+    position: absolute;
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAFlElEQVRYhbWXXYwbVxmGn288npm1XW8cr+3xLma11kYpF0VVi6BcgFpEiEBCIC4oF235kYoAgYSUVvykEVQgEhUFwQVwUYFUgYALkIoQUhFFahFCggJNG1VVG+Qk3V2vfzb2rtfetcfj+bjwbHAcp3GS7bk658w53/OemfOe841wk8UwDDKZjKRSqbssy7pfRN4PHAaSQA9YVdUXVPUPrVbr6bW1ta7v+1fFkZuBJ5NJWVhYuCMajZ4G7gNE5IpQAqCqAAr8bX19/d56va7jscwbhWcyGXFd9wsichqww+5AVc8ALwKXgJiIPCAiqVCEe614NyQgnU5LPp//GvBdhqscAD/b3d39fqPRuNDpdDSZTIrruo8Be/C67/uf3Nraumr1NyTAcRzJ5/OfGIFvDAaD+8vl8vPNZlMBstmsuK57HPiWDul13/ePlkqllz3Pmxh3agHz8/MHDcP4SQhv+b7/oVKp9HK32x2FPwZ8O5xyGb43BsCyLA4cOCCqSrPZ1KkExGIxSSQSx4A5AFX9yoULFy4HTqfT4rruN64HdxxHisXiO03T/B1QnpmZOTKVgNnZ2Sjw2bD5r42NjV/t7OwogIiQy+XuBR6fEv4nIAsszc7OftyYRkAikbgnnISqPjlqJ9u2xTTNTwMGsDMNPLSsiMhHpxJg2/a7wqp2Op1nfd8f39GZMOgb29vbZ98EnhERBRoigoi8+7oCDMMQwzDeFja7Ozs7b4w+HwwGAC+Flrs9lUo94rquTIIDqqonVPWX4fTCVG8AsMIV9kLQ5dLv97XT6fwYqIVd38tms48WCgVjHA6cqFQqp4BO2LauKyAajQK0GNrvtmg06oyPWVlZWfM87yMMT0EBTqZSqVdN0/z7OLzVaimhm4DWmwqwLIulpaXDwINhlxGJRObGx3meR6lUOuN53tG9NyEiy4ADBMDxSqVyqlaraTweF+CucOrr17ShZVkUi8XbLcv6MzAfnmxPtNvtlUnjPc/TUqn0YqFQuDsej39ZVe9gaMmnKpXKXxuNhgIcPHhwCbgz/JTPT7wNx+Fh98lqtXqiWq1OPNNHSzQalUgkgqrieZ7u7ZtUKiWFQuGnwMOAep73nqvewK3CYbgx+/3+FX2O48j8/Px9wOfCrr80Go3/XCFgP+CTSjwel8XFxTsjkchvgAjQ6/f7xzY2Nv5/F7wVcNM0JZPJyNzc3AMi8iOG2ZKq6ldXV1dfCYJgeBveKjydTksikVgcDAZ13/d3RURmZmbeHo/HPygiDwN3h0MV+GalUnlye3tbQ5EmxWLx8M3Cc7mc5HK5U8AxhpZrM7SfPTa0HgTBF8vl8tN7jgAwFxYWEpZl/X4UXqvVbgR+EngkTAoNYHbstKwCP2+32z8ol8vN0XsCwEwmk18CDoXt07Va7USj0SCXyxmGYdi9Xq87qngC/FEAVV0BfgHcBvSDIFjt9Xr/brfb/9jc3Ozv7u5OTslE5FNh/Vyz2TxerVb10KFDS47jPAMsAqdU9fG9tGsSHFj1PO/I+fPnz+3ZLwiCqTauISLvCC+aZ+r1ug/gOM5ngGURsYCvO45z+XteC14qlV7v9XoaBIFOC4fhN4uE9T4Mc/kgCF4bVlWB80EQeNeDXyvpnEbAf8P6B9LptIgI6+vrvx4MBg8B3+l2ux9uNpvquu6+wwEiuVzOBd4HuLFYbFNV/3np0iWt1Wpna7Xac41GYzOTyUg2m913OEAkFoudtW37QSABHEkkElumab7Q7/eJRqOSz+etdDr9BEOf7yscQCzLkuXl5feapvlHhkclwBngOSAKHAWW3wo4hD+RYe52j2mavwXc0R/NkUPlNc/zPlYqlc7tFxxCB/i+z9bW1ppt20/Ztu2JSAZIMXTGWVX9YavV+vzFixcr49fsrZb/AbnEB+jFwiulAAAAAElFTkSuQmCCMTQ4NQ==');
+}
+
+/*STYLES FOR CSS POPUP*/
+
+
+#blanket {
+    background-color: #111;
+    opacity: 0.65;
+    *background: none;
+    position: absolute;
+    z-index: 9001;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+}
+
+#popUpDiv {
+    position: fixed;
+    width: 400px;
+    height: auto;
+    min-height: 150px;
+    border: 2px solid #0f9bdc;
+    z-index: 9002;
+    background-color: #ffffff;
+    border-radius: 10px;
+}
+
+    #popUpDiv a {
+        position: relative;
+        top: 20px;
+        left: 20px;
+    }
+
+.fsSubmitButton {
+    background-color: #0f9bdc;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #FFF;
+    border: hidden;
+    font-size: 30px;
+    height: 30px;
+    width: 30px;
+    text-align: center;
+    cursor: pointer;
+    bottom: 20px;
+    font-size: 20px;
+    border-radius: 5px;
+    position: absolute;
+    left: 93%;
+    top: -2px;
+}
+
+.li {
+    padding-left: 20px;
+    padding-top: 6px;
+}
+</style><script language="javascript" type="text/javascript">/**
+ * @return {number}
+ */
+function GetTotal() {
+    var myTotal = 0;
+    for (var j = 0; j < myData.length; j++) {
+        myTotal += (typeof myData[j] == 'number') ? myData[j] : 0;
+    }
+    return myTotal;
+}
+
+
+function CreatePie() {
+    var canvas;
+    var ctx;
+    var lastend = 0;
+    var myTotal = GetTotal();
+
+    canvas = document.getElementById('canvas');
+    ctx = canvas.getContext('2d');
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    CreateText();
+
+    for (var i = 0; i < myData.length; i++) {
+        ctx.fillStyle = pieColors[i];
+        ctx.beginPath();
+        ctx.moveTo(160, 75);
+        ctx.arc(160, 75, 75, lastend, lastend +
+            (Math.PI * 2 * (myData[i] / myTotal)), false);
+        ctx.lineTo(160, 75);
+        ctx.fill();
+        lastend += Math.PI * 2 * (myData[i] / myTotal);
+        ctx.arc(160, 75, 40, 0, Math.PI * 2);
+    }
+
+    // either change this to the background color,CalculateTestsStatuses or use the global composition
+    ctx.globalCompositeOperation = "destination-out";
+    ctx.beginPath();
+    ctx.moveTo(160, 35);
+    ctx.arc(160, 75, 40, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.closePath();
+    // if using the global composition method, make sure to change it back to default.
+    ctx.globalCompositeOperation = "source-over";
+}
+
+function CreateText() {
+    var canvas;
+    var ctx;
+    var textPosY = 50;
+    var textPosX = 0;
+
+    canvas = document.getElementById("canvas");
+    ctx = canvas.getContext("2d");
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    for (var i = 0; i < myData.length; i++) {
+        ctx.fillStyle = pieColors[i];
+        ctx.font = "15px arial";
+        ctx.fillText(myParsedData[i], textPosX, textPosY);
+        textPosY += 35;
+    }
+}
+
+var allPassed = 0;
+var allFailed = 0;
+var allWarns = 0;
+
+var myData = [];
+
+var myParsedData = [];
+
+
+function CreateTotalStatusesGraph() {
+
+    var totalTests = allPassed + allFailed + allWarns;
+    var passedPrec = (allPassed / totalTests) * 100;
+    var failedPrec = (allFailed / totalTests) * 100;
+    var warnPrec = (allWarns / totalTests) * 100;
+
+    passedPrec = passedPrec.toFixed(2).replace("/\.(\d\d)\d?$/", '.$1');
+    failedPrec = failedPrec.toFixed(2).replace("/\.(\d\d)\d?$/", '.$1');
+    warnPrec = warnPrec.toFixed(2).replace("/\.(\d\d)\d?$/", '.$1');
+
+    //document.getElementById("TotalFailedDiv").style.width = failedPrec + "%";
+    //document.getElementById("TotalPassedDiv").style.width = passedPrec + "%";
+    //document.getElementById("TotalWarnDiv").style.width = warnPrec + "%";
+
+    //document.getElementById("TotalFailedDiv").title = allFailed + "(" + failedPrec + "%)";
+    //document.getElementById("TotalPassedDiv").title = allPassed + "(" + passedPrec + "%)";
+    //document.getElementById("TotalWarnDiv").title = allWarns + "(" + warnPrec + "%)";
+
+    document.getElementById("TotalFailedText").innerHTML = allFailed + "(" + failedPrec + "%)";;
+    document.getElementById("TotalPassedText").innerHTML = allPassed + "(" + passedPrec + "%)";;
+    document.getElementById("TotalWarnText").innerHTML = allWarns + "(" + warnPrec + "%)";;
+}
+
+function CalculateTotalPrecents() {
+
+    var totalTests = allPassed + allFailed + allWarns;
+    var passedPrec = (allPassed / totalTests) * 100;
+    var failedPrec = (allFailed / totalTests) * 100;
+    var warnPrec = (allWarns / totalTests) * 100;
+
+    myData.push(passedPrec);
+    myData.push(failedPrec);
+    myData.push(warnPrec);
+
+    myParsedData.push(allPassed + " (" + Math.round(passedPrec).toFixed(2) + "%)");
+    myParsedData.push(allFailed + " (" + Math.round(failedPrec).toFixed(2) + "%)");
+    myParsedData.push(allWarns + " (" + Math.round(warnPrec).toFixed(2) + "%)");
+
+    document.getElementById('dataViewer').innerHTML = "<tr class='odd'><td><canvas id='canvas' width='240' height='150'>This text is displayed if your browser does not support HTML5 Canvas.</canvas></td></tr>";
+    CreatePie();
+    AddEventListener();
+}
+
+function CalculateTestsStatuses(testContaineId, classId) {
+    var totalPassed = 0;
+    var totalFailed = 0;
+    var totalInconclusive = 0;
+    var e = document.getElementById(testContaineId);
+    var tests = e.getElementsByClassName('Test');
+    for (var i = 0; i < tests.length; i++) {
+        var test = tests[i];
+        if (test.getElementsByClassName('warn').length > 0) {
+            totalInconclusive++;
+            allWarns++;
+        }
+        else if (test.getElementsByClassName('failed').length > 0) {
+            totalFailed++;
+            allFailed++;
+        }
+        else if (test.getElementsByClassName('passed').length > 0) {
+            totalPassed++;
+            allPassed++;
+        }
+    }
+
+    var totalTests = totalFailed + totalInconclusive + totalPassed;
+    var passedPrec = (totalPassed / totalTests) * 100;
+    var failedPrec = (totalFailed / totalTests) * 100;
+    var warnPrec = (totalInconclusive / totalTests) * 100;
+
+    passedPrec = passedPrec.toFixed(2).replace("/\.(\d\d)\d?$/", '.$1');
+    failedPrec = failedPrec.toFixed(2).replace("/\.(\d\d)\d?$/", '.$1');
+    warnPrec = warnPrec.toFixed(2).replace("/\.(\d\d)\d?$/", '.$1');
+
+    document.getElementById(classId + "Failed").style.width = failedPrec + "%";
+    document.getElementById(classId + "Passed").style.width = passedPrec + "%";
+    document.getElementById(classId + "Warn").style.width = warnPrec + "%";
+
+    document.getElementById(classId + "Failed").title = totalFailed + "(" + failedPrec + "%)";
+    document.getElementById(classId + "Passed").title = totalPassed + "(" + passedPrec + "%)";
+    document.getElementById(classId + "Warn").title = totalInconclusive + "(" + warnPrec + "%)";
+}
+</script><script language="javascript" type="text/javascript">var img = [];
+
+function AddToArray(imagesString) {
+    img = imagesString.split("|");
+    slideimagesRight();
+    if (img.length > 1) {
+        show("rightArrow");
+        show("leftArrow");
+    }
+    else if (img.length == 1) {
+        hide("rightArrow");
+        hide("leftArrow");
+    }
+}
+
+function slideimagesRight() {
+    var lastPlace = img[img.length - 1];//Save the last cell 
+    for (var i = 1; i < img.length; i++) {
+        img[img.length - i] = img[img.length - 1 - i];//Do the replacment,shift left
+    }
+
+    img[0] = lastPlace;//Replace first cell with the last cell we stored
+
+    for (var i = 0; i < img.length; i++) {
+        updateFloatingImage(img[i]);
+    }
+}
+
+function slideimagesLeft() {
+    var firstPlace = img[0];
+
+    for (var i = 0; i < img.length - 1; i++) {
+        img[i] = img[i + 1];
+    }
+
+    img[img.length - 1] = firstPlace;
+
+    for (var i = 0; i < img.length; i++) {
+        updateFloatingImage(img[i]);
+    }
+}
+
+function identifyKeyDownEvent(keyEvent) {
+    var pressedKeyValue = keyEvent.keyCode;
+    if (pressedKeyValue == 27) {//esc
+        hide('floatingImageBackground');
+        hide('floatingGrayBackground');
+    }
+    else if (pressedKeyValue == 37) {//left
+        slideimagesLeft();
+    }
+    else if (pressedKeyValue == 39) {//right
+        slideimagesRight();
+    }
+}
+
+</script><script language="javascript" type="text/javascript">
+var pieColors = ["#5bab5b", "#d8534f", "#efac4e"];//green,red,yellow
+
+function ShowHideWithChange(id1, id2, textOnHide, textOnShow) {
+    if (document.getElementById(id1).className == 'visibleRow') {
+        document.getElementById(id2).innerHTML = textOnHide;
+        document.getElementById(id1).className = 'hiddenRow';
+    }
+    else {
+        document.getElementById(id2).innerHTML = textOnShow;
+        document.getElementById(id1).className = 'visibleRow';
+    }
+}
+
+function ShowHide(id1) {
+    if (document.getElementById(id1).className == 'visibleRow') {
+        document.getElementById(id1).className = 'hiddenRow';
+    }
+    else {
+        document.getElementById(id1).className = 'visibleRow';
+    }
+}
+
+function AddEventListener() {
+    var button = document.getElementById('btn-download');
+    button.addEventListener('click', function () {
+        button.href = canvas.toDataURL('image/png');
+    });
+}
+
+function show(id) {
+    document.getElementById(id).style.visibility = "visible";
+    document.getElementById(id).style.display = "block";
+}
+function hide(id) {
+
+    document.getElementById(id).style.visibility = "hidden";
+    document.getElementById(id).style.display = "none";
+}
+
+function updateFloatingImage(url) {
+    document.getElementById('floatingImage').src = url;
+}
+
+function ToggleMessageView(messageText,shortenMessageText, id) {
+    var element = document.getElementById(id + "TestMessage");
+    var linkElement = document.getElementById(id + "TestMessageLink");
+    if (linkElement.innerHTML == "Show More") {
+        element.innerHTML = messageText;
+        linkElement.innerHTML = "Show Less";
+    } else {
+        element.innerHTML = shortenMessageText;
+        linkElement.innerHTML = "Show More";
+    }
+}</script><script language="javascript" type="text/javascript">function toggle(div_id) {
+    var el = document.getElementById(div_id);
+    if (el.style.display == 'none') { el.style.display = 'block'; }
+    else { el.style.display = 'none'; }
+}
+function blanket_size(popUpDivVar) {
+    if (typeof window.innerWidth != 'undefined') {
+        viewportheight = window.innerHeight;
+    } else {
+        viewportheight = document.documentElement.clientHeight;
+    }
+    if ((viewportheight > document.body.parentNode.scrollHeight) && (viewportheight > document.body.parentNode.clientHeight)) {
+        blanket_height = viewportheight;
+    } else {
+        if (document.body.parentNode.clientHeight > document.body.parentNode.scrollHeight) {
+            blanket_height = document.body.parentNode.clientHeight;
+        } else {
+            blanket_height = document.body.parentNode.scrollHeight;
+        }
+    }
+    var blanket = document.getElementById('blanket');
+    blanket.style.height = blanket_height + 'px';
+    var popUpDiv = document.getElementById(popUpDivVar);
+    popUpDiv_height = blanket_height / 2 - 200;//200 is half popup's height
+    //popUpDiv.style.top = popUpDiv_height + 'px';
+}
+function window_pos(popUpDivVar) {
+    if (typeof window.innerWidth != 'undefined') {
+        viewportwidth = window.innerHeight;
+    } else {
+        viewportwidth = document.documentElement.clientHeight;
+    }
+    if ((viewportwidth > document.body.parentNode.scrollWidth) && (viewportwidth > document.body.parentNode.clientWidth)) {
+        window_width = viewportwidth;
+    } else {
+        if (document.body.parentNode.clientWidth > document.body.parentNode.scrollWidth) {
+            window_width = document.body.parentNode.clientWidth;
+        } else {
+            window_width = document.body.parentNode.scrollWidth;
+        }
+    }
+    var popUpDiv = document.getElementById(popUpDivVar);
+    window_width = window_width / 2 - 200;//200 is half popup's width
+    popUpDiv.style.left = window_width + 'px';
+}
+function popup(windowname) {
+    blanket_size(windowname);
+    window_pos(windowname);
+    //  toggle('blanket');
+    toggle(windowname);
+}
+
+function toggleCheckbox(element) {
+    var checkbox = element;
+    if (checkbox.className == "Checked") {
+        checkbox.className = "UnChecked";
+    } else {
+        checkbox.className = "Checked";
+    }
+    updateViewBasedOnSettings(checkbox.id);
+    updateLocalStorage(checkbox.id, document.getElementById(checkbox.id + "Element").style.display);
+}
+
+function toggleStatusesCheckbox(element) {
+    var checkbox = element;
+    if (checkbox.className == "Checked") {
+        checkbox.className = "UnChecked";
+        FilterTestsByStatuses(element.title, "none");
+        updateLocalStorage(checkbox.id, "none");
+    } else {
+        checkbox.className = "Checked";
+        FilterTestsByStatuses(element.title, "table-row");
+        updateLocalStorage(checkbox.id, "table-row");
+    }
+
+
+}
+
+function updateLocalStorage(id, value) {
+    localStorage.setItem(id, value);
+}
+
+function updateViewBasedOnSettings(id) {
+    var element = document.getElementById(id + "Element");
+    if (element.style.display == "none") {
+        document.getElementById(id + "Element").style.display = "block";
+    } else {
+        document.getElementById(id + "Element").style.display = "none";
+    }
+}
+
+function FilterTestsByStatuses(status, display) {
+    var elements = document.getElementsByClassName(status);
+    for (var j = 0; j < elements.length; j++) {
+        elements[j].parentNode.style.display = display;
+    }
+}
+
+function ShowStatusesLocalStorgeValues() {
+    var elementsNames =
+    [
+        "failedTestsStatuses",
+        "passedTestsStatuses",
+        "warnTestsStatuses"
+    ];
+
+    for (var i = 0; i < elementsNames.length; i++) {
+        var localStorageData = localStorage.getItem(elementsNames[i]);
+        var checkbox = document.getElementById(elementsNames[i]);
+        FilterTestsByStatuses(checkbox.title, localStorageData);
+        UpdateCheckboxState(checkbox, localStorageData);
+    }
+}
+
+function ShowLocalStorgeValues() {
+
+
+    var elementsNames =
+    [
+        "failedTests",
+        "testsByClasses",
+        "mostSlowest",
+        "summaryTables",
+        "TotalTests",
+        "testStatuses",
+        "testDetails"
+    ];
+
+    for (var i = 0; i < elementsNames.length; i++) {
+        var localStorageData = localStorage.getItem(elementsNames[i]);
+        document.getElementById(elementsNames[i] + "Element").style.display = localStorageData;
+        var checkbox = document.getElementById(elementsNames[i]);
+        UpdateCheckboxState(checkbox, localStorageData);
+    }
+}
+
+function UpdateCheckboxState(checkbox, localStorageData) {
+    if (localStorageData == "none") {
+        checkbox.className = "UnChecked";
+    } else {
+        checkbox.className = "Checked";
+    }
+}</script><title>SGopala@WLA-GSP17 2021-11-28 10:53:05</title>
+  </head>
+  <body onload="ShowLocalStorgeValues();ShowStatusesLocalStorgeValues();" onkeydown="return identifyKeyDownEvent(event);">
+    <div id="divToRefresh" class="wrapOverall">
+      <div id="floatingGrayBackground" onclick="hide('floatingGrayBackground');hide('floatingImageBackground');"></div>
+      <div id="floatingImageBackground">
+        <div id="navigation">
+          <table border="0" cellspacing="0" cellpadding="0">
+            <tr>
+              <td class="arrowCell">
+                <div id="leftArrow" onclick="slideimagesLeft();"></div>
+              </td>
+              <td valign="top">
+                <div class="overFlowImage"><img src="" class="displayed" id="floatingImage"></div>
+              </td>
+              <td class="arrowCell">
+                <div id="rightArrow" onclick="slideimagesRight();"></div>
+              </td>
+            </tr>
+            <tr>
+              <td></td>
+              <td colspan="4" class="closeImageViewButton"><a href="javascript:hide('floatingImageBackground');hide('floatingGrayBackground')">✖ Close</a></td>
+              <td></td>
+            </tr>
+          </table>
+        </div>
+      </div><br><div class="StatusBar statusBarCompleted">
+        <div class="statusBarInner statusBarCompletedInner">
+          <center>
+            <h1 class="hWhite">
+              <div class="settingsIcon" onclick="popup('popUpDiv')"></div>
+              <div class="titleCenterd">SGopala@WLA-GSP17 2021-11-28 10:53:05</div>
+            </h1>
+          </center>
+        </div>
+      </div>
+      <div id="blanket" style="display: none; height: 789px;"></div>
+      <div id="popUpDiv" style="display: none; top: 194.5px; left: 751.5px;"><br><div class="checkboxContainer">
+          <div id="summaryTables" onclick="toggleCheckbox(this)" class="Checked"></div> Summary tables
+              <br><div class="li">
+            <div id="TotalTests" onclick="toggleCheckbox(this)" class="Checked"></div> Pie view
+              </div>
+          <div class="li">
+            <div id="testStatuses" onclick="toggleCheckbox(this)" class="Checked"></div> Tests statuses
+              </div>
+          <div class="li">
+            <div id="testDetails" onclick="toggleCheckbox(this)" class="Checked"></div> Tests details
+              </div>
+        </div>
+        <div class="checkboxContainer">
+          <div id="failedTests" onclick="toggleCheckbox(this)" class="Checked"></div> Failed tests
+            </div>
+        <div class="checkboxContainer">
+          <div id="testsByClasses" onclick="toggleCheckbox(this)" class="Checked"></div> Tests by classes
+              <div class="li">
+            <div id="failedTestsStatuses" onclick="toggleStatusesCheckbox(this)" class="Checked" title="failed"></div>
+            <div class="Tag StatusTag NumberTagRed">FAILED</div>
+          </div>
+          <div class="li">
+            <div id="passedTestsStatuses" onclick="toggleStatusesCheckbox(this)" class="Checked" title="passed"></div>
+            <div class="Tag StatusTag NumberTagGreen">PASSED</div>
+          </div>
+          <div class="li">
+            <div id="warnTestsStatuses" onclick="toggleStatusesCheckbox(this)" class="Checked" title="warn"></div>
+            <div class="Tag StatusTag NumberTagYellow">PASSED</div>
+          </div>
+        </div>
+        <div class="checkboxContainer">
+          <div id="mostSlowest" onclick="toggleCheckbox(this)" class="Checked"></div> Most 5 slowest tests
+            </div><input type="button" value="X" class="fsSubmitButton" onclick="popup('popUpDiv')"></div>
+      <div class="SummaryDiv" id="summaryTablesElement">
+        <div id="TotalTestsElement">
+          <table id="TotalTestsTable">
+            <caption>Results Summary</caption>
+            <thead>
+              <tr class="odd">
+                <th scope="col" abbr="Status">
+                      Pie View
+                    </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <div id="dataViewer"></div>
+                </td>
+              </tr>
+              <tr id="DownloadSection">
+                <td><a href="#" class="button" id="btn-download" download="SGopala@WLA-GSP17 2021-11-28 10:53:05StatusesPie.png">Save graph</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div id="testStatusesElement">
+          <table class="DetailsTable StatusesTable">
+            <caption>Tests Statuses</caption>
+            <tbody>
+              <tr class="odd">
+                <th class="column1 statusCount">Total</th>
+                <td class="statusCount">6</td>
+              </tr>
+              <tr>
+                <th scope="row" class="column1 statusCount">Executed</th>
+                <td class="statusCount">6</td>
+              </tr>
+              <tr>
+                <th scope="row" class="column1 statusCount">Passed</th>
+                <td class="statusCount">6</td>
+              </tr>
+              <tr>
+                <th scope="row" class="column1 statusCount">Failed</th>
+                <td class="statusCount">0</td>
+              </tr>
+              <tr>
+                <th scope="row" class="column1 statusCount">Inconclusive</th>
+                <td class="statusCount">0</td>
+              </tr>
+              <tr>
+                <th scope="row" class="column1 statusCount">Error</th>
+                <td class="statusCount">0</td>
+              </tr>
+              <tr>
+                <th scope="row" class="column1 statusCount">Warning</th>
+                <td class="statusCount">0</td>
+              </tr>
+              <tr>
+                <th scope="row" class="column1 statusCount">Timeout</th>
+                <td class="statusCount">0</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div id="testDetailsElement">
+          <table class="SummaryTable">
+            <caption>Summary</caption>
+            <tbody>
+              <tr class="odd">
+                <th class="column1">Start Time</th>
+                <td>11/28/2021 10:53:04 AM</td>
+              </tr>
+              <tr>
+                <th class="column1">End Time</th>
+                <td>11/28/2021 10:53:05 AM</td>
+              </tr>
+              <tr>
+                <th class="column1">Duration</th>
+                <td>1.30 seconds</td>
+              </tr>
+              <tr class="odd">
+                <th class="column1">User</th>
+                <td>HLHZ\SGopala</td>
+              </tr>
+              <tr>
+                <th scope="row" class="column1">Machine</th>
+                <td>WLA-GSP17</td>
+              </tr>
+              <tr>
+                <th scope="row" class="column1">Description</th>
+                <td>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row" class="column1">Outcome</th>
+                <td>Completed</td>
+              </tr>
+              <tr>
+                <th scope="row" class="column1">Message</th>
+                <td class="outcomeMessage">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div id="testsByClassesElement">
+        <table>
+          <caption>All Tests Group By Classes</caption>
+          <thead>
+            <tr class="odd">
+              <th scope="col" abbr="Status"></th>
+              <th scope="col" abbr="Test">
+                    Classes <div class="Tag NumberTag">1</div>
+              </th>
+              <th scope="col" abbr="Message"></th>
+              <th scope="col" abbr="Exception">More</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="PackageStatus">
+                <div id="ID0AQD0TDFailed" class="graphsDiv NumberTagRed tooltip"></div>
+                <div id="ID0AQD0TDPassed" class="graphsDiv NumberTagGreen tooltip"></div>
+                <div id="ID0AQD0TDWarn" class="graphsDiv NumberTagYellow tooltip"></div>
+              </td>
+              <td class="Function">CreditCardApplications.Tests.CreditCardApplicationEvaluatorShould</td>
+              <td class="TestsCount" name="ID0AQD0TDId">
+                <div class="Tag NumberTag">6 Tests</div>
+              </td>
+              <td class="ex">
+                <div class="OpenMoreButton" onclick="ShowHideWithChange('ID0AQD0TDTestsContainer','ID0AQD0TDButton','Show Tests','Hide Tests');">
+                  <div class="MoreButtonText" id="ID0AQD0TDButton">Show Tests</div>
+                </div>
+              </td>
+            </tr>
+            <tr id="ID0AQD0TDTestsContainer" class="hiddenRow">
+              <td colspan="4">
+                <table>
+                  <thead>
+                    <tr class="odd">
+                      <th scope="col" class="TestsTable" abbr="Status">Status</th>
+                      <th scope="col" class="TestsTable" abbr="Test">Test</th>
+                      <th scope="col" class="TestsTable" abbr="Message">Message</th>
+                      <th scope="col" class="TestsTable" abbr="Actions"></th>
+                      <th scope="col" class="TestsTable" abbr="Exception">Duration</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="Test">
+                      <td class="passed">
+                        <div class="Tag StatusTag NumberTagGreen">PASSED</div>
+                      </td>
+                      <td class="Function">CreditCardApplications.Tests.CreditCardApplicationEvaluatorShould.ReferWhenLicenseKeyExpired</td>
+                      <td class="Messages"></td>
+                      <td class="Messages"></td>
+                      <td class="Message">2.94 ms</td>
+                    </tr>
+                    <tr id="ID0AID0LDStacktrace" class="hiddenRow">
+                      <td colspan="5" class="testOutputs">
+                        <table>
+                          <tbody>
+                            <tr>
+                              <td class="testOutputsTitle">
+                  StackTrace
+                </td>
+                            </tr>
+                            <tr class="visibleRow">
+                              <td class="alert-status-failed">
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                    </tr>
+                    <tr id="ID0AID0LDStdOut" class="hiddenRow">
+                      <td colspan="5" class="testOutputs">
+                        <table>
+                          <tbody>
+                            <tr>
+                              <td class="testOutputsTitle">
+                  StdOut
+                </td>
+                            </tr>
+                            <tr class="visibleRow">
+                              <td class="alert-status-out">
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                    </tr>
+                    <tr id="ID0AID0LDStdErr" class="hiddenRow">
+                      <td colspan="5" class="testOutputs">
+                        <table>
+                          <tbody>
+                            <tr>
+                              <td class="testOutputsTitle">
+                  StdErr
+                </td>
+                            </tr>
+                            <tr class="visibleRow">
+                              <td class="alert-status-err">
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                    </tr>
+                    <tr id="ID0AID0LDDescription" class="hiddenRow">
+                      <td colspan="5" class="testOutputs">
+                        <table>
+                          <tbody>
+                            <tr>
+                              <td class="testOutputsTitle">
+                  Description
+                </td>
+                            </tr>
+                            <tr class="visibleRow">
+                              <td class="alert-status-description">
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                    </tr>
+                    <tr class="Test">
+                      <td class="passed">
+                        <div class="Tag StatusTag NumberTagGreen">PASSED</div>
+                      </td>
+                      <td class="Function">CreditCardApplications.Tests.CreditCardApplicationEvaluatorShould.DeclineLowIncomeApplicationsOutDemo</td>
+                      <td class="Messages"></td>
+                      <td class="Messages"></td>
+                      <td class="Message">5.98 ms</td>
+                    </tr>
+                    <tr id="ID0AXD01DStacktrace" class="hiddenRow">
+                      <td colspan="5" class="testOutputs">
+                        <table>
+                          <tbody>
+                            <tr>
+                              <td class="testOutputsTitle">
+                  StackTrace
+                </td>
+                            </tr>
+                            <tr class="visibleRow">
+                              <td class="alert-status-failed">
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                    </tr>
+                    <tr id="ID0AXD01DStdOut" class="hiddenRow">
+                      <td colspan="5" class="testOutputs">
+                        <table>
+                          <tbody>
+                            <tr>
+                              <td class="testOutputsTitle">
+                  StdOut
+                </td>
+                            </tr>
+                            <tr class="visibleRow">
+                              <td class="alert-status-out">
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                    </tr>
+                    <tr id="ID0AXD01DStdErr" class="hiddenRow">
+                      <td colspan="5" class="testOutputs">
+                        <table>
+                          <tbody>
+                            <tr>
+                              <td class="testOutputsTitle">
+                  StdErr
+                </td>
+                            </tr>
+                            <tr class="visibleRow">
+                              <td class="alert-status-err">
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                    </tr>
+                    <tr id="ID0AXD01DDescription" class="hiddenRow">
+                      <td colspan="5" class="testOutputs">
+                        <table>
+                          <tbody>
+                            <tr>
+                              <td class="testOutputsTitle">
+                  Description
+                </td>
+                            </tr>
+                            <tr class="visibleRow">
+                              <td class="alert-status-description">
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                    </tr>
+                    <tr class="Test">
+                      <td class="passed">
+                        <div class="Tag StatusTag NumberTagGreen">PASSED</div>
+                      </td>
+                      <td class="Function">CreditCardApplications.Tests.CreditCardApplicationEvaluatorShould.DeclineLowIncomeApplications</td>
+                      <td class="Messages"></td>
+                      <td class="Messages"></td>
+                      <td class="Message">81.68 ms</td>
+                    </tr>
+                    <tr id="ID0AGE0JEStacktrace" class="hiddenRow">
+                      <td colspan="5" class="testOutputs">
+                        <table>
+                          <tbody>
+                            <tr>
+                              <td class="testOutputsTitle">
+                  StackTrace
+                </td>
+                            </tr>
+                            <tr class="visibleRow">
+                              <td class="alert-status-failed">
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                    </tr>
+                    <tr id="ID0AGE0JEStdOut" class="hiddenRow">
+                      <td colspan="5" class="testOutputs">
+                        <table>
+                          <tbody>
+                            <tr>
+                              <td class="testOutputsTitle">
+                  StdOut
+                </td>
+                            </tr>
+                            <tr class="visibleRow">
+                              <td class="alert-status-out">
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                    </tr>
+                    <tr id="ID0AGE0JEStdErr" class="hiddenRow">
+                      <td colspan="5" class="testOutputs">
+                        <table>
+                          <tbody>
+                            <tr>
+                              <td class="testOutputsTitle">
+                  StdErr
+                </td>
+                            </tr>
+                            <tr class="visibleRow">
+                              <td class="alert-status-err">
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                    </tr>
+                    <tr id="ID0AGE0JEDescription" class="hiddenRow">
+                      <td colspan="5" class="testOutputs">
+                        <table>
+                          <tbody>
+                            <tr>
+                              <td class="testOutputsTitle">
+                  Description
+                </td>
+                            </tr>
+                            <tr class="visibleRow">
+                              <td class="alert-status-description">
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                    </tr>
+                    <tr class="Test">
+                      <td class="passed">
+                        <div class="Tag StatusTag NumberTagGreen">PASSED</div>
+                      </td>
+                      <td class="Function">CreditCardApplications.Tests.CreditCardApplicationEvaluatorShould.ReferYoungApplications</td>
+                      <td class="Messages"></td>
+                      <td class="Messages"></td>
+                      <td class="Message">0.54 ms</td>
+                    </tr>
+                    <tr id="ID0AVE0YEStacktrace" class="hiddenRow">
+                      <td colspan="5" class="testOutputs">
+                        <table>
+                          <tbody>
+                            <tr>
+                              <td class="testOutputsTitle">
+                  StackTrace
+                </td>
+                            </tr>
+                            <tr class="visibleRow">
+                              <td class="alert-status-failed">
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                    </tr>
+                    <tr id="ID0AVE0YEStdOut" class="hiddenRow">
+                      <td colspan="5" class="testOutputs">
+                        <table>
+                          <tbody>
+                            <tr>
+                              <td class="testOutputsTitle">
+                  StdOut
+                </td>
+                            </tr>
+                            <tr class="visibleRow">
+                              <td class="alert-status-out">
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                    </tr>
+                    <tr id="ID0AVE0YEStdErr" class="hiddenRow">
+                      <td colspan="5" class="testOutputs">
+                        <table>
+                          <tbody>
+                            <tr>
+                              <td class="testOutputsTitle">
+                  StdErr
+                </td>
+                            </tr>
+                            <tr class="visibleRow">
+                              <td class="alert-status-err">
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                    </tr>
+                    <tr id="ID0AVE0YEDescription" class="hiddenRow">
+                      <td colspan="5" class="testOutputs">
+                        <table>
+                          <tbody>
+                            <tr>
+                              <td class="testOutputsTitle">
+                  Description
+                </td>
+                            </tr>
+                            <tr class="visibleRow">
+                              <td class="alert-status-description">
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                    </tr>
+                    <tr class="Test">
+                      <td class="passed">
+                        <div class="Tag StatusTag NumberTagGreen">PASSED</div>
+                      </td>
+                      <td class="Function">CreditCardApplications.Tests.CreditCardApplicationEvaluatorShould.AcceptHighIncomeApplications</td>
+                      <td class="Messages"></td>
+                      <td class="Messages"></td>
+                      <td class="Message">0.13 ms</td>
+                    </tr>
+                    <tr id="ID0AEF0HFStacktrace" class="hiddenRow">
+                      <td colspan="5" class="testOutputs">
+                        <table>
+                          <tbody>
+                            <tr>
+                              <td class="testOutputsTitle">
+                  StackTrace
+                </td>
+                            </tr>
+                            <tr class="visibleRow">
+                              <td class="alert-status-failed">
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                    </tr>
+                    <tr id="ID0AEF0HFStdOut" class="hiddenRow">
+                      <td colspan="5" class="testOutputs">
+                        <table>
+                          <tbody>
+                            <tr>
+                              <td class="testOutputsTitle">
+                  StdOut
+                </td>
+                            </tr>
+                            <tr class="visibleRow">
+                              <td class="alert-status-out">
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                    </tr>
+                    <tr id="ID0AEF0HFStdErr" class="hiddenRow">
+                      <td colspan="5" class="testOutputs">
+                        <table>
+                          <tbody>
+                            <tr>
+                              <td class="testOutputsTitle">
+                  StdErr
+                </td>
+                            </tr>
+                            <tr class="visibleRow">
+                              <td class="alert-status-err">
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                    </tr>
+                    <tr id="ID0AEF0HFDescription" class="hiddenRow">
+                      <td colspan="5" class="testOutputs">
+                        <table>
+                          <tbody>
+                            <tr>
+                              <td class="testOutputsTitle">
+                  Description
+                </td>
+                            </tr>
+                            <tr class="visibleRow">
+                              <td class="alert-status-description">
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                    </tr>
+                    <tr class="Test">
+                      <td class="passed">
+                        <div class="Tag StatusTag NumberTagGreen">PASSED</div>
+                      </td>
+                      <td class="Function">CreditCardApplications.Tests.CreditCardApplicationEvaluatorShould.ReferInvalidFrequentFlyerApplication</td>
+                      <td class="Messages"></td>
+                      <td class="Messages"></td>
+                      <td class="Message">1.34 ms</td>
+                    </tr>
+                    <tr id="ID0ATF0WFStacktrace" class="hiddenRow">
+                      <td colspan="5" class="testOutputs">
+                        <table>
+                          <tbody>
+                            <tr>
+                              <td class="testOutputsTitle">
+                  StackTrace
+                </td>
+                            </tr>
+                            <tr class="visibleRow">
+                              <td class="alert-status-failed">
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                    </tr>
+                    <tr id="ID0ATF0WFStdOut" class="hiddenRow">
+                      <td colspan="5" class="testOutputs">
+                        <table>
+                          <tbody>
+                            <tr>
+                              <td class="testOutputsTitle">
+                  StdOut
+                </td>
+                            </tr>
+                            <tr class="visibleRow">
+                              <td class="alert-status-out">
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                    </tr>
+                    <tr id="ID0ATF0WFStdErr" class="hiddenRow">
+                      <td colspan="5" class="testOutputs">
+                        <table>
+                          <tbody>
+                            <tr>
+                              <td class="testOutputsTitle">
+                  StdErr
+                </td>
+                            </tr>
+                            <tr class="visibleRow">
+                              <td class="alert-status-err">
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                    </tr>
+                    <tr id="ID0ATF0WFDescription" class="hiddenRow">
+                      <td colspan="5" class="testOutputs">
+                        <table>
+                          <tbody>
+                            <tr>
+                              <td class="testOutputsTitle">
+                  Description
+                </td>
+                            </tr>
+                            <tr class="visibleRow">
+                              <td class="alert-status-description">
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+            </tr><script>
+                    CalculateTestsStatuses('ID0AQD0TDTestsContainer','ID0AQD0TD');
+                  </script></tbody>
+        </table>
+      </div>
+      <div id="mostSlowestElement">
+        <Table>
+          <caption>Five most slowest tests</caption>
+          <thead>
+            <tr class="odd">
+              <th scope="col">Time</th>
+              <th scope="col" abbr="Status">Status</th>
+              <th scope="col" abbr="Test">Test</th>
+              <th scope="col" abbr="Message">Duration</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row" class="column1">11/28/2021 10:53:05 AM</th>
+              <td class="passed">
+                <div class="Tag StatusTag NumberTagGreen">PASSED</div>
+              </td>
+              <td class="Function slowest">CreditCardApplications.Tests.CreditCardApplicationEvaluatorShould.CreditCardApplications.Tests.CreditCardApplicationEvaluatorShould.DeclineLowIncomeApplications</td>
+              <td class="Message slowest">81.68 ms</td>
+            </tr>
+            <tr>
+              <th scope="row" class="column1">11/28/2021 10:53:05 AM</th>
+              <td class="passed">
+                <div class="Tag StatusTag NumberTagGreen">PASSED</div>
+              </td>
+              <td class="Function slowest">CreditCardApplications.Tests.CreditCardApplicationEvaluatorShould.CreditCardApplications.Tests.CreditCardApplicationEvaluatorShould.DeclineLowIncomeApplicationsOutDemo</td>
+              <td class="Message slowest">5.98 ms</td>
+            </tr>
+            <tr>
+              <th scope="row" class="column1">11/28/2021 10:53:05 AM</th>
+              <td class="passed">
+                <div class="Tag StatusTag NumberTagGreen">PASSED</div>
+              </td>
+              <td class="Function slowest">CreditCardApplications.Tests.CreditCardApplicationEvaluatorShould.CreditCardApplications.Tests.CreditCardApplicationEvaluatorShould.ReferWhenLicenseKeyExpired</td>
+              <td class="Message slowest">2.94 ms</td>
+            </tr>
+            <tr>
+              <th scope="row" class="column1">11/28/2021 10:53:05 AM</th>
+              <td class="passed">
+                <div class="Tag StatusTag NumberTagGreen">PASSED</div>
+              </td>
+              <td class="Function slowest">CreditCardApplications.Tests.CreditCardApplicationEvaluatorShould.CreditCardApplications.Tests.CreditCardApplicationEvaluatorShould.ReferInvalidFrequentFlyerApplication</td>
+              <td class="Message slowest">1.34 ms</td>
+            </tr>
+            <tr>
+              <th scope="row" class="column1">11/28/2021 10:53:05 AM</th>
+              <td class="passed">
+                <div class="Tag StatusTag NumberTagGreen">PASSED</div>
+              </td>
+              <td class="Function slowest">CreditCardApplications.Tests.CreditCardApplicationEvaluatorShould.CreditCardApplications.Tests.CreditCardApplicationEvaluatorShould.ReferYoungApplications</td>
+              <td class="Message slowest">0.54 ms</td>
+            </tr>
+            <tr>
+              <td colspan="4">
+                <h6>TRX Html Viewer log - Niv Navick 2015</h6>
+              </td>
+            </tr>
+          </tbody>
+        </Table>
+      </div>
+    </div>
+  </body><script>
+        CalculateTotalPrecents();
+        CreateTotalStatusesGraph();
+      </script></html>

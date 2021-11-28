@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="f2b3b666-7ad5-49e4-ad8b-acd8cf44de56" name="SGopala@WLA-GSP17 2021-11-28 10:53:05" runUser="HLHZ\SGopala" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2021-11-28T10:53:05.3854486+04:00" queuing="2021-11-28T10:53:05.3854486+04:00" start="2021-11-28T10:53:04.1111087+04:00" finish="2021-11-28T10:53:05.4080027+04:00" />
+  <TestSettings name="default" id="cd4038ce-cb6c-4a42-9f7b-98e9c565afe2">
+    <Deployment runDeploymentRoot="SGopala_WLA-GSP17_2021-11-28_10_53_05" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="4d32bbc7-6f9a-4f1f-89de-9168dce57ca5" testId="abe22db9-66c9-56d3-b699-86152919243c" testName="CreditCardApplications.Tests.CreditCardApplicationEvaluatorShould.ReferWhenLicenseKeyExpired" computerName="WLA-GSP17" duration="00:00:00.0029393" startTime="2021-11-28T10:53:05.2808085+04:00" endTime="2021-11-28T10:53:05.2808096+04:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="4d32bbc7-6f9a-4f1f-89de-9168dce57ca5" />
+    <UnitTestResult executionId="61c754c2-358d-4b8e-8ee6-e7c0b42d906f" testId="a0d01fd0-215c-d029-ad50-957c22d2a7ab" testName="CreditCardApplications.Tests.CreditCardApplicationEvaluatorShould.AcceptHighIncomeApplications" computerName="WLA-GSP17" duration="00:00:00.0001313" startTime="2021-11-28T10:53:05.2729213+04:00" endTime="2021-11-28T10:53:05.2729215+04:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="61c754c2-358d-4b8e-8ee6-e7c0b42d906f" />
+    <UnitTestResult executionId="c66fa33e-ad23-419f-a575-1e7fec58ff78" testId="5ccbab94-139a-90d0-0301-ddce6e86a7a7" testName="CreditCardApplications.Tests.CreditCardApplicationEvaluatorShould.DeclineLowIncomeApplications" computerName="WLA-GSP17" duration="00:00:00.0816791" startTime="2021-11-28T10:53:05.2701010+04:00" endTime="2021-11-28T10:53:05.2701537+04:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="c66fa33e-ad23-419f-a575-1e7fec58ff78" />
+    <UnitTestResult executionId="f000ccfb-44bd-4540-8a4a-2ffab8ec6664" testId="38520222-b033-8311-7cd7-9abd1a946dc2" testName="CreditCardApplications.Tests.CreditCardApplicationEvaluatorShould.ReferInvalidFrequentFlyerApplication" computerName="WLA-GSP17" duration="00:00:00.0013396" startTime="2021-11-28T10:53:05.2728622+04:00" endTime="2021-11-28T10:53:05.2728625+04:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="f000ccfb-44bd-4540-8a4a-2ffab8ec6664" />
+    <UnitTestResult executionId="9c3c2e52-08d7-4757-8d56-8f8de88e7888" testId="d4ee8fbd-6481-0283-cf17-0f694b1b24c9" testName="CreditCardApplications.Tests.CreditCardApplicationEvaluatorShould.DeclineLowIncomeApplicationsOutDemo" computerName="WLA-GSP17" duration="00:00:00.0059823" startTime="2021-11-28T10:53:05.2772155+04:00" endTime="2021-11-28T10:53:05.2772325+04:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="9c3c2e52-08d7-4757-8d56-8f8de88e7888" />
+    <UnitTestResult executionId="495c5e27-afb6-4010-b99b-cd356a62ab81" testId="25131d88-acaa-bb0b-5fbd-5862e726690c" testName="CreditCardApplications.Tests.CreditCardApplicationEvaluatorShould.ReferYoungApplications" computerName="WLA-GSP17" duration="00:00:00.0005408" startTime="2021-11-28T10:53:05.2778089+04:00" endTime="2021-11-28T10:53:05.2778096+04:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="495c5e27-afb6-4010-b99b-cd356a62ab81" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="CreditCardApplications.Tests.CreditCardApplicationEvaluatorShould.ReferWhenLicenseKeyExpired" storage="c:\enginerd\dev\enginerd\starters\mocking-moq-xunit-starter\hands-on\creditcardapplications.tests\bin\debug\netcoreapp3.1\creditcardapplications.tests.dll" id="abe22db9-66c9-56d3-b699-86152919243c">
+      <Execution id="4d32bbc7-6f9a-4f1f-89de-9168dce57ca5" />
+      <TestMethod codeBase="C:\Enginerd\Dev\enginerd\starters\mocking-moq-xunit-starter\hands-on\CreditCardApplications.Tests\bin\Debug\netcoreapp3.1\CreditCardApplications.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="CreditCardApplications.Tests.CreditCardApplicationEvaluatorShould" name="ReferWhenLicenseKeyExpired" />
+    </UnitTest>
+    <UnitTest name="CreditCardApplications.Tests.CreditCardApplicationEvaluatorShould.DeclineLowIncomeApplicationsOutDemo" storage="c:\enginerd\dev\enginerd\starters\mocking-moq-xunit-starter\hands-on\creditcardapplications.tests\bin\debug\netcoreapp3.1\creditcardapplications.tests.dll" id="d4ee8fbd-6481-0283-cf17-0f694b1b24c9">
+      <Execution id="9c3c2e52-08d7-4757-8d56-8f8de88e7888" />
+      <TestMethod codeBase="C:\Enginerd\Dev\enginerd\starters\mocking-moq-xunit-starter\hands-on\CreditCardApplications.Tests\bin\Debug\netcoreapp3.1\CreditCardApplications.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="CreditCardApplications.Tests.CreditCardApplicationEvaluatorShould" name="DeclineLowIncomeApplicationsOutDemo" />
+    </UnitTest>
+    <UnitTest name="CreditCardApplications.Tests.CreditCardApplicationEvaluatorShould.DeclineLowIncomeApplications" storage="c:\enginerd\dev\enginerd\starters\mocking-moq-xunit-starter\hands-on\creditcardapplications.tests\bin\debug\netcoreapp3.1\creditcardapplications.tests.dll" id="5ccbab94-139a-90d0-0301-ddce6e86a7a7">
+      <Execution id="c66fa33e-ad23-419f-a575-1e7fec58ff78" />
+      <TestMethod codeBase="C:\Enginerd\Dev\enginerd\starters\mocking-moq-xunit-starter\hands-on\CreditCardApplications.Tests\bin\Debug\netcoreapp3.1\CreditCardApplications.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="CreditCardApplications.Tests.CreditCardApplicationEvaluatorShould" name="DeclineLowIncomeApplications" />
+    </UnitTest>
+    <UnitTest name="CreditCardApplications.Tests.CreditCardApplicationEvaluatorShould.ReferYoungApplications" storage="c:\enginerd\dev\enginerd\starters\mocking-moq-xunit-starter\hands-on\creditcardapplications.tests\bin\debug\netcoreapp3.1\creditcardapplications.tests.dll" id="25131d88-acaa-bb0b-5fbd-5862e726690c">
+      <Execution id="495c5e27-afb6-4010-b99b-cd356a62ab81" />
+      <TestMethod codeBase="C:\Enginerd\Dev\enginerd\starters\mocking-moq-xunit-starter\hands-on\CreditCardApplications.Tests\bin\Debug\netcoreapp3.1\CreditCardApplications.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="CreditCardApplications.Tests.CreditCardApplicationEvaluatorShould" name="ReferYoungApplications" />
+    </UnitTest>
+    <UnitTest name="CreditCardApplications.Tests.CreditCardApplicationEvaluatorShould.AcceptHighIncomeApplications" storage="c:\enginerd\dev\enginerd\starters\mocking-moq-xunit-starter\hands-on\creditcardapplications.tests\bin\debug\netcoreapp3.1\creditcardapplications.tests.dll" id="a0d01fd0-215c-d029-ad50-957c22d2a7ab">
+      <Execution id="61c754c2-358d-4b8e-8ee6-e7c0b42d906f" />
+      <TestMethod codeBase="C:\Enginerd\Dev\enginerd\starters\mocking-moq-xunit-starter\hands-on\CreditCardApplications.Tests\bin\Debug\netcoreapp3.1\CreditCardApplications.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="CreditCardApplications.Tests.CreditCardApplicationEvaluatorShould" name="AcceptHighIncomeApplications" />
+    </UnitTest>
+    <UnitTest name="CreditCardApplications.Tests.CreditCardApplicationEvaluatorShould.ReferInvalidFrequentFlyerApplication" storage="c:\enginerd\dev\enginerd\starters\mocking-moq-xunit-starter\hands-on\creditcardapplications.tests\bin\debug\netcoreapp3.1\creditcardapplications.tests.dll" id="38520222-b033-8311-7cd7-9abd1a946dc2">
+      <Execution id="f000ccfb-44bd-4540-8a4a-2ffab8ec6664" />
+      <TestMethod codeBase="C:\Enginerd\Dev\enginerd\starters\mocking-moq-xunit-starter\hands-on\CreditCardApplications.Tests\bin\Debug\netcoreapp3.1\CreditCardApplications.Tests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="CreditCardApplications.Tests.CreditCardApplicationEvaluatorShould" name="ReferInvalidFrequentFlyerApplication" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="abe22db9-66c9-56d3-b699-86152919243c" executionId="4d32bbc7-6f9a-4f1f-89de-9168dce57ca5" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="a0d01fd0-215c-d029-ad50-957c22d2a7ab" executionId="61c754c2-358d-4b8e-8ee6-e7c0b42d906f" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="5ccbab94-139a-90d0-0301-ddce6e86a7a7" executionId="c66fa33e-ad23-419f-a575-1e7fec58ff78" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="38520222-b033-8311-7cd7-9abd1a946dc2" executionId="f000ccfb-44bd-4540-8a4a-2ffab8ec6664" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="d4ee8fbd-6481-0283-cf17-0f694b1b24c9" executionId="9c3c2e52-08d7-4757-8d56-8f8de88e7888" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="25131d88-acaa-bb0b-5fbd-5862e726690c" executionId="495c5e27-afb6-4010-b99b-cd356a62ab81" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="6" executed="6" passed="6" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v2.4.1 (64-bit .NET Core 3.1.19)&#xD;
+[xUnit.net 00:00:00.40]   Discovering: CreditCardApplications.Tests&#xD;
+[xUnit.net 00:00:00.43]   Discovered:  CreditCardApplications.Tests&#xD;
+[xUnit.net 00:00:00.43]   Starting:    CreditCardApplications.Tests&#xD;
+[xUnit.net 00:00:00.58]   Finished:    CreditCardApplications.Tests&#xD;
+</StdOut>
+    </Output>
+  </ResultSummary>
+</TestRun>

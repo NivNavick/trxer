@@ -1,18 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Xml;
 using System.Xml.Xsl;
 
 namespace TrxerConsole
 {
-    class Program
+    internal class Program
     {
         /// <summary>
         /// Embedded Resource name
         /// </summary>
         private const string XSLT_FILE = "Trxer.xslt";
+
         /// <summary>
         /// Trxer output format
         /// </summary>
@@ -22,15 +23,32 @@ namespace TrxerConsole
         /// Main entry of TrxerConsole
         /// </summary>
         /// <param name="args">First cell shoud be TRX path</param>
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
+#if !DEBUG
             if (args.Any() == false)
             {
                 Console.WriteLine("No trx file,  Trxer.exe <filename>");
                 return;
             }
+#else
+            {
+                args = new[] { @"C:\Enginerd\Dev\enginerd\trxer\Examples\xunit-test-run-example.trx" };
+            }
+            #endif
+
             Console.WriteLine("Trx File\n{0}", args[0]);
-            Transform(args[0], PrepareXsl());
+            string outputFilePath;
+            if (args.Length == 2)
+            {
+                outputFilePath = Path.Combine(args[1], Path.GetFileName(args[0]) + OUTPUT_FILE_EXT);
+            }
+            else
+            {
+                outputFilePath = args[0] + OUTPUT_FILE_EXT;
+            }
+
+            Transform(args[0], PrepareXsl(), outputFilePath);
         }
 
         /// <summary>
@@ -38,12 +56,13 @@ namespace TrxerConsole
         /// </summary>
         /// <param name="fileName">Trx file path</param>
         /// <param name="xsl">Xsl document</param>
-        private static void Transform(string fileName, XmlDocument xsl)
+        /// <param name="outputFile"></param>
+        private static void Transform(string fileName, XmlDocument xsl, string outputFile)
         {
             XslCompiledTransform x = new XslCompiledTransform(true);
             x.Load(xsl, new XsltSettings(true, true), null);
             Console.WriteLine("Transforming...");
-            x.Transform(fileName, fileName + OUTPUT_FILE_EXT);
+            x.Transform(fileName, outputFile);
             Console.WriteLine("Done transforming xml into html");
         }
 
@@ -62,21 +81,29 @@ namespace TrxerConsole
         }
 
         /// <summary>
-        /// Merges all javascript linked to page into Trxer html report itself
+        /// Merge all javascript linked to page into Trxer html report itself
         /// </summary>
         /// <param name="xslDoc">Xsl document</param>
         private static void MergeJavaScript(XmlDocument xslDoc)
         {
             Console.WriteLine("Loading javascript...");
-            XmlNode scriptEl = xslDoc.GetElementsByTagName("script")[0];
-            XmlAttribute scriptSrc = scriptEl.Attributes["src"];
-            string script = ResourceReader.LoadTextFromResource(scriptSrc.Value);
-            scriptEl.Attributes.Remove(scriptSrc);
-            scriptEl.InnerText = script;
+            XmlNodeList linkNodes = xslDoc.GetElementsByTagName("script");
+            List<XmlNode> toChangeList = linkNodes.Cast<XmlNode>().ToList();
+            foreach (XmlNode xmlNode in toChangeList)
+            {
+                XmlAttribute scriptSrc = xmlNode.Attributes["src"];
+                if (scriptSrc == null)
+                {
+                    continue;
+                }
+                string script = ResourceReader.LoadTextFromResource(scriptSrc.Value);
+                xmlNode.Attributes.Remove(scriptSrc);
+                xmlNode.InnerText = script;
+            }
         }
 
         /// <summary>
-        /// Merges all css linked to page ito Trxer html report itself
+        /// Merge all css linked to page ito Trxer html report itself
         /// </summary>
         /// <param name="xslDoc">Xsl document</param>
         private static void MergeCss(XmlDocument xslDoc)
