@@ -10,17 +10,23 @@
 
   <msxsl:script language="C#" implements-prefix="trxreport">
     <![CDATA[
-    public string RemoveAssemblyName(string asm) 
+    public string RemoveAssemblyName(string asm)
     {
-        int idx = asm.IndexOf(',');
-        if (idx == -1)
-            return asm;
-        return asm.Substring(0, idx);
+      if(asm.IndexOf(',')>0) {
+        return asm.Substring(0,asm.IndexOf(','));
+      }
+      else 
+      {
+        return asm;
+      }
     }
     public string RemoveNamespace(string asm) 
     {
-      int coma = asm.IndexOf(',');
-      return asm.Substring(coma + 2, asm.Length - coma - 2);
+      if(asm.IndexOf(',')>0) {
+        int coma = asm.IndexOf(',');
+        return asm.Substring(coma + 2, asm.Length - coma - 2);
+      }
+      return asm;
     }
     public string GetShortDateTime(string time)
     {
