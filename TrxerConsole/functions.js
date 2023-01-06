@@ -214,5 +214,84 @@ function CalculateTestsStatuses(testContaineId, canvasId) {
     CreateHorizontalBars(canvasId, passedPrec, failedPrec, warnPrec);
 }
 
+/**
+ * Remove assembly name from function name.
+ * @param {string} asm 
+ * @returns 
+ */
+function RemoveAssemblyName(asm) {
+    var idx = asm.indexOf(',');
+    if (idx == -1)
+        return asm;
+    return asm.substring(0, idx);
+}
 
+/**
+ * Return input date in short date form.
+ * @param {string} date 
+ * @returns 
+ */
+function GetShortDateTime(date) {
+    if (!date) {
+        return "";
+    }
+    return new Date(date).toLocaleDateString();
+}
 
+/**
+ * Return formatted duration in readable display text.
+ * 
+ * @overload
+ * @param {string} duration
+ */
+/**
+ * Return formatted duration in readable display text.
+ * 
+ * @overload
+ * @param {string} start
+ * @param {string} finish
+ */
+function ToExactTimeDefinition() {
+    var ms = 0;
+
+    if (arguments.length == 1) {
+        var duration = arguments[0];
+        var parts = duration.split(':');
+        ms = parseFloat(parts[0]) * 60 * 60 * 1000 + parseFloat(parts[1]) * 60 * 1000 + parseFloat(parts[2]) * 1000;
+    }
+    else if (arguments.length == 2) {
+        var start = arguments[0];
+        var finish = arguments[1];
+        ms = new Date(finish) - new Date(start);
+    }
+
+    if (ms < 1000)
+        return ms.toFixed(2) + " msec";
+
+    if (ms >= 1000 && ms < 60000)
+        return (ms/1000).toFixed(2) + " sec";
+
+    if (ms >= 60000 && ms < 3600000)
+        return (ms/1000/60).toFixed(2) + " min";
+
+    return (ms/1000/60/60).toFixed(2) + " hr";
+}
+
+/**
+ * Return the current datetime as string.
+ */
+function CurrentDateTime() {
+    return new Date().toString();
+}
+
+/**
+ * Extract image url from input text.
+ * @param {string} text 
+ */
+function ExtractImageUrl(text) {
+    var match = /['"][^\s]+(\.(jpg|png|gif|bmp))['"]/i.exec(text);
+    if (match.length > 0) {
+        return match[0].replace("\'", "").replace("\"", "").replace("\\","\\\\");
+    }
+    return null;
+}

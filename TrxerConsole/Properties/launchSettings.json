@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "TrxerConsole": {
+      "commandName": "Project",
+      "commandLineArgs": "../Examples/example.trx"
+    }
+  }
+}

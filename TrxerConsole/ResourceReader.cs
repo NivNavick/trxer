@@ -1,5 +1,4 @@
-﻿using System.IO;
-using System.Reflection;
+﻿using System.Reflection;
 
 namespace TrxerConsole
 {
@@ -8,8 +7,7 @@ namespace TrxerConsole
         internal static string LoadTextFromResource(string name)
         {
             string result = string.Empty;
-            using (StreamReader sr = new StreamReader(
-                   StreamFromResource(name)))
+            using (StreamReader sr = new(StreamFromResource(name)))
             {
                 result = sr.ReadToEnd();
             }
@@ -18,9 +16,7 @@ namespace TrxerConsole
 
         internal static Stream StreamFromResource(string name)
         {
-           
             return Assembly.GetExecutingAssembly().GetManifestResourceStream("TrxerConsole." + name);
-       
         }
     }
 }
