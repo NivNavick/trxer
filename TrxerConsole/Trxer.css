@@ -58,7 +58,7 @@ address {
     height: 60px;
 }
 
-.statusBarPassed {
+.statusBarPassed, .statusBarCompleted {
     background-color: #5bab5b;
 }
 
@@ -78,7 +78,7 @@ address {
     top: 15%;
 }
 
-.statusBarPassedInner {
+.statusBarPassedInner, .statusBarCompletedInner {
     position: relative;
     background-color: #339833;
     width: 100%;
