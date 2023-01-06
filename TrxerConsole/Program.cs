@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Xml;
+﻿using System.Xml;
 using System.Xml.Xsl;
 
 namespace TrxerConsole
@@ -24,13 +20,16 @@ namespace TrxerConsole
         /// <param name="args">First cell shoud be TRX path</param>
         static void Main(string[] args)
         {
-            if (args.Any() == false)
+            if (!args.Any())
             {
-                Console.WriteLine("No trx file,  Trxer.exe <filename>");
+                Console.WriteLine("No trx file, trxer <TRX file 1> <TRX file 2>");
                 return;
             }
-            Console.WriteLine("Trx File\n{0}", args[0]);
-            Transform(args[0], PrepareXsl());
+            foreach (var file in args)
+            {
+                Console.WriteLine("Trx File\n{0}", file);
+                Transform(file, PrepareXsl());
+            }
         }
 
         /// <summary>
@@ -40,8 +39,8 @@ namespace TrxerConsole
         /// <param name="xsl">Xsl document</param>
         private static void Transform(string fileName, XmlDocument xsl)
         {
-            XslCompiledTransform x = new XslCompiledTransform(true);
-            x.Load(xsl, new XsltSettings(true, true), null);
+            XslCompiledTransform x = new(true);
+            x.Load(xsl, new XsltSettings(true, false), null);
             Console.WriteLine("Transforming...");
             x.Transform(fileName, fileName + OUTPUT_FILE_EXT);
             Console.WriteLine("Done transforming xml into html");
@@ -53,7 +52,7 @@ namespace TrxerConsole
         /// <returns>Xsl document</returns>
         private static XmlDocument PrepareXsl()
         {
-            XmlDocument xslDoc = new XmlDocument();
+            XmlDocument xslDoc = new();
             Console.WriteLine("Loading xslt template...");
             xslDoc.Load(ResourceReader.StreamFromResource(XSLT_FILE));
             MergeCss(xslDoc);

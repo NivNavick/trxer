@@ -1,8 +1,8 @@
 
 ![11910876](https://cloud.githubusercontent.com/assets/11910876/7189304/c483f1b0-e486-11e4-9a95-44a1243fea5d.png)
 <h3>Transforms trx file into html</h3><br/>
-Trxer is a new way to view Trx Reports,all you need is a browser<br/>
-Trxer website: http://wingsrom.ro/trxer/<br/>
+Trxer is a new way to view Trx Reports, all you need is a browser<br/>
+<br/>
 
 <b>Navigate Easily</b><br/>
 Trxer so friendly UI will make your life easier,much easier.You can navigate through test classed,<br/>
@@ -28,7 +28,8 @@ Each color:<br/>
   <li>red</li>
   <li>yellow</li>
 </ul>
-indicate test status and tells you whether test passed,failed or got warned during run.
+indicate test status and tells you whether test passed,failed or got warned during run.<br/>
+<br/>
 
 <b>Images</b><br/>
 assume you have an image to show in the report , just put it's url in the test message,stdout or stderror and<br/>
@@ -61,13 +62,17 @@ but can easily supports lower versions by lowering the '2010' year to whatever y
 <b>Supporting Browsers</b><br/>
 Trxer supported by all major browsers that supports Html5 Canvas<br/>
 
+<b>Installation</b>
+
+```bash
+dotnet tool install -g NivNavick.Trxer
+```
+
 <b>Usage</b><br/>
-Trxer is an EXE file.<br/>
-Trxer.exe <file.trx><br/>
 The output will be at the trx folder under the name "file.trx.html"<br/>
 
 ```bash
-TrxerConsole.exe <TRX file>
+trxer <TRX file 1> <TRX file 2>
 ```
 
 This is how it looks like
